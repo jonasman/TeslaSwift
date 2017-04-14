@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0478B862FEF88CCD3EC80F94 /* Pods_TeslaSwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 197116DC2020475D3BAC1658 /* Pods_TeslaSwiftMac.framework */; };
 		0C7ED84E15E6213553283EE1 /* Pods_TeslaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCF54A5D3EEC6D742F8BA4D /* Pods_TeslaSwift.framework */; };
+		7D161BA01E9DC805001C89ED /* StreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D161B9F1E9DC805001C89ED /* StreamEvent.swift */; };
 		8CC62B67A853293ADBFB6B75 /* Pods_TeslaSwift_TeslaSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0A2FE496942C63F2654382 /* Pods_TeslaSwift_TeslaSwiftTests.framework */; };
 		CF01EA671C9EC1950064B2B5 /* VehicleState.json in Resources */ = {isa = PBXBuildFile; fileRef = CF01EA661C9EC1950064B2B5 /* VehicleState.json */; };
 		CF0D2F251D95A4A900E5A304 /* Authtentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D2F191D95A4A900E5A304 /* Authtentication.swift */; };
@@ -140,6 +141,7 @@
 		5BA4687B48AE0E48AF1EA4CD /* Pods-TeslaSwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeslaSwiftMac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeslaSwiftMac/Pods-TeslaSwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		663732209E4E55CAD3A287C6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7714DD772753FEF8BB88D841 /* Pods-TeslaSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeslaSwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeslaSwiftTests/Pods-TeslaSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7D161B9F1E9DC805001C89ED /* StreamEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamEvent.swift; sourceTree = "<group>"; };
 		893283E37D672FB17EB144D2 /* Pods-TeslaSwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeslaSwiftMac.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeslaSwiftMac/Pods-TeslaSwiftMac.release.xcconfig"; sourceTree = "<group>"; };
 		9D0A2FE496942C63F2654382 /* Pods_TeslaSwift_TeslaSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeslaSwift_TeslaSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCF54A5D3EEC6D742F8BA4D /* Pods_TeslaSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeslaSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,6 +288,7 @@
 				CF1BD5921DD5041800E4C493 /* ChargeLimitPercentageCommandOptions.swift */,
 				CF1BD5951DD5051600E4C493 /* SetTemperatureCommandOptions.swift */,
 				CF1BD5981DD505EF00E4C493 /* SetSunRoofCommandOptions.swift */,
+				7D161B9F1E9DC805001C89ED /* StreamEvent.swift */,
 				CF1BD59B1DD5070100E4C493 /* RemoteStartDriveCommandOptions.swift */,
 				CF0D2F221D95A4A900E5A304 /* Vehicle.swift */,
 				CFF001A71E755CF800B8139B /* VehicleExtended.swift */,
@@ -771,6 +774,7 @@
 				CFA984F91CC2545600B23C7D /* TeslaEndpoint.swift in Sources */,
 				CFD2E7C91C8A13D60005E882 /* SecondViewController.swift in Sources */,
 				CF48FA991C8B08AC00B1DA93 /* TabController.swift in Sources */,
+				7D161BA01E9DC805001C89ED /* StreamEvent.swift in Sources */,
 				CF1BD5931DD5041800E4C493 /* ChargeLimitPercentageCommandOptions.swift in Sources */,
 				CFB5D7B71E66088F003EA1EF /* ErrorMessage.swift in Sources */,
 				CFD2E7E81C8A13F20005E882 /* TeslaSwift.swift in Sources */,

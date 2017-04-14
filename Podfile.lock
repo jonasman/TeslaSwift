@@ -16,18 +16,21 @@ PODS:
   - OHHTTPStubs/Swift (5.2.3):
     - OHHTTPStubs/Core
   - PromiseKit/CorePromise (4.1.7)
+  - SwiftWebSocket (2.6.5)
 
 DEPENDENCIES:
   - ObjectMapper (~> 2.0)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - PromiseKit/CorePromise (~> 4.0)
+  - SwiftWebSocket
 
 SPEC CHECKSUMS:
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   PromiseKit: 779f2e41faf62d854e7593026ddbcb0bb5c5002d
+  SwiftWebSocket: 1ef8a0efb023544643bdf480c1ec4a62b204f293
 
-PODFILE CHECKSUM: f9610958b96784011f2cff98870527dbc6fc3856
+PODFILE CHECKSUM: 9e5e0b42cb127cb964b6fa5276e0806a0f4d09b6
 
 COCOAPODS: 1.2.0

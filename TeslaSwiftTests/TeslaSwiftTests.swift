@@ -991,4 +991,24 @@ class TeslaSwiftTests: XCTestCase {
 		
 		waitForExpectations(timeout: 2, handler: nil)
 	}
+    
+    func testStreamVehicleInformation() {
+        let service = TeslaSwift()
+        service.useMockServer = true
+        service.streamVehicleInformation(vehicle: )
+        
+        service.authenticate(email: "user", password: "pass").then { (token) in
+                service.getVehicles()
+            }.then { (vehicles) in
+                service.streamVehicleInformation(vehicles[0])
+            }.then { (response) -> Void in
+                XCTAssertEqual(response.result, false)
+                XCTAssertEqual(response.reason, "Test OpenTrunk")
+                expection.fulfill()
+            }.catch { (error) in
+                print(error)
+                XCTFail((error as NSError).description)
+        }
+
+    }
 }
