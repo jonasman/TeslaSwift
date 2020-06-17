@@ -11,22 +11,35 @@ import os.log
 import CoreLocation.CLLocation
 
 public enum VehicleCommand {
+        /// Set vehicle valet mode on or off with a PIN to disable it from within the car. 
+        /// Reuses last PIN from previous valet session. Valet Mode limits the car's top speed to 70MPH and 80kW of acceleration power. 
+        /// It also disables Homelink, Bluetooth and Wifi settings, and the ability to disable mobile access to the car. 
+        /// It also hides your favorites, home, and work locations in navigation.
 	case valetMode(valetActivated: Bool, pin: String?)
-	case resetValetPin
+	/// Resets vehicle valet PIN
+        case resetValetPin
+        /// Opens vehicle charge port. Also unlocks the charge port if it is locked.
 	case openChargeDoor
-	case closeChargeDoor
+	/// Closes vehicle charge port.
+        case closeChargeDoor
+        /// Set vehicle to standard charge limit
 	case chargeLimitStandard
+        /// Set vehicle to max charge limit
 	case chargeLimitMaxRange
+        /// Set vehicle charge limit
 	case chargeLimitPercentage(limit: Int)
-	case startCharging
-	case stopCharging
+	/// Starts vehicle charging. Vehicle must be plugged in, have power available, and not at charge limit.
+        case startCharging
+	/// Stop vehicle charging. Vehicle must be charging.
+        case stopCharging
+        /// Flashes the lights of the vehicle once
 	case flashLights
-    case triggerHomeLink(location: CLLocation)
+        case triggerHomeLink(location: CLLocation)
 	case honkHorn
 	case unlockDoors
 	case lockDoors
 	case setTemperature(driverTemperature: Double, passengerTemperature: Double)
-    case setMaxDefrost(on: Bool)
+        case setMaxDefrost(on: Bool)
 	case startAutoConditioning
 	case stopAutoConditioning
 	case setSunRoof(state: RoofState, percentage: Int?)
