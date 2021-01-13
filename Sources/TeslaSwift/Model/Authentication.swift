@@ -19,14 +19,14 @@ open class AuthToken: Codable {
 	
 	open var accessToken: String?
 	open var tokenType: String?
-	open var createdAt: Date? = Date()
+    open var createdAt: TimeInterval? = Date().timeIntervalSince1970
 	open var expiresIn: TimeInterval?
 	open var refreshToken: String?
     open var idToken: String?
 	
 	open var isValid: Bool {
 		if let createdAt = createdAt, let expiresIn = expiresIn {
-			return -createdAt.timeIntervalSinceNow < expiresIn
+            return -Date(timeIntervalSince1970: createdAt).timeIntervalSinceNow < expiresIn
 		} else {
 			return false
 		}
@@ -46,7 +46,7 @@ open class AuthToken: Codable {
 
         accessToken = try? container.decode(String.self, forKey: .accessToken)
         tokenType = try? container.decode(String.self, forKey: .tokenType)
-        createdAt = (try? container.decode(Date.self, forKey: .createdAt)) ?? Date()
+        createdAt = (try? container.decode(TimeInterval.self, forKey: .createdAt)) ?? Date().timeIntervalSince1970
         expiresIn = try? container.decode(TimeInterval.self, forKey: .expiresIn)
         refreshToken = try? container.decode(String.self, forKey: .refreshToken)
         idToken = try? container.decode(String.self, forKey: .idToken)
