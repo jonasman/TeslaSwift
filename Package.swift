@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "TeslaSwift",
     platforms: [
-        .macOS(.v10_12), .iOS(.v10), .watchOS(.v3), .tvOS(.v10)
+        .macOS(.v10_15), .iOS(.v13), .watchOS(.v6), .tvOS(.v13)
     ],
     products: [
         .library(name: "TeslaSwift", targets: ["TeslaSwift"]),

@@ -14,7 +14,6 @@ import TeslaSwift
 import TeslaSwiftStreaming
 #endif
 
-@available(iOS 13.0, macOS 10.15, watchOS 6, tvOS 13, *)
 extension TeslaStreaming  {
 
     public func streamPublisher(vehicle: Vehicle) -> TeslaStreamingPublisher {

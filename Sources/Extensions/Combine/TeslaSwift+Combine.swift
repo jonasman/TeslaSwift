@@ -13,7 +13,6 @@ import Combine
 import TeslaSwift
 #endif
 
-@available(iOS 13.0, macOS 10.15, watchOS 6, tvOS 13, *)
 extension TeslaSwift {
     
     func resultify<Value: Decodable>(subscriber: @escaping (Result<Value, Error>) -> Void) -> ((Result<Value, Error>) -> ()) {

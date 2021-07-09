@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name         = "TeslaSwift"
-	s.version      = "7.0.4"
+	s.version      = "7.0.5"
 	s.summary      = "Swift library to access the Tesla Model S, X, 3 and Y API."
 
 	s.homepage     = "https://github.com/jonasman/TeslaSwift"
@@ -9,10 +9,10 @@ Pod::Spec.new do |s|
 
 	s.author             = { "Joao Nunes" => "joao3001@hotmail.com" }
 	s.social_media_url   = "https://twitter.com/jonas2man"
-	s.ios.deployment_target = '10.0'
-	s.osx.deployment_target = '10.12'
-	s.watchos.deployment_target = '3.0'
-	s.tvos.deployment_target = '10.0'
+	s.ios.deployment_target = '13.0'
+	s.osx.deployment_target = '10.15'
+	s.watchos.deployment_target = '6.0'
+	s.tvos.deployment_target = '13.0'
 	s.swift_version = '5.3'
 
 	s.source       = { :git => "https://github.com/jonasman/TeslaSwift.git", :tag => "#{s.version}" }

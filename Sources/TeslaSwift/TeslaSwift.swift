@@ -181,7 +181,7 @@ extension TeslaSwift {
      - returns: A ViewController that your app needs to present. This ViewController will ask the user for his/her Tesla credentials, MFA code if set and then dismiss on successful authentication
      */
     #if canImport(WebKit) && canImport(UIKit)
-    @available(iOS 13.0, *)
+
     public func authenticateWeb(completion: @escaping (Result<AuthToken, Error>) -> ()) -> TeslaWebLoginViewController? {
 
         let codeRequest = AuthCodeRequest()
