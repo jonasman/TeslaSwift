@@ -51,6 +51,7 @@ public enum VehicleCommand {
 	case setSeatHeater(seat: HeatedSeat, level: HeatLevel)
 	case setSteeringWheelHeater(on: Bool)
 	case sentryMode(activated: Bool)
+    case wakeUp
     case windowControl(state: WindowState)
 	
 	func path() -> String {
@@ -135,6 +136,8 @@ public enum VehicleCommand {
 			return "command/remote_steering_wheel_heater_request"
 		case .sentryMode:
 			return "command/set_sentry_mode"
+        case .wakeUp:
+            return "command/wake_up"
         case .windowControl:
             return "command/window_control"
 		}
