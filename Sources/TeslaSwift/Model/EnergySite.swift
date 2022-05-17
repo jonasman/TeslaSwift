@@ -10,25 +10,26 @@ import Foundation
 
 // MARK: - EnergySite
 open class EnergySite: Codable {
-    
+
     // Unique to EnergySite
     open var id: String?
     open var energySiteID: Decimal
     open var assetSiteID: String?
     open var components: Components?
-    
+
     // Also available in EnergySiteStatus
     open var resourceType: String
-    open var siteName: String
-    open var gatewayID: String
-    open var energyLeft: Double
-    open var totalPackEnergy: Double
-    open var percentageCharged: Double
-    open var batteryType: String
-    open var backupCapable: Bool
-    open var batteryPower: Double
+    open var siteName: String?
+    open var gatewayID: String?
+    open var energyLeft: Double?
+    open var totalPackEnergy: Double?
+    open var percentageCharged: Double?
+    open var batteryType: String?
+    open var backupCapable: Bool?
+    open var batteryPower: Double?
     open var syncGridAlertEnabled: Bool
     open var breakerAlertEnabled: Bool
+    open var solarPower: Double?
 
     enum CodingKeys: String, CodingKey {
         case energySiteID = "energy_site_id"
@@ -46,13 +47,14 @@ open class EnergySite: Codable {
         case syncGridAlertEnabled = "sync_grid_alert_enabled"
         case breakerAlertEnabled = "breaker_alert_enabled"
         case components
+        case solarPower = "solar_power"
     }
-    
-    
+
+
     // MARK: - Components
     open class Components: Codable {
         open var battery: Bool
-        open var batteryType: String
+        open var batteryType: String?
         open var solar: Bool
         open var solarType: String
         open var grid: Bool
