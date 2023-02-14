@@ -14,7 +14,9 @@ open class VehicleConfig: Codable {
 	open var carSpecialType: String?
 	open var carType: String?
 	open var chargePortType: String?
+    open var driverAssist: String?
 	open var euVehicle: Bool?
+    open var efficiencyPackage: String?
 	open var exteriorColor: String?
 	open var hasAirSuspension: Bool?
 	open var hasLudicrousMode: Bool?
@@ -39,6 +41,8 @@ open class VehicleConfig: Codable {
 		case carSpecialType		 = "car_special_type"
 		case carType				 = "car_type"
 		case chargePortType			= "charge_port_type"
+        case driverAssist = "driver_assist"
+        case efficiencyPackage = "efficiency_package"
 		case euVehicle			 = "eu_vehicle"
 		case exteriorColor		 = "exterior_color"
 		case hasAirSuspension 	= "has_air_suspension"
@@ -67,6 +71,8 @@ open class VehicleConfig: Codable {
 		carSpecialType = try? container.decode(String.self, forKey: .carSpecialType)
 		carType = try? container.decode(String.self, forKey: .carType)
 		chargePortType = try? container.decode(String.self, forKey: .chargePortType)
+        driverAssist = try? container.decode(String.self, forKey: .driverAssist)
+        efficiencyPackage = try? container.decode(String.self, forKey: .efficiencyPackage)
 		euVehicle = try? container.decode(Bool.self, forKey: .euVehicle)
 		hasAirSuspension = try? container.decode(Bool.self, forKey: .hasAirSuspension)
 		exteriorColor = try? container.decode(String.self, forKey: .exteriorColor)
@@ -97,6 +103,8 @@ open class VehicleConfig: Codable {
 		try container.encodeIfPresent(carSpecialType, forKey: .carSpecialType)
 		try container.encodeIfPresent(carType, forKey: .carType)
 		try container.encodeIfPresent(chargePortType, forKey: .chargePortType)
+        try container.encodeIfPresent(driverAssist, forKey: .driverAssist)
+        try container.encodeIfPresent(efficiencyPackage, forKey: .efficiencyPackage)
 		try container.encodeIfPresent(euVehicle, forKey: .euVehicle)
 		try container.encodeIfPresent(exteriorColor, forKey: .exteriorColor)
 		try container.encodeIfPresent(hasAirSuspension, forKey: .hasAirSuspension)

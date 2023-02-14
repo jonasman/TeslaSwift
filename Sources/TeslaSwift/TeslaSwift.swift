@@ -240,13 +240,21 @@ extension TeslaSwift {
      
      - returns: A completion handler with all the data
      */
-    public func getAllData(_ vehicle: Vehicle) async throws -> VehicleExtended {
+    public func getAllData(_ vehicleID: String) async throws -> VehicleExtended {
         _ = try await checkAuthentication()
-        let vehicleID = vehicle.id!
         let response: Response<VehicleExtended> = try await request(.allStates(vehicleID: vehicleID), body: nullBody)
         return response.response
 	}
-	
+
+    /**
+     Fetches the vehicle data
+
+     - returns: A completion handler with all the data
+     */
+    public func getAllData(_ vehicle: Vehicle) async throws -> VehicleExtended {
+        return try await getAllData(vehicle.id!)
+    }
+
 	/**
 	Fetches the vehicle mobile access state
 	
@@ -349,13 +357,21 @@ extension TeslaSwift {
 	
 	- returns: The current Vehicle
 	*/
-    public func wakeUp(_ vehicle: Vehicle) async throws -> Vehicle {
+    public func wakeUp(_ vehicleID: String) async throws -> Vehicle {
         _ = try await checkAuthentication()
-        let vehicleID = vehicle.id!
         let response: Response<Vehicle> = try await request(.wakeUp(vehicleID: vehicleID), body: nullBody)
         return response.response
 	}
-	
+
+    /**
+     Wakes up the vehicle
+
+     - returns: The current Vehicle
+     */
+    public func wakeUp(_ vehicle: Vehicle) async throws -> Vehicle {
+        return try await getAllData(vehicle.id!)
+    }
+
 	/**
 	Sends a command to the vehicle
 	
