@@ -372,6 +372,17 @@ extension TeslaSwift {
         return try await getAllData(vehicle.id!)
     }
 
+
+    /**
+     Sends a command to the vehicle
+
+     - parameter vehicleID: the if od the vehicle that will receive the command
+     - parameter command: the command to send to the vehicle
+     - returns: A completion handler with the CommandResponse object containing the results of the command.
+     */
+    public func sendCommandToVehicle(_ vehicle: Vehicle, command: VehicleCommand) async throws -> CommandResponse {
+        return try await sendCommandToVehicle(vehicle.id!, command: command)
+    }
 	/**
 	Sends a command to the vehicle
 	
@@ -379,72 +390,72 @@ extension TeslaSwift {
 	- parameter command: the command to send to the vehicle
 	- returns: A completion handler with the CommandResponse object containing the results of the command.
 	*/
-	public func sendCommandToVehicle(_ vehicle: Vehicle, command: VehicleCommand) async throws -> CommandResponse {
+	public func sendCommandToVehicle(_ vehicleID: String, command: VehicleCommand) async throws -> CommandResponse {
         _ = try await checkAuthentication()
 
         switch command {
             case let .setMaxDefrost(on: state):
                 let body = MaxDefrostCommandOptions(state: state)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .triggerHomeLink(coordinates):
                 let body = HomeLinkCommandOptions(coordinates: coordinates)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .valetMode(valetActivated, pin):
                 let body = ValetCommandOptions(valetActivated: valetActivated, pin: pin)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .openTrunk(options):
                 let body = options
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .shareToVehicle(address):
                 let body = address
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .scheduledCharging(enable, time):
                 let body = ScheduledChargingCommandOptions(enable: enable, time: time)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .scheduledDeparture(body):
                 return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
             case let .chargeLimitPercentage(limit):
                 let body = ChargeLimitPercentageCommandOptions(limit: limit)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .setTemperature(driverTemperature, passengerTemperature):
                 let body = SetTemperatureCommandOptions(driverTemperature: driverTemperature, passengerTemperature: passengerTemperature)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .setSunRoof(state, percent):
                 let body = SetSunRoofCommandOptions(state: state, percent: percent)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .startVehicle(password):
                 let body = RemoteStartDriveCommandOptions(password: password)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .speedLimitSetLimit(speed):
                 let body = SetSpeedLimitOptions(limit: speed)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .speedLimitActivate(pin):
                 let body = SpeedLimitPinOptions(pin: pin)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .speedLimitDeactivate(pin):
                 let body = SpeedLimitPinOptions(pin: pin)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .speedLimitClearPin(pin):
                 let body = SpeedLimitPinOptions(pin: pin)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .setSeatHeater(seat, level):
                 let body = RemoteSeatHeaterRequestOptions(seat: seat, level: level)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .setSteeringWheelHeater(on):
                 let body = RemoteSteeringWheelHeaterRequestOptions(on: on)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .sentryMode(activated):
                 let body = SentryModeCommandOptions(activated: activated)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .windowControl(state):
                 let body = WindowControlCommandOptions(command: state)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .setCharging(amps):
                 let body = ChargeAmpsCommandOptions(amps: amps)
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             default:
                 let body = nullBody
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
         }
 	}
 
