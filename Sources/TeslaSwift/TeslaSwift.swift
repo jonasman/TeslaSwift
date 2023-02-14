@@ -412,7 +412,7 @@ extension TeslaSwift {
                 let body = ScheduledChargingCommandOptions(enable: enable, time: time)
                 return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .scheduledDeparture(body):
-                return try await request(Endpoint.command(vehicleID: vehicle.id!, command: command), body: body)
+                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .chargeLimitPercentage(limit):
                 let body = ChargeLimitPercentageCommandOptions(limit: limit)
                 return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
