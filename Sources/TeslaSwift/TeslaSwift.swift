@@ -372,7 +372,6 @@ extension TeslaSwift {
         return try await getAllData(vehicle.id!)
     }
 
-
     /**
      Sends a command to the vehicle
 
