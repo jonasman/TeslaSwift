@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 private let oAuthClientID: String = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef2106796384"
 private let oAuthWebClientID: String = "ownerapi"
@@ -96,7 +95,6 @@ class AuthTokenRequest: Encodable {
 }
 
 class AuthTokenRequestWeb: Encodable {
-
     enum GrantType: String, Encodable {
         case refreshToken = "refresh_token"
         case authorizationCode = "authorization_code"
@@ -113,9 +111,9 @@ class AuthTokenRequestWeb: Encodable {
     var refreshToken: String?
     var scope: String?
 
-    init(grantType: GrantType = .authorizationCode, code: String? = nil, refreshToken: String? = nil) {
-        if grantType == .authorizationCode {
-            codeVerifier = oAuthClientID.codeVerifier
+    init(grantType: GrantType = .authorizationCode, code: String? = nil, codeVerifier: String? = nil, refreshToken: String? = nil) {
+        if grantType == .authorizationCode, let codeVerifier {
+            self.codeVerifier = codeVerifier
             self.code = code
             redirectURI = oAuthRedirectURI
         } else if grantType == .refreshToken {
@@ -152,8 +150,8 @@ class AuthCodeRequest: Encodable {
     var codeChallengeMethod = "S256"
     var state = "teslaSwift"
 
-    init() {
-        self.codeChallenge = clientID.codeVerifier.challenge
+    init(codeChallenge: String) {
+        self.codeChallenge = codeChallenge
     }
 
     // MARK: Codable protocol
@@ -179,38 +177,5 @@ class AuthCodeRequest: Encodable {
             URLQueryItem(name: CodingKeys.codeChallengeMethod.rawValue, value: codeChallengeMethod),
             URLQueryItem(name: CodingKeys.state.rawValue, value: state)
         ]
-    }
-}
-
-extension String {
-    var codeVerifier: String {
-        let verifier = self.data(using: .utf8)!.base64EncodedString()
-            .replacingOccurrences(of: "+", with: "-")
-            .replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "=", with: "")
-            .trimmingCharacters(in: .whitespaces)
-        return verifier
-    }
-
-    var challenge: String {
-        let hash = self.sha256
-        let challenge = hash.base64EncodedString()
-            .replacingOccurrences(of: "+", with: "-")
-            .replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "=", with: "")
-            .trimmingCharacters(in: .whitespaces)
-        return challenge
-    }
-
-    var sha256: String {
-        let inputData = Data(self.utf8)
-        let hashed = SHA256.hash(data: inputData)
-        let hashString = hashed.compactMap { String(format: "%02x", $0) }.joined()
-        return hashString
-    }
-
-    func base64EncodedString() -> String {
-        let inputData = Data(self.utf8)
-        return inputData.base64EncodedString()
     }
 }

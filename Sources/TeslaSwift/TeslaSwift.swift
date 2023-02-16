@@ -8,6 +8,8 @@
 
 import Foundation
 import os.log
+import CryptoKit
+import Security
 
 public enum TeslaError: Error, Equatable {
     case networkError(error: NSError)
@@ -37,7 +39,6 @@ open class TeslaSwift {
 }
 
 extension TeslaSwift {
-
     public var isAuthenticated: Bool {
         return token != nil && (token?.isValid ?? false)
     }
@@ -53,8 +54,8 @@ extension TeslaSwift {
      An async function that returns when the token as been retrieved
      */
     public func authenticateWeb() -> (TeslaWebLoginViewController?, () async throws -> AuthToken) {
-
-        let codeRequest = AuthCodeRequest()
+        let codeVerifier = codeVerifier()
+        let codeRequest = AuthCodeRequest(codeChallenge: challenge(for: codeVerifier))
         let endpoint = Endpoint.oAuth2Authorization(auth: codeRequest)
         var urlComponents = URLComponents(string: endpoint.baseURL())
         urlComponents?.path = endpoint.path
@@ -68,14 +69,14 @@ extension TeslaSwift {
         }
 
         let teslaWebLoginViewController = TeslaWebLoginViewController(url: safeUrlComponents.url!)
-
         func result() async throws -> AuthToken {
                 let url = try await teslaWebLoginViewController.result()
+
                 let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
                 if let queryItems = urlComponents?.queryItems {
                     for queryItem in queryItems {
                         if queryItem.name == "code", let code = queryItem.value {
-                            return try await self.getAuthenticationTokenForWeb(code: code)
+                            return try await self.getAuthenticationTokenForWeb(code: code, codeVerifier: codeVerifier)
                         }
                     }
                 }
@@ -85,9 +86,8 @@ extension TeslaSwift {
     }
     #endif
 
-    private func getAuthenticationTokenForWeb(code: String) async throws -> AuthToken {
-
-        let body = AuthTokenRequestWeb(code: code)
+    private func getAuthenticationTokenForWeb(code: String, codeVerifier: String) async throws -> AuthToken {
+        let body = AuthTokenRequestWeb(code: code, codeVerifier: codeVerifier)
 
         do {
             let token: AuthToken = try await request(.oAuth2Token, body: body)
@@ -701,3 +701,61 @@ public let teslaJSONDecoder: JSONDecoder = {
         })
 	return decoder
 }()
+
+// MARK: - code to create code_verifier and challenge
+
+precedencegroup ForwardApplication {
+    associativity: left
+}
+
+infix operator |>: ForwardApplication
+
+func |> <A, B>(a: A, f: (A) -> B) -> B {
+    f(a)
+}
+
+func |> <A, B>(a: A, f: (A) throws -> B) throws -> B {
+    try f(a)
+}
+
+extension TeslaSwift {
+
+    func generateCryptographicallySecureRandomOctets(count: Int) -> [UInt8] {
+        var octets = [UInt8](repeating: 0, count: count)
+        let status = SecRandomCopyBytes(kSecRandomDefault, octets.count, &octets)
+        if status == errSecSuccess { // Always test the status.
+            return octets
+        }
+
+        return []
+    }
+
+    func base64URLEncode<S>(octets: S) -> String where S : Sequence, UInt8 == S.Element {
+        let data = Data(octets)
+        return data
+            .base64EncodedString() // Regular base64 encoder
+            .replacingOccurrences(of: "=", with: "") // Remove any trailing '='s
+            .replacingOccurrences(of: "+", with: "-") // 62nd char of encoding
+            .replacingOccurrences(of: "/", with: "_") // 63rd char of encoding
+            .trimmingCharacters(in: .whitespaces)
+    }
+
+    func codeVerifier() -> String {
+        return 32
+        |> generateCryptographicallySecureRandomOctets
+        |> base64URLEncode
+    }
+
+    func challenge(for verifier: String) -> String {
+        let challenge = verifier
+            .data(using: .ascii) // (a)
+            .map { SHA256.hash(data: $0) } // (b)
+            .map { base64URLEncode(octets: $0) } // (c)
+
+        if let challenge = challenge {
+            return challenge
+        }
+
+        return ""
+    }
+}
