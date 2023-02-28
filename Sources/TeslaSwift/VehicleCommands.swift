@@ -50,7 +50,7 @@ public enum VehicleCommand {
     case setSeatHeater(seat: HeatedSeat, level: HeatLevel)
     case setSteeringWheelHeater(on: Bool)
     case sentryMode(activated: Bool)
-    case windowControl(state: WindowState)
+    case windowControl(state: WindowState, location: CLLocation? = nil)
     case setCharging(amps: Int)
     case remoteBoombox
 

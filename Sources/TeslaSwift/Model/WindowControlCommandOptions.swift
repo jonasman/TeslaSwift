@@ -20,8 +20,13 @@ open class WindowControlCommandOptions: Encodable {
     open var longitude: CLLocationDegrees = 0
     open var command: WindowState
     
-    public init(command: WindowState) {
+    public init(command: WindowState, location: CLLocation?) {
         self.command = command
+
+        if let location {
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+        }
     }
     
     enum CodingKeys: String, CodingKey {

@@ -446,8 +446,8 @@ extension TeslaSwift {
             case let .sentryMode(activated):
                 let body = SentryModeCommandOptions(activated: activated)
                 return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
-            case let .windowControl(state):
-                let body = WindowControlCommandOptions(command: state)
+            case let .windowControl(state, location):
+                let body = WindowControlCommandOptions(command: state, location: location)
                 return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .setCharging(amps):
                 let body = ChargeAmpsCommandOptions(amps: amps)
