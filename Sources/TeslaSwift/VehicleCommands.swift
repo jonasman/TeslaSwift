@@ -31,7 +31,7 @@ public enum VehicleCommand {
     case startAutoConditioning
     case stopAutoConditioning
     case setSunRoof(state: RoofState, percentage: Int?)
-    case startVehicle(password: String)
+    case startVehicle
     case openTrunk(options: OpenTrunkOptions)
     case togglePlayback
     case nextTrack

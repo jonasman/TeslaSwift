@@ -422,9 +422,6 @@ extension TeslaSwift {
             case let .setSunRoof(state, percent):
                 let body = SetSunRoofCommandOptions(state: state, percent: percent)
                 return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
-            case let .startVehicle(password):
-                let body = RemoteStartDriveCommandOptions(password: password)
-                return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
             case let .speedLimitSetLimit(speed):
                 let body = SetSpeedLimitOptions(limit: speed)
                 return try await request(Endpoint.command(vehicleID: vehicleID, command: command), body: body)
