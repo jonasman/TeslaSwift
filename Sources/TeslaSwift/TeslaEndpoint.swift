@@ -57,11 +57,11 @@ extension Endpoint {
             case .vehicles:
                 return "/api/1/vehicles"
             case .vehicleSummary(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)"
+                return "/api/1/vehicles/\(vehicleID)?let_sleep=true"
             case .mobileAccess(let vehicleID):
                 return "/api/1/vehicles/\(vehicleID)/mobile_enabled"
             case .allStates(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/vehicle_data"
+                return "/api/1/vehicles/\(vehicleID)/vehicle_data?let_sleep=true"
             case .chargeState(let vehicleID):
                 return "/api/1/vehicles/\(vehicleID)/data_request/charge_state"
             case .climateState(let vehicleID):
