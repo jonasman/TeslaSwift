@@ -64,7 +64,7 @@ open class StreamEvent: Codable {
 		return nil
 	}
 	
-	init(values: String) {
+    public init(values: String) {
 		// timeStamp,speed,odometer,soc,elevation,est_heading,est_lat,est_lng,power,shift_state,range,est_range,heading
 		let separatedValues = values.components(separatedBy: ",")
 		
