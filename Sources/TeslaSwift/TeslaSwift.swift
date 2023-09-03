@@ -85,7 +85,16 @@ extension TeslaSwift {
     }
     #endif
 
-    private func getAuthenticationTokenForWeb(code: String) async throws -> AuthToken {
+    public var authenticationURL: URL? {
+        let codeRequest = AuthCodeRequest()
+        let endpoint = Endpoint.oAuth2Authorization(auth: codeRequest)
+        var urlComponents = URLComponents(string: endpoint.baseURL())
+        urlComponents?.path = endpoint.path
+        urlComponents?.queryItems = endpoint.queryParameters
+        return urlComponents?.url
+    }
+
+    public func getAuthenticationTokenForWeb(code: String) async throws -> AuthToken {
 
         let body = AuthTokenRequestWeb(code: code)
 
