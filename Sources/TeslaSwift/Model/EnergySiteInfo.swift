@@ -45,7 +45,7 @@ open class EnergySiteInfo: Codable {
     // MARK: - Components
     open class Components: Codable {
         open var solar: Bool
-        open var solarType: String
+        open var solarType: String?
         open var battery: Bool
         open var grid: Bool
         open var backup: Bool
