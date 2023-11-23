@@ -12,7 +12,7 @@ import TeslaSwift
 
 extension TeslaSwift {
     public func revokeToken() -> Future<Bool, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.revokeToken()
@@ -25,7 +25,7 @@ extension TeslaSwift {
     }
     
     public func getVehicles() -> Future<[Vehicle], Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getVehicles()
@@ -38,7 +38,7 @@ extension TeslaSwift {
     }
     
     public func getVehicle(_ vehicleID: String) -> Future<Vehicle, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getVehicle(vehicleID)
@@ -51,7 +51,7 @@ extension TeslaSwift {
     }
     
     public func getVehicle(_ vehicle: Vehicle) -> Future<Vehicle, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getVehicle(vehicle)
@@ -64,7 +64,7 @@ extension TeslaSwift {
     }
     
     public func getAllData(_ vehicle: Vehicle) -> Future<VehicleExtended, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getAllData(vehicle)
@@ -77,7 +77,7 @@ extension TeslaSwift {
     }
     
     public func getVehicleMobileAccessState(_ vehicle: Vehicle) -> Future<Bool, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getVehicleMobileAccessState(vehicle)
@@ -90,7 +90,7 @@ extension TeslaSwift {
     }
     
     public func wakeUp(_ vehicle: Vehicle) -> Future<Vehicle, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.wakeUp(vehicle)
@@ -103,7 +103,7 @@ extension TeslaSwift {
     }
     
     public func sendCommandToVehicle(_ vehicle: Vehicle, command: VehicleCommand) -> Future<CommandResponse, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.sendCommandToVehicle(vehicle, command: command)
@@ -116,7 +116,7 @@ extension TeslaSwift {
     }
     
     public func getProducts() -> Future<[Product], Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getProducts()
@@ -129,7 +129,7 @@ extension TeslaSwift {
     }
     
     public func getEnergySiteStatus(siteID: String) -> Future<EnergySiteStatus, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getEnergySiteStatus(siteID: siteID)
@@ -142,7 +142,7 @@ extension TeslaSwift {
     }
 
     public func getEnergySiteLiveStatus(siteID: String) -> Future<EnergySiteLiveStatus, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getEnergySiteLiveStatus(siteID: siteID)
@@ -155,7 +155,7 @@ extension TeslaSwift {
     }
 
     public func getEnergySiteInfo(siteID: String) -> Future<EnergySiteInfo, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getEnergySiteInfo(siteID: siteID)
@@ -168,7 +168,7 @@ extension TeslaSwift {
     }
 
     public func getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period) -> Future<EnergySiteHistory, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getEnergySiteHistory(siteID: siteID, period: period)
@@ -181,7 +181,7 @@ extension TeslaSwift {
     }
 
     public func getBatteryStatus(batteryID: String) -> Future<BatteryStatus, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getBatteryStatus(batteryID: batteryID)
@@ -194,7 +194,7 @@ extension TeslaSwift {
     }
 
     public func getBatteryData(batteryID: String) -> Future<BatteryData, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getBatteryData(batteryID: batteryID)
@@ -207,7 +207,7 @@ extension TeslaSwift {
     }
 
     public func getBatteryPowerHistory(batteryID: String) -> Future<BatteryPowerHistory, Error> {
-        Future{ promise in
+        Future { promise in
             Task {
                 do {
                     let result = try await self.getBatteryPowerHistory(batteryID: batteryID)
