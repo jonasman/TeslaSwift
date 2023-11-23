@@ -15,7 +15,7 @@ open class EnergySiteInfo: Codable {
     open var backupReservePercent: Double?
     open var defaultRealMode: String?
     open var installationDate: Date
-    open var version: String
+    open var version: String?
     open var batteryCount: Int?
     open var nameplatePower: Double?
     open var nameplateEnergy: Double?
