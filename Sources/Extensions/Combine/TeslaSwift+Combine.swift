@@ -115,7 +115,7 @@ extension TeslaSwift {
         }
     }
     
-    public func getNearbyChargingSite(vehicle: Vehicle) -> Future<NearbyChargingSites, Error>{
+    public func getNearbyChargingSite(vehicle: Vehicle) -> Future<NearbyChargingSites, Error> {
         Future { promise in
             Task {
                 do {
