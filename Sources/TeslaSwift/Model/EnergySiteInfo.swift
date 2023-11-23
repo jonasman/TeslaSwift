@@ -11,7 +11,7 @@ import Foundation
 // MARK: - EnergySiteInfo
 open class EnergySiteInfo: Codable {
     open var id: String
-    open var siteName: String
+    open var siteName: String?
     open var backupReservePercent: Double
     open var defaultRealMode: String
     open var installationDate: Date
