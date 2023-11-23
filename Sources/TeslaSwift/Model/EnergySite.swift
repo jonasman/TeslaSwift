@@ -20,13 +20,13 @@ open class EnergySite: Codable {
     // Also available in EnergySiteStatus
     open var resourceType: String
     open var siteName: String?
-    open var gatewayID: String
-    open var energyLeft: Double
-    open var totalPackEnergy: Double
-    open var percentageCharged: Double
-    open var batteryType: String
-    open var backupCapable: Bool
-    open var batteryPower: Double
+    open var gatewayID: String?
+    open var energyLeft: Double?
+    open var totalPackEnergy: Double?
+    open var percentageCharged: Double?
+    open var batteryType: String?
+    open var backupCapable: Bool?
+    open var batteryPower: Double?
     open var syncGridAlertEnabled: Bool
     open var breakerAlertEnabled: Bool
 
