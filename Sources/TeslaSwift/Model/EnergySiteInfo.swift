@@ -114,7 +114,7 @@ open class EnergySiteInfo: Codable {
 
     // MARK: - UserSettings
     open class UserSettings: Codable {
-        open var stormModeEnabled: Bool
+        open var stormModeEnabled: Bool?
         open var syncGridAlertEnabled: Bool
         open var breakerAlertEnabled: Bool
 
