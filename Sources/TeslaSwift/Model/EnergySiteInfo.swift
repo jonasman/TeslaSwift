@@ -52,18 +52,18 @@ open class EnergySiteInfo: Codable {
         open var gateway: String
         open var loadMeter: Bool
         open var touCapable: Bool?
-        open var stormModeCapable: Bool
+        open var stormModeCapable: Bool?
         open var flexEnergyRequestCapable: Bool
         open var carChargingDataSupported: Bool
         open var offGridVehicleChargingReserveSupported: Bool
         open var vehicleChargingPerformanceViewEnabled: Bool
         open var vehicleChargingSolarOffsetViewEnabled: Bool
         open var batterySolarOffsetViewEnabled: Bool
-        open var setIslandingModeEnabled: Bool
-        open var backupTimeRemainingEnabled: Bool
-        open var batteryType: String
-        open var configurable: Bool
-        open var gridServicesEnabled: Bool
+        open var setIslandingModeEnabled: Bool?
+        open var backupTimeRemainingEnabled: Bool?
+        open var batteryType: String?
+        open var configurable: Bool?
+        open var gridServicesEnabled: Bool?
 
         enum CodingKeys: String, CodingKey {
             case solar
