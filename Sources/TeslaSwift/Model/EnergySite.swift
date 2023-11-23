@@ -19,7 +19,7 @@ open class EnergySite: Codable {
     
     // Also available in EnergySiteStatus
     open var resourceType: String
-    open var siteName: String
+    open var siteName: String?
     open var gatewayID: String
     open var energyLeft: Double
     open var totalPackEnergy: Double
