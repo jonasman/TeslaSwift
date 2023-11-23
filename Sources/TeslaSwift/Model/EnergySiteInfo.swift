@@ -12,18 +12,18 @@ import Foundation
 open class EnergySiteInfo: Codable {
     open var id: String
     open var siteName: String?
-    open var backupReservePercent: Double
-    open var defaultRealMode: String
+    open var backupReservePercent: Double?
+    open var defaultRealMode: String?
     open var installationDate: Date
     open var version: String
-    open var batteryCount: Int
-    open var nameplatePower: Double
-    open var nameplateEnergy: Double
+    open var batteryCount: Int?
+    open var nameplatePower: Double?
+    open var nameplateEnergy: Double?
     open var installationTimeZone: String
-    open var offGridVehicleChargingReservePercent: Double
+    open var offGridVehicleChargingReservePercent: Double?
     
     open var userSettings: UserSettings
-    open var touSettings: TOUSettings
+    open var touSettings: TOUSettings?
     open var components: Components
 
     enum CodingKeys: String, CodingKey {
@@ -51,7 +51,7 @@ open class EnergySiteInfo: Codable {
         open var backup: Bool
         open var gateway: String
         open var loadMeter: Bool
-        open var touCapable: Bool
+        open var touCapable: Bool?
         open var stormModeCapable: Bool
         open var flexEnergyRequestCapable: Bool
         open var carChargingDataSupported: Bool
