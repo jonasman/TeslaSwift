@@ -59,7 +59,7 @@ open class TeslaSwift {
 }
 
 //MARK: Partner APIs
-extension TeslaSwift {
+public extension TeslaSwift {
 
     /**
      Retrieves a partner Auth token
