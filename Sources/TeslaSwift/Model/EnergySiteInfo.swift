@@ -11,19 +11,19 @@ import Foundation
 // MARK: - EnergySiteInfo
 open class EnergySiteInfo: Codable {
     open var id: String
-    open var siteName: String
-    open var backupReservePercent: Double
-    open var defaultRealMode: String
+    open var siteName: String?
+    open var backupReservePercent: Double?
+    open var defaultRealMode: String?
     open var installationDate: Date
-    open var version: String
-    open var batteryCount: Int
-    open var nameplatePower: Double
-    open var nameplateEnergy: Double
+    open var version: String?
+    open var batteryCount: Int?
+    open var nameplatePower: Double?
+    open var nameplateEnergy: Double?
     open var installationTimeZone: String
-    open var offGridVehicleChargingReservePercent: Double
+    open var offGridVehicleChargingReservePercent: Double?
     
     open var userSettings: UserSettings
-    open var touSettings: TOUSettings
+    open var touSettings: TOUSettings?
     open var components: Components
 
     enum CodingKeys: String, CodingKey {
@@ -45,25 +45,25 @@ open class EnergySiteInfo: Codable {
     // MARK: - Components
     open class Components: Codable {
         open var solar: Bool
-        open var solarType: String
+        open var solarType: String?
         open var battery: Bool
         open var grid: Bool
         open var backup: Bool
         open var gateway: String
         open var loadMeter: Bool
-        open var touCapable: Bool
-        open var stormModeCapable: Bool
+        open var touCapable: Bool?
+        open var stormModeCapable: Bool?
         open var flexEnergyRequestCapable: Bool
         open var carChargingDataSupported: Bool
         open var offGridVehicleChargingReserveSupported: Bool
         open var vehicleChargingPerformanceViewEnabled: Bool
         open var vehicleChargingSolarOffsetViewEnabled: Bool
         open var batterySolarOffsetViewEnabled: Bool
-        open var setIslandingModeEnabled: Bool
-        open var backupTimeRemainingEnabled: Bool
-        open var batteryType: String
-        open var configurable: Bool
-        open var gridServicesEnabled: Bool
+        open var setIslandingModeEnabled: Bool?
+        open var backupTimeRemainingEnabled: Bool?
+        open var batteryType: String?
+        open var configurable: Bool?
+        open var gridServicesEnabled: Bool?
 
         enum CodingKeys: String, CodingKey {
             case solar
@@ -114,7 +114,7 @@ open class EnergySiteInfo: Codable {
 
     // MARK: - UserSettings
     open class UserSettings: Codable {
-        open var stormModeEnabled: Bool
+        open var stormModeEnabled: Bool?
         open var syncGridAlertEnabled: Bool
         open var breakerAlertEnabled: Bool
 
