@@ -13,7 +13,15 @@ open class EnergySite: Codable {
     
     // Unique to EnergySite
     open var id: String?
+    public var batteryId: BatteryId? {
+        guard let id else { return nil }
+        
+        return BatteryId(id: id)
+    }
     open var energySiteID: Decimal
+    public var siteId: SiteId {
+        SiteId(id: energySiteID)
+    }
     open var assetSiteID: String?
     open var components: Components?
     

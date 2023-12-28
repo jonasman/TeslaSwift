@@ -15,14 +15,14 @@ open class Vehicle: Codable {
 	open var calendarEnabled: Bool?
 	open var color: String?
 	open var displayName: String?
-	open var id: String? {
+	open var id: VehicleId? {
 		get {
 			guard let value = idInt else { return nil }
-			return "\(value)"
+			return VehicleId(id: value)
 		}
 		set {
-			guard let newValue = newValue else { idInt = nil; return }
-			idInt = Int64(newValue)
+            guard let newValue = newValue?.id else { idInt = nil; return }
+            idInt = Int64(newValue)
 		}
 	}
 	open var idInt: Int64?
@@ -106,5 +106,28 @@ open class Vehicle: Codable {
 		try container.encodeIfPresent(vin, forKey: .vin)
 		
 	}
+}
 
+public class VehicleId {
+    public let id: Int64
+
+    init(id: Int64) {
+        self.id = id
+    }
+}
+
+public class SiteId {
+    public let id: Decimal
+
+    init(id: Decimal) {
+        self.id = id
+    }
+}
+
+public class BatteryId {
+    public let id: String
+
+    init(id: String) {
+        self.id = id
+    }
 }

@@ -36,7 +36,7 @@ class ProductViewController: UIViewController {
         guard let energySite = energySite else { return }
         Task { @MainActor in
             do {
-            let response = try await api.getEnergySiteStatus(siteID: "\(energySite.energySiteID)")
+            let response = try await api.getEnergySiteStatus(siteID: energySite.siteId)
             self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
@@ -48,7 +48,7 @@ class ProductViewController: UIViewController {
         guard let energySite = energySite else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getEnergySiteLiveStatus(siteID: "\(energySite.energySiteID)")
+                let response = try await api.getEnergySiteLiveStatus(siteID: energySite.siteId)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
@@ -60,7 +60,7 @@ class ProductViewController: UIViewController {
         guard let energySite = energySite else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getEnergySiteInfo(siteID: "\(energySite.energySiteID)")
+                let response = try await api.getEnergySiteInfo(siteID: energySite.siteId)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
@@ -72,7 +72,7 @@ class ProductViewController: UIViewController {
         guard let energySite = energySite else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getEnergySiteHistory(siteID: "\(energySite.energySiteID)", period: EnergySiteHistory.Period.day)
+                let response = try await api.getEnergySiteHistory(siteID: energySite.siteId, period: EnergySiteHistory.Period.day)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
@@ -81,10 +81,10 @@ class ProductViewController: UIViewController {
     }
     
     @IBAction func getBatteryStatus(_ sender: Any) {
-        guard let energySiteId = energySite?.id else { return }
+        guard let energySiteId = energySite?.batteryId else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getBatteryStatus(batteryID: "\(energySiteId)")
+                let response = try await api.getBatteryStatus(batteryID: energySiteId)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
@@ -93,10 +93,10 @@ class ProductViewController: UIViewController {
     }
     
     @IBAction func getBatteryData(_ sender: Any) {
-        guard let energySiteId = energySite?.id else { return }
+        guard let energySiteId = energySite?.batteryId else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getBatteryData(batteryID: "\(energySiteId)")
+                let response = try await api.getBatteryData(batteryID: energySiteId)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription
@@ -105,10 +105,10 @@ class ProductViewController: UIViewController {
     }
     
     @IBAction func getBatteryPowerHistory(_ sender: Any) {
-        guard let energySiteId = energySite?.id else { return }
+        guard let energySiteId = energySite?.batteryId else { return }
         Task { @MainActor in
             do {
-                let response = try await api.getBatteryPowerHistory(batteryID: "\(energySiteId)")
+                let response = try await api.getBatteryPowerHistory(batteryID: energySiteId)
                 self.textView.text = response.jsonString
             } catch let error {
                 self.textView.text = error.localizedDescription

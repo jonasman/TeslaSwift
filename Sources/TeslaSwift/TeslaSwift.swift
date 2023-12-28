@@ -27,6 +27,7 @@ public enum TeslaAPI {
     public enum Region: String, Codable {
         case northAmericaAsiaPacific = "https://fleet-api.prd.na.vn.cloud.tesla.com"
         case europeMiddleEastAfrica = "https://fleet-api.prd.eu.vn.cloud.tesla.com"
+        case china = "https://fleet-api.prd.cn.vn.cloud.tesla.cn"
     }
 
     case ownerAPI
@@ -316,7 +317,7 @@ extension TeslaSwift {
     
     - returns: A Vehicle.
     */
-    public func getVehicle(_ vehicleID: String) async throws -> Vehicle {
+    public func getVehicle(_ vehicleID: VehicleId) async throws -> Vehicle {
         _ = try await checkAuthentication()
         let response: Response<Vehicle> = try await request(.vehicleSummary(vehicleID: vehicleID))
         return response.response
@@ -398,7 +399,7 @@ extension TeslaSwift {
 	
 	- parameter vehicle: the vehicle that will receive the command
 	- parameter command: the command to send to the vehicle
-	- returns: A completion handler with the CommandResponse object containing the results of the command.
+	- returns: A CommandResponse object containing the results of the command.
 	*/
 	public func sendCommandToVehicle(_ vehicle: Vehicle, command: VehicleCommand) async throws -> CommandResponse {
         _ = try await checkAuthentication()
@@ -468,12 +469,25 @@ extension TeslaSwift {
         }
 	}
 
+
+    /**
+     Sends a signed command to the vehicle
+
+     - parameter vehicle: the vehicle that will receive the command
+     - parameter command: the command to send to the vehicle
+     - returns: A CommandResponse object containing the results of the command.
+     */
+    public func sendSignedCommandToVehicle(_ vehicle: Vehicle, command: VehicleCommand) async throws -> CommandResponse {
+        _ = try await checkAuthentication()
+        let body = "" // TODO
+        return try await request(Endpoint.signedCommand(vehicleID: vehicle.id!), body: body)
+    }
     /**
     Fetchs the status of your energy site
      
     - returns: The EnergySiteStatus
     */
-    public func getEnergySiteStatus(siteID: String) async throws -> EnergySiteStatus {
+    public func getEnergySiteStatus(siteID: SiteId) async throws -> EnergySiteStatus {
         _ = try await checkAuthentication()
         let response: Response<EnergySiteStatus> = try await request(.getEnergySiteStatus(siteID: siteID))
         return response.response
@@ -484,7 +498,7 @@ extension TeslaSwift {
      
     - returns: A completion handler with an array of Products.
     */
-    public func getEnergySiteLiveStatus(siteID: String) async throws -> EnergySiteLiveStatus {
+    public func getEnergySiteLiveStatus(siteID: SiteId) async throws -> EnergySiteLiveStatus {
         _ = try await checkAuthentication()
         let response: Response<EnergySiteLiveStatus> = try await request(.getEnergySiteLiveStatus(siteID: siteID))
         return response.response
@@ -495,7 +509,7 @@ extension TeslaSwift {
      
     - returns: The EnergySiteInfo.
     */
-    public func getEnergySiteInfo(siteID: String) async throws -> EnergySiteInfo {
+    public func getEnergySiteInfo(siteID: SiteId) async throws -> EnergySiteInfo {
         _ = try await checkAuthentication()
         let response: Response<EnergySiteInfo> = try await request(.getEnergySiteInfo(siteID: siteID))
         return response.response
@@ -506,7 +520,7 @@ extension TeslaSwift {
      
     - returns: The EnergySiteHistory
     */
-    public func getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period) async throws  -> EnergySiteHistory {
+    public func getEnergySiteHistory(siteID: SiteId, period: EnergySiteHistory.Period) async throws  -> EnergySiteHistory {
         _ = try await checkAuthentication()
         let response: Response<EnergySiteHistory> = try await request(.getEnergySiteHistory(siteID: siteID, period: period))
         return response.response
@@ -517,7 +531,7 @@ extension TeslaSwift {
      
     - returns: The BatteryStatus
     */
-    public func getBatteryStatus(batteryID: String) async throws -> BatteryStatus {
+    public func getBatteryStatus(batteryID: BatteryId) async throws -> BatteryStatus {
         _ = try await checkAuthentication()
         let response: Response<BatteryStatus> = try await request(.getBatteryStatus(batteryID: batteryID))
         return response.response
@@ -528,7 +542,7 @@ extension TeslaSwift {
      
     - returns: The BatteryData
     */
-    public func getBatteryData(batteryID: String) async throws -> BatteryData {
+    public func getBatteryData(batteryID: BatteryId) async throws -> BatteryData {
         _ = try await checkAuthentication()
         let response: Response<BatteryData> = try await request(.getBatteryData(batteryID: batteryID))
         return response.response
@@ -539,7 +553,7 @@ extension TeslaSwift {
      
     - returns: The BatteryPowerHistory
     */
-    public func getBatteryPowerHistory(batteryID: String) async throws -> BatteryPowerHistory {
+    public func getBatteryPowerHistory(batteryID: BatteryId) async throws -> BatteryPowerHistory {
         _ = try await checkAuthentication()
         let response: Response<BatteryPowerHistory> = try await request(.getBatteryPowerHistory(batteryID: batteryID))
         return response.response

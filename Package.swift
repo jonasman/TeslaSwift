@@ -1,10 +1,10 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 import PackageDescription
 
 let package = Package(
     name: "TeslaSwift",
     platforms: [
-        .macOS(.v11), .iOS(.v14), .watchOS(.v7), .tvOS(.v14)
+        .macOS(.v12), .iOS(.v15), .watchOS(.v8), .tvOS(.v15)
     ],
     products: [
         .library(name: "TeslaSwift", targets: ["TeslaSwift"]),

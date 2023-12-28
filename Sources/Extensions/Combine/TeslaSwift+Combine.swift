@@ -137,7 +137,7 @@ extension TeslaSwift {
         return future
     }
     
-    public func getEnergySiteStatus(siteID: String) -> Future<EnergySiteStatus, Error> {
+    public func getEnergySiteStatus(siteID: SiteId) -> Future<EnergySiteStatus, Error> {
         let future = Future<EnergySiteStatus, Error> { (subscriber: @escaping (Result<EnergySiteStatus, Error>) -> Void) in
             Task {
                 do {
@@ -151,7 +151,7 @@ extension TeslaSwift {
         return future
     }
 
-    public func getEnergySiteLiveStatus(siteID: String) -> Future<EnergySiteLiveStatus, Error> {
+    public func getEnergySiteLiveStatus(siteID: SiteId) -> Future<EnergySiteLiveStatus, Error> {
         let future = Future<EnergySiteLiveStatus, Error> { (subscriber: @escaping (Result<EnergySiteLiveStatus, Error>) -> Void) in
             Task {
                 do {
@@ -165,7 +165,7 @@ extension TeslaSwift {
         return future
     }
 
-    public func getEnergySiteInfo(siteID: String) -> Future<EnergySiteInfo, Error> {
+    public func getEnergySiteInfo(siteID: SiteId) -> Future<EnergySiteInfo, Error> {
         let future = Future<EnergySiteInfo, Error> { (subscriber: @escaping (Result<EnergySiteInfo, Error>) -> Void) in
             Task {
                 do {
@@ -179,7 +179,7 @@ extension TeslaSwift {
         return future
     }
 
-    public func getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period) -> Future<EnergySiteHistory, Error> {
+    public func getEnergySiteHistory(siteID: SiteId, period: EnergySiteHistory.Period) -> Future<EnergySiteHistory, Error> {
         let future = Future<EnergySiteHistory, Error> { (subscriber: @escaping (Result<EnergySiteHistory, Error>) -> Void) in
             Task {
                 do {
@@ -193,7 +193,7 @@ extension TeslaSwift {
         return future
     }
 
-    public func getBatteryStatus(batteryID: String) -> Future<BatteryStatus, Error> {
+    public func getBatteryStatus(batteryID: BatteryId) -> Future<BatteryStatus, Error> {
         let future = Future<BatteryStatus, Error> { (subscriber: @escaping (Result<BatteryStatus, Error>) -> Void) in
             Task {
                 do {
@@ -207,7 +207,7 @@ extension TeslaSwift {
         return future
     }
 
-    public func getBatteryData(batteryID: String) -> Future<BatteryData, Error> {
+    public func getBatteryData(batteryID: BatteryId) -> Future<BatteryData, Error> {
         let future = Future<BatteryData, Error> { (subscriber: @escaping (Result<BatteryData, Error>) -> Void) in
             Task {
                 do {
@@ -221,7 +221,7 @@ extension TeslaSwift {
         return future
     }
 
-    public func getBatteryPowerHistory(batteryID: String) -> Future<BatteryPowerHistory, Error> {
+    public func getBatteryPowerHistory(batteryID: BatteryId) -> Future<BatteryPowerHistory, Error> {
         let future = Future<BatteryPowerHistory, Error> { (subscriber: @escaping (Result<BatteryPowerHistory, Error>) -> Void) in
             Task {
                 do {
