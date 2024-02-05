@@ -29,14 +29,25 @@ public enum TeslaAPI {
         case europeMiddleEastAfrica = "https://fleet-api.prd.eu.vn.cloud.tesla.com"
         case china = "https://fleet-api.prd.cn.vn.cloud.tesla.cn"
     }
+    
+    public enum Scope: String {
+        case openId = "openid"
+        case offlineAccess = "offline_access"
+        case userData = "user_data"
+        case vehicleDeviceData = "vehicle_device_data"
+        case vehicleCmds = "vehicle_cmds"
+        case vehicleChargingCmds = "vehicle_charging_cmds"
+        case energyDeviceData = "energy_device_data"
+        case energyCmds = "energy_cmds"
+    }
 
     case ownerAPI
-    case fleetAPI(region: Region, clientID: String, clientSecret: String, redirectURI: String)
+    case fleetAPI(region: Region, clientID: String, clientSecret: String, redirectURI: String, scopes: [Scope])
 
     var url: String {
         switch self {
             case .ownerAPI: return "https://owner-api.teslamotors.com"
-            case let .fleetAPI(region: region, clientID: _, clientSecret: _, redirectURI: _): return region.rawValue
+            case let .fleetAPI(region: region, clientID: _, clientSecret: _, redirectURI: _, scopes: _): return region.rawValue
         }
     }
 }
