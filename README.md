@@ -11,7 +11,7 @@ Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https:/
 You can use [Swift Package Manager](https://swift.org/package-manager/) and specify a dependency in `Package.swift` by adding this or adding the dependency to Xcode:
 
 ```swift
-.Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 9)
+.Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 10)
 ```
 
 There are also extensions for Combine `TeslaSwiftCombine`
