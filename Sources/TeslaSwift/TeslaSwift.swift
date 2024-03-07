@@ -69,7 +69,7 @@ public extension TeslaSwift {
 
      - returns: An Auth token
      */
-    func getPartnerToken(code: String) async throws -> AuthToken {
+    func getPartnerToken() async throws -> AuthToken {
 
         let body = AuthTokenRequestWeb(teslaAPI: teslaAPI, grantType: .clientCredentials)
 

@@ -36,7 +36,7 @@ Follow the steps on the [official documentation](https://developer.tesla.com/doc
 
 This library helps you get a partner token and register your app with 2 APIs:
 ```swift
-getPartnerToken(code: String)
+getPartnerToken()
 registerApp(domain: String)
 ```
 
