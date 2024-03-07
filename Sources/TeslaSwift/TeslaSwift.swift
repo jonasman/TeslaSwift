@@ -100,7 +100,7 @@ public extension TeslaSwift {
      This is not to be used in client apps, but only to help register your Tesla app
 
      - parameter domain: The domain where your public key is hosted
-     - returns: The asociated public key with this app and a few more details about the app
+     - returns: The associated public key with this app and a few more details about the app
      */
     func registerApp(domain: String) async throws -> PartnerResponse {
 
@@ -261,6 +261,20 @@ extension TeslaSwift {
         TeslaWebLoginViewController.removeCookies()
         #endif
     }
+
+    /**
+     Create a URL to send your public key to vehicle.
+     Old Model S and X do not need to call this function
+     Your website must include the pem file in doman/.well-known/appspecific/com.tesla.3p.public-key.pem
+
+     Call this function after the user has authenticated then use UIApplication.shared.open(url)
+
+     - parameter domain: The domain where your public key is hosted
+     - returns: The URL for your app to open to register the public key in the vehicle
+     */
+    public func urlToSendPublicKeyToVehicle(domain: String) -> URL? {
+        return URL(string: "https://tesla.com/_ak/\(domain)")
+    }
 }
 
 //MARK: User APIs
@@ -277,7 +291,7 @@ extension TeslaSwift {
     }
 
     /**
-     Fetchs the uer region
+     Fetchs the user region
 
      - returns: the user region
      */

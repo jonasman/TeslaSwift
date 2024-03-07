@@ -108,7 +108,14 @@ class VehicleViewController: UIViewController {
     @IBAction func logout(_ sender: Any) {
         api.logout()
     }
-    
+    @IBAction func sendKeyToVehicle(_ sender: Any) {
+        let yourDomain = ""
+        if let url = api.urlToSendPublicKeyToVehicle(domain: yourDomain) {
+            UIApplication.shared.open(url)
+        }
+    }
+
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: sender)
 		if segue.identifier == "toStream" {
