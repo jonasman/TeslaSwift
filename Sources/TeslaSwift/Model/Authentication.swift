@@ -175,35 +175,36 @@ extension TeslaAPI {
     var region: Region? {
         switch self {
             case .ownerAPI: return nil
-            case let .fleetAPI(region: region, clientID: _, clientSecret: _, redirectURI: _): return region
+        case let .fleetAPI(region: region, clientID: _, clientSecret: _, redirectURI: _, scopes: _): return region
         }
     }
 
     var clientID: String {
         switch self {
             case .ownerAPI: return "ownerapi"
-            case let .fleetAPI(region: _, clientID: clientID, clientSecret: _, redirectURI: _): return clientID
+            case let .fleetAPI(region: _, clientID: clientID, clientSecret: _, redirectURI: _, scopes: _): return clientID
         }
     }
 
     var clientSecret: String {
         switch self {
             case .ownerAPI: return "c7257eb71a564034f9419ee651c7d0e5f7aa6bfbd18bafb5c5c033b093bb2fa3"
-            case let .fleetAPI(region: _, clientID: _, clientSecret: clientSecret, redirectURI: _): return clientSecret
+            case let .fleetAPI(region: _, clientID: _, clientSecret: clientSecret, redirectURI: _, scopes: _): return clientSecret
         }
     }
 
     var redirectURI: String {
         switch self {
             case .ownerAPI: return "https://auth.tesla.com/void/callback"
-            case let .fleetAPI(region: _, clientID: _, clientSecret: _, redirectURI: redirectURI): return redirectURI
+            case let .fleetAPI(region: _, clientID: _, clientSecret: _, redirectURI: redirectURI, scopes: _): return redirectURI
         }
     }
 
     var scope: String {
         switch self {
             case .ownerAPI: return "openid email offline_access"
-            case .fleetAPI: return "openid user_data vehicle_device_data offline_access vehicle_cmds vehicle_charging_cmds energy_device_data energy_cmds"
+            case let .fleetAPI(region: _, clientID: _, clientSecret: _, redirectURI: _, scopes: scopes):
+            return scopes.map { $0.rawValue }.joined(separator: " ")
         }
     }
 }
