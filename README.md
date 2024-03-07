@@ -251,6 +251,7 @@ http://ts.la/joao290
 * EV Companion (https://itunes.apple.com/us/app/ev-companion/id1574209459?mt=8)
 * S3XY Key Fob (https://kenmaz.net/tesla-app/)
 * Meter (https://apps.apple.com/us/app/meter/id1603166204)
+* Chargey (https://get.chargey.app/)
 
 Missing your app? open a PR or issue
 
