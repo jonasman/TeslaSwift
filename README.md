@@ -132,6 +132,17 @@ struct TeslaLogin: View {
     }
 }
 ```
+## Public Key upload to vehicle
+After authenticatiom, some vehicles might need to receive your public key.
+
+```swift
+if let url = api.urlToSendPublicKeyToVehicle(domain: yourDomain) {
+    UIApplication.shared.open(url)
+}
+```
+
+This will open the Tesla app and send the public key to the selected vehicle in the app.
+
 
 ## Token reuse
 After authentication, store the AuthToken in a safe place.
