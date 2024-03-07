@@ -32,7 +32,15 @@ open class DriveState: Codable {
 	open var date: Date?
 	open var timeStamp: Double?
 	open var power: Int?
-	
+
+    open var activeRouteLatitude: CLLocationDegrees?
+    open var activeRouteLongitude: CLLocationDegrees?
+    open var activeRouteTrafficMinutesDelay: Double?
+    open var activeRouteDestination: String?
+    open var activeRouteEnergyAtArrival: Int?
+    open var activeRouteMilesToArrival: Double?
+    open var activeRouteMinutesToArrival: Double?
+
 	open var position: CLLocation? {
 		if let latitude = latitude,
 			let longitude = longitude,
@@ -62,6 +70,13 @@ open class DriveState: Codable {
 		case nativeLongitude = "native_longitude"
 		case nativeLocationSupportedBool = "native_location_supported"
 		case nativeType = "native_type"
+        case activeRouteLatitude = "active_route_latitude"
+        case activeRouteLongitude = "active_route_longitude"
+        case activeRouteTrafficMinutesDelay = "active_route_traffic_minutes_delay"
+        case activeRouteDestination = "active_route_destination"
+        case activeRouteEnergyAtArrival = "active_route_energy_at_arrival"
+        case activeRouteMilesToArrival = "active_route_miles_to_arrival"
+        case activeRouteMinutesToArrival = "active_route_minutes_to_arrival"
 	}
 
 	required public init(from decoder: Decoder) throws {
@@ -82,6 +97,14 @@ open class DriveState: Codable {
 		date = try? container.decode(Date.self, forKey: .date)
 		timeStamp = try? container.decode(Double.self, forKey: .timeStamp)
 		power = try? container.decode(Int.self, forKey: .power)
+
+        activeRouteLatitude = try? container.decode(CLLocationDegrees.self, forKey: .activeRouteLatitude)
+        activeRouteLongitude = try? container.decode(CLLocationDegrees.self, forKey: .activeRouteLongitude)
+        activeRouteTrafficMinutesDelay = try? container.decode(Double.self, forKey: .activeRouteTrafficMinutesDelay)
+        activeRouteDestination = try? container.decode(String.self, forKey: .activeRouteDestination)
+        activeRouteEnergyAtArrival = try? container.decode(Int.self, forKey: .activeRouteEnergyAtArrival)
+        activeRouteMilesToArrival = try? container.decode(Double.self, forKey: .activeRouteMilesToArrival)
+        activeRouteMinutesToArrival = try? container.decode(Double.self, forKey: .activeRouteMinutesToArrival)
 	}
 	
 	public func encode(to encoder: Encoder) throws {
@@ -102,5 +125,13 @@ open class DriveState: Codable {
 		try container.encodeIfPresent(date, forKey: .date)
 		try container.encodeIfPresent(timeStamp, forKey: .timeStamp)
 		try container.encodeIfPresent(power, forKey: .power)
+
+        try container.encodeIfPresent(activeRouteLatitude, forKey: .activeRouteLatitude)
+        try container.encodeIfPresent(activeRouteLongitude, forKey: .activeRouteLongitude)
+        try container.encodeIfPresent(activeRouteTrafficMinutesDelay, forKey: .activeRouteTrafficMinutesDelay)
+        try container.encodeIfPresent(activeRouteDestination, forKey: .activeRouteDestination)
+        try container.encodeIfPresent(activeRouteEnergyAtArrival, forKey: .activeRouteEnergyAtArrival)
+        try container.encodeIfPresent(activeRouteMilesToArrival, forKey: .activeRouteMilesToArrival)
+        try container.encodeIfPresent(activeRouteMinutesToArrival, forKey: .activeRouteMinutesToArrival)
 	}
 }
