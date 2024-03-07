@@ -26,7 +26,7 @@ class VehicleViewController: UIViewController {
 	@IBAction func gettAll(_ sender: Any) {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
-            let extendedVehicle = try await api.getAllData(vehicle)
+            let extendedVehicle = try await api.getAllData(vehicle, endpoints: AllStatesEndpoints.allWithLocation)
             self.textView.text = "All data:\n" +
             extendedVehicle.jsonString!
         }

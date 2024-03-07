@@ -24,7 +24,7 @@ enum Endpoint {
 	case vehicles
     case vehicleSummary(vehicleID: VehicleId)
 	case mobileAccess(vehicleID: VehicleId)
-	case allStates(vehicleID: VehicleId)
+    case allStates(vehicleID: VehicleId, endpoints: [AllStatesEndpoints])
 	case chargeState(vehicleID: VehicleId)
 	case climateState(vehicleID: VehicleId)
 	case driveState(vehicleID: VehicleId)
@@ -44,6 +44,21 @@ enum Endpoint {
     case getBatteryStatus(batteryID: BatteryId)
     case getBatteryData(batteryID: BatteryId)
     case getBatteryPowerHistory(batteryID: BatteryId)
+}
+
+public enum AllStatesEndpoints: String {
+    case chargeState = "charge_state"
+    case climateState = "climate_state"
+    case closuresState = "closures_state"
+    case driveState = "drive_state"
+    case guiSettings = "gui_settings"
+    case locationData = "location_data" // Same as driveState but with location
+    case vehicleConfig = "vehicle_config"
+    case vehicleState = "vehicle_state"
+    case vehicleDataCombo = "vehicle_data_combo"
+
+    public static var all: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .driveState, .guiSettings, .vehicleConfig, .vehicleState]
+    public static var allWithLocation: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .locationData, .guiSettings, .vehicleConfig, .vehicleState]
 }
 
 extension Endpoint {
@@ -73,7 +88,7 @@ extension Endpoint {
                 return "/api/1/vehicles/\(vehicleID.id)"
             case .mobileAccess(let vehicleID):
                 return "/api/1/vehicles/\(vehicleID.id)/mobile_enabled"
-            case .allStates(let vehicleID):
+            case .allStates(let vehicleID, _):
                 return "/api/1/vehicles/\(vehicleID.id)/vehicle_data"
             case .chargeState(let vehicleID):
                 return "/api/1/vehicles/\(vehicleID.id)/data_request/charge_state"
@@ -135,6 +150,8 @@ extension Endpoint {
                 return [URLQueryItem(name: "token", value: token)]
             case let .getEnergySiteHistory(_, period):
                 return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "energy")]
+            case let .allStates(_, endpoints):
+                return [URLQueryItem(name: "endpoints", value: endpoints.map({ $0.rawValue }).joined(separator: ";"))]
             default:
                 return []
         }

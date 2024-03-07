@@ -363,10 +363,10 @@ extension TeslaSwift {
      
      - returns: A completion handler with all the data
      */
-    public func getAllData(_ vehicle: Vehicle) async throws -> VehicleExtended {
+    public func getAllData(_ vehicle: Vehicle, endpoints: [AllStatesEndpoints]) async throws -> VehicleExtended {
         _ = try await checkAuthentication()
         let vehicleID = vehicle.id!
-        let response: Response<VehicleExtended> = try await request(.allStates(vehicleID: vehicleID))
+        let response: Response<VehicleExtended> = try await request(.allStates(vehicleID: vehicleID, endpoints: endpoints))
         return response.response
 	}
 	
@@ -679,11 +679,14 @@ extension TeslaSwift {
         var urlComponents = URLComponents(url: URL(string: endpoint.baseURL(teslaAPI: teslaAPI))!, resolvingAgainstBaseURL: true)
         urlComponents?.path = endpoint.path
         urlComponents?.queryItems = endpoint.queryParameters
+        let percentEncodedQuery = urlComponents?.percentEncodedQuery
+        // Tesla requires semicolons to be encoded in the query, so we force .urlQueryAllowed on the query params to remove the semicolon
+        urlComponents?.percentEncodedQuery = percentEncodedQuery?.replacingOccurrences(of: ";", with: "%3B")
         var request = URLRequest(url: urlComponents!.url!)
 		request.httpMethod = endpoint.method
 		
 		request.setValue("TeslaSwift", forHTTPHeaderField: "User-Agent")
-        request.setValue("TeslaApp/4.9.2", forHTTPHeaderField: "x-tesla-user-agent")
+        request.setValue("TeslaApp/4.30.6", forHTTPHeaderField: "x-tesla-user-agent")
 
 		if let token = self.token?.accessToken {
 			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
