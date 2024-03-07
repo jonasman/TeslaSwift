@@ -39,10 +39,12 @@ public enum TeslaAPI {
         case vehicleChargingCmds = "vehicle_charging_cmds"
         case energyDeviceData = "energy_device_data"
         case energyCmds = "energy_cmds"
+
+        public static var all: [Scope] = [.openId, .offlineAccess, .userData, .vehicleDeviceData, .vehicleCmds, .vehicleChargingCmds, .energyDeviceData, .energyCmds]
     }
 
     case ownerAPI
-    case fleetAPI(region: Region, clientID: String, clientSecret: String, redirectURI: String, scopes: [Scope])
+    case fleetAPI(region: Region, clientID: String, clientSecret: String, redirectURI: String, scopes: [Scope] = Scope.all)
 
     var url: String {
         switch self {
