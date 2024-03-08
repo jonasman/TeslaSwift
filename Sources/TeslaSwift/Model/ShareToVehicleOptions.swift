@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 open class ShareToVehicleOptions: Codable {
 	
@@ -15,12 +16,19 @@ open class ShareToVehicleOptions: Codable {
     public let timestamp_ms: String
     
     public init(address: String) {
-        self.value = ShareToVehicleValue.init(address: address)
+        self.value = ShareToVehicleValue(address: address)
         self.type = "share_ext_content_raw"
         self.locale = "en-US"
         self.timestamp_ms = "12345"
     }
-	
+
+    public init(coordinate: CLLocationCoordinate2D) {
+        self.value = ShareToVehicleValue(coordinate: coordinate)
+        self.type = "share_ext_content_raw"
+        self.locale = "en-US"
+        self.timestamp_ms = "12345"
+    }
+
     public class ShareToVehicleValue: Codable {
 		public let intentAction: String
         public let intentType: String
@@ -31,7 +39,13 @@ open class ShareToVehicleOptions: Codable {
             self.intentAction = "android.intent.action.SEND"
             self.intentType = "text%2F%0Aplain"
         }
-		
+
+        init(coordinate: CLLocationCoordinate2D) {
+            self.intentText = "\(coordinate.latitude),\(coordinate.longitude)"
+            self.intentAction = "android.intent.action.SEND"
+            self.intentType = "text%2F%0Aplain"
+        }
+
         enum CodingKeys: String, CodingKey {
             case intentAction   = "android.intent.ACTION"
             case intentType     = "android.intent.TYPE"
