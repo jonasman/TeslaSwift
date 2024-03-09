@@ -36,13 +36,22 @@
                                     <action selector="webLoginAction:" destination="gEs-3m-96K" eventType="touchUpInside" id="HG8-Jf-YZB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEc-1W-XvM">
+                                <rect key="frame" x="146.5" y="130" width="82" height="30"/>
+                                <state key="normal" title="NativeLogin"/>
+                                <connections>
+                                    <action selector="nativeLoginAction:" destination="gEs-3m-96K" eventType="touchUpInside" id="4zU-Vt-zlC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o0e-Sq-to2"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="JzU-9s-Xww" secondAttribute="trailing" id="3BJ-aV-l9D"/>
+                            <constraint firstItem="KEc-1W-XvM" firstAttribute="top" secondItem="jLG-8m-UEH" secondAttribute="bottom" constant="16" id="749-rj-yQ1"/>
                             <constraint firstItem="BW1-mo-rTp" firstAttribute="top" secondItem="7Wq-ak-cpO" secondAttribute="topMargin" id="MKZ-KR-L3H"/>
                             <constraint firstItem="BW1-mo-rTp" firstAttribute="leading" secondItem="7Wq-ak-cpO" secondAttribute="leadingMargin" constant="-20" id="PJd-tN-v0V"/>
+                            <constraint firstItem="KEc-1W-XvM" firstAttribute="centerX" secondItem="7Wq-ak-cpO" secondAttribute="centerX" id="Qhx-bf-FLh"/>
                             <constraint firstItem="JzU-9s-Xww" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Wq-ak-cpO" secondAttribute="leadingMargin" id="h1N-EP-lW7"/>
                             <constraint firstItem="jLG-8m-UEH" firstAttribute="centerX" secondItem="7Wq-ak-cpO" secondAttribute="centerX" id="iSC-l1-Egg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BW1-mo-rTp" secondAttribute="trailing" constant="-20" id="lyZ-rz-eTx"/>

@@ -10,6 +10,7 @@ import UIKit
 
 extension Notification.Name {
     static let loginDone = Notification.Name("loginDone")
+    static let nativeLoginDone = Notification.Name("nativeLoginDone")
 }
 
 class LoginViewController: UIViewController {
@@ -32,6 +33,17 @@ class LoginViewController: UIViewController {
             } catch let error {
                 self.messageLabel.text = "Authentication failed: \(error)"
             }
+        }
+    }
+
+    @IBAction func nativeLoginAction(_ sender: AnyObject) {
+        if let url = api.authenticateWebNativeURL() {
+            UIApplication.shared.open(url)
+        }
+        NotificationCenter.default.addObserver(forName: Notification.Name.nativeLoginDone, object: nil, queue: nil) { [weak self] (notification: Notification) in
+            NotificationCenter.default.post(name: Notification.Name.loginDone, object: nil)
+
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 }

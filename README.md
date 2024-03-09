@@ -64,7 +64,30 @@ Add the extension modules if needed (with the previous line)
 import TeslaSwiftCombine
 ```
 
-Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support: 
+Perform an authentication with your MyTesla credentials using the browser:
+
+If you use deeplinks, add your callback URI scheme as a URL Scheme to your app under info -> URL Types
+```swift
+ if let url = api.authenticateWebNativeURL() {
+    UIApplication.shared.open(url)
+}
+...
+
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    Task { @MainActor in
+        do {
+            _ = try await api.authenticateWebNative(url: url)
+            // Notify your code the auth is done
+        } catch {
+            print("Error")
+        }
+    }        
+    return true
+}
+```   
+
+Alternative method using a webview (this method does not have auto fill for email and MFA code)
+Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support:
 
 ```swift
 let teslaAPI = ...

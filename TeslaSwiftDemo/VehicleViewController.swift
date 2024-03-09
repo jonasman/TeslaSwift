@@ -109,7 +109,7 @@ class VehicleViewController: UIViewController {
         api.logout()
     }
     @IBAction func sendKeyToVehicle(_ sender: Any) {
-        let yourDomain = ""
+        let yourDomain = "orange-dune-0e6c58803.5.azurestaticapps.net"
         if let url = api.urlToSendPublicKeyToVehicle(domain: yourDomain) {
             UIApplication.shared.open(url)
         }

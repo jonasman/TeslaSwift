@@ -28,7 +28,6 @@
 		708FBA5B274E9D250026CEEF /* BatteryPowerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708FBA59274E9D250026CEEF /* BatteryPowerHistory.swift */; };
 		708FBA5E274EA1740026CEEF /* EnergySite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708FBA5C274EA1740026CEEF /* EnergySite.swift */; };
 		708FBA60274EA4260026CEEF /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708FBA5F274EA4260026CEEF /* ProductViewController.swift */; };
-		8CC62B67A853293ADBFB6B75 /* Pods_TeslaSwift_TeslaSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0A2FE496942C63F2654382 /* Pods_TeslaSwift_TeslaSwiftTests.framework */; };
 		CF01EA671C9EC1950064B2B5 /* VehicleState.json in Resources */ = {isa = PBXBuildFile; fileRef = CF01EA661C9EC1950064B2B5 /* VehicleState.json */; };
 		CF0D2F261D95A4A900E5A304 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D2F191D95A4A900E5A304 /* Authentication.swift */; };
 		CF0D2F281D95A4A900E5A304 /* ChargeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D2F1A1D95A4A900E5A304 /* ChargeState.swift */; };
@@ -71,6 +70,7 @@
 		CF5FF50E21AADC3E007B6306 /* ShareToVehicleOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F055172173DB3D00BE3BE5 /* ShareToVehicleOptions.swift */; };
 		CF67D223272D49D100738CB3 /* ChargeAmpsCommandOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF67D221272D49D100738CB3 /* ChargeAmpsCommandOptions.swift */; };
 		CF713549256AA59D00988AFE /* TeslaWebLoginViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF713547256AA59D00988AFE /* TeslaWebLoginViewContoller.swift */; };
+		CF7FEFDC2B9CB92700743B49 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = CF7FEFDB2B9CB92700743B49 /* Starscream */; };
 		CFA984E61CBD6E0C00B23C7D /* SetValetMode.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA984E51CBD6E0C00B23C7D /* SetValetMode.json */; };
 		CFA984E81CBD730500B23C7D /* ResetValetPin.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA984E71CBD730500B23C7D /* ResetValetPin.json */; };
 		CFA984EA1CBD739400B23C7D /* OpenChargeDoor.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA984E91CBD739400B23C7D /* OpenChargeDoor.json */; };
@@ -199,6 +199,7 @@
 		CF67D221272D49D100738CB3 /* ChargeAmpsCommandOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeAmpsCommandOptions.swift; sourceTree = "<group>"; };
 		CF713547256AA59D00988AFE /* TeslaWebLoginViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaWebLoginViewContoller.swift; sourceTree = "<group>"; };
 		CF786B1E2A92268C00084FAF /* TeslaSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TeslaSwift; path = ..; sourceTree = "<group>"; };
+		CF7FEFD92B9CB91A00743B49 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CF8D0CFE1D971B320069FFFE /* Pods_TeslaSwift_TeslaSwiftTests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_TeslaSwift_TeslaSwiftTests.framework; path = "../../Library/Developer/Xcode/DerivedData/TeslaSwift-dvxfesbvbekzvlebgextwccbvtxb/Build/Products/Debug-iphonesimulator/Pods_TeslaSwift_TeslaSwiftTests.framework"; sourceTree = "<group>"; };
 		CFA037A31C8A160600FA2423 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		CFA984E51CBD6E0C00B23C7D /* SetValetMode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SetValetMode.json; sourceTree = "<group>"; };
@@ -266,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC62B67A853293ADBFB6B75 /* Pods_TeslaSwift_TeslaSwiftTests.framework in Frameworks */,
+				CF7FEFDC2B9CB92700743B49 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +361,7 @@
 		972A07A9A28D45E77B9699F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF7FEFD92B9CB91A00743B49 /* Foundation.framework */,
 				CF8D0CFE1D971B320069FFFE /* Pods_TeslaSwift_TeslaSwiftTests.framework */,
 				CF4D4D0C1D81F39900CCE6ED /* Pods_TeslaSwiftTests.framework */,
 				CFD950661C8A44F4008397BD /* Pods.framework */,
@@ -546,6 +548,9 @@
 				CFD2E7D91C8A13D60005E882 /* PBXTargetDependency */,
 			);
 			name = TeslaSwiftDemoTests;
+			packageProductDependencies = (
+				CF7FEFDB2B9CB92700743B49 /* Starscream */,
+			);
 			productName = TeslaSwiftTests;
 			productReference = CFD2E7D71C8A13D60005E882 /* TeslaSwiftDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -904,13 +909,12 @@
 		CFD2E7E41C8A13D60005E882 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ../TeslaSwiftTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -925,13 +929,12 @@
 		CFD2E7E51C8A13D60005E882 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ../TeslaSwiftTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -994,6 +997,11 @@
 		CF489E982AEDB0D800A3BE69 /* TeslaSwiftStreaming */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TeslaSwiftStreaming;
+		};
+		CF7FEFDB2B9CB92700743B49 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF786B1F2A92271600084FAF /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

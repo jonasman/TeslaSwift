@@ -20,6 +20,7 @@ public enum TeslaError: Error, Equatable {
     case failedToParseData
     case failedToReloadVehicle
     case internalError
+    case noCodeInURL
 }
 
 public enum TeslaAPI {
@@ -173,6 +174,44 @@ extension TeslaSwift {
         return (teslaWebLoginViewController, result)
     }
     #endif
+
+    /**
+     Creates a URL for Native browser authentication
+
+     If the Auth is successful, the Tesla login will call your Redirect URI
+
+     - returns: the URL to open
+     */
+    public func authenticateWebNativeURL() -> URL? {
+        let codeRequest = AuthCodeRequest(teslaAPI: teslaAPI)
+        let endpoint = Endpoint.oAuth2Authorization(auth: codeRequest)
+        var urlComponents = URLComponents(string: endpoint.baseURL(teslaAPI: teslaAPI))
+        urlComponents?.path = endpoint.path
+        urlComponents?.queryItems = endpoint.queryParameters
+
+        return urlComponents?.url
+    }
+
+    /**
+     Authenticates the API based on the code receveid in the URL call back from the Tesla Authenticartion website
+
+     If the code is not found, this function will throw a TeslaError.noCodeInURL
+
+     - returns: the Authentication Token
+     */
+    public func authenticateWebNative(url: URL) async throws -> AuthToken {
+        if let code = parseCode(url: url) {
+            return try await getAuthenticationTokenForWeb(code: code)
+        } else {
+            throw TeslaError.noCodeInURL
+        }
+    }
+
+    func parseCode(url: URL) -> String? {
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let codeQueryItem = components?.queryItems?.first(where: { $0.name == "code" })
+        return codeQueryItem?.value
+    }
 
     private func getAuthenticationTokenForWeb(code: String) async throws -> AuthToken {
 
