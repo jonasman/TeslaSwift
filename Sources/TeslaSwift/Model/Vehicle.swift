@@ -22,7 +22,7 @@ open class Vehicle: Codable {
 		}
 		set {
             guard let newValue = newValue?.id else { idInt = nil; return }
-            idInt = Int64(newValue)
+            idInt = newValue
 		}
 	}
 	open var idInt: Int64?
@@ -33,7 +33,16 @@ open class Vehicle: Codable {
 	open var tokens: [String]?
 	open var vehicleID: Int64?
 	open var vin: String?
-	
+
+    // fields via /api/1/products
+    open var userId: Int64?
+    open var accessType: String?
+    open var cachedData: String?
+    open var apiVersion: Int?
+    open var bleAutopairEnrolled: Bool?
+    open var commandSigning: Bool?
+    open var releaseNotesSupported: Bool?
+
 	// MARK: Codable protocol
 	
 	enum CodingKeys: String, CodingKey {
@@ -51,6 +60,13 @@ open class Vehicle: Codable {
 		case tokens					 = "tokens"
 		case vehicleID				 = "vehicle_id"
 		case vin						 = "vin"
+        case userId                   = "user_id"
+        case accessType               = "access_type"
+        case cachedData               = "cached_data"
+        case apiVersion               = "api_version"
+        case bleAutopairEnrolled       = "ble_autopair_enrolled"
+        case commandSigning            = "command_signing"
+        case releaseNotesSupported     = "release_notes_supported"
 
 	}
 	
@@ -86,6 +102,13 @@ open class Vehicle: Codable {
 		tokens = try? container.decode([String].self, forKey: .tokens)
 		vehicleID = try? container.decode(Int64.self, forKey: .vehicleID)
 		vin = try? container.decode(String.self, forKey: .vin)
+        userId = try? container.decode(Int64.self, forKey: .userId)
+        accessType = try? container.decode(String.self, forKey: .accessType)
+        cachedData = try? container.decode(String.self, forKey: .cachedData)
+        apiVersion = try? container.decode(Int.self, forKey: .apiVersion)
+        bleAutopairEnrolled = try? container.decode(Bool.self, forKey: .bleAutopairEnrolled)
+        commandSigning = try? container.decode(Bool.self, forKey: .commandSigning)
+        releaseNotesSupported  = try? container.decode(Bool.self, forKey: .releaseNotesSupported)
 	}
 	
 	public func encode(to encoder: Encoder) throws {
@@ -104,7 +127,13 @@ open class Vehicle: Codable {
 		try container.encodeIfPresent(tokens, forKey: .tokens)
 		try container.encodeIfPresent(vehicleID, forKey: .vehicleID)
 		try container.encodeIfPresent(vin, forKey: .vin)
-		
+        try container.encodeIfPresent(userId, forKey: .userId)
+        try container.encodeIfPresent(accessType, forKey: .accessType)
+        try container.encodeIfPresent(cachedData, forKey: .cachedData)
+        try container.encodeIfPresent(apiVersion, forKey: .apiVersion)
+        try container.encodeIfPresent(bleAutopairEnrolled, forKey: .bleAutopairEnrolled)
+        try container.encodeIfPresent(commandSigning, forKey: .commandSigning)
+        try container.encodeIfPresent(releaseNotesSupported, forKey: .releaseNotesSupported)
 	}
 }
 

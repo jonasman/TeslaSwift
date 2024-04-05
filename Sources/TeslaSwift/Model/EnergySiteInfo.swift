@@ -64,6 +64,7 @@ open class EnergySiteInfo: Codable {
         open var batteryType: String?
         open var configurable: Bool?
         open var gridServicesEnabled: Bool?
+        open var wallConnectors: [WallConnectors]?
 
         enum CodingKeys: String, CodingKey {
             case solar
@@ -83,6 +84,7 @@ open class EnergySiteInfo: Codable {
             case batteryType = "battery_type"
             case configurable
             case gridServicesEnabled = "grid_services_enabled"
+            case wallConnectors = "wall_connectors"
         }
     }
 

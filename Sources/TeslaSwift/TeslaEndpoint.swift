@@ -121,7 +121,7 @@ extension Endpoint {
             case .getEnergySiteLiveStatus(let siteID):
                 return "/api/1/energy_sites/\(siteID.id)/live_status"
             case .getEnergySiteInfo(let siteID):
-                return "/api/1/energy_sites/\(siteID)/site_info"
+                return "/api/1/energy_sites/\(siteID.id)/site_info"
             case .getEnergySiteHistory(let siteID, _):
                 return "/api/1/energy_sites/\(siteID.id)/history"
             case .getBatteryStatus(let batteryID):

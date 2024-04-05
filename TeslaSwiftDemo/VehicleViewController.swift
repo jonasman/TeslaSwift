@@ -19,7 +19,7 @@ class VehicleViewController: UIViewController {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
             let vehicle2 = try await api.getVehicle(vehicle)
-            self.textView.text = "Inside temp: \(vehicle2.jsonString!)"
+            self.textView.text = "Vehicle: \(vehicle2.jsonString!)"
         }
     }
 	

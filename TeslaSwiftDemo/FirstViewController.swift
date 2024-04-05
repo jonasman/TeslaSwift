@@ -16,8 +16,8 @@ class FirstViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var data:[Vehicle]?
-    
+    var data: [Product]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,8 +38,8 @@ class FirstViewController: UIViewController, UITableViewDataSource {
     
     func getVehicles() {
         Task { @MainActor in
-            let vehicles = try await api.getVehicles()
-            self.data = vehicles
+            let products = try await api.getProducts()
+            self.data = products
             self.tableView.reloadData()
         }
     }
@@ -52,11 +52,11 @@ class FirstViewController: UIViewController, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let vehicle = data![(indexPath as NSIndexPath).row]
-        
-        cell.textLabel?.text = vehicle.displayName
-        cell.detailTextLabel?.text = vehicle.vin
-        
+        let product = data![(indexPath as NSIndexPath).row]
+
+        cell.textLabel?.text = product.vehicle?.displayName ?? ""
+        cell.detailTextLabel?.text = product.vehicle?.vin ?? product.energySite?.id
+
         
         return cell
     }
@@ -68,7 +68,9 @@ class FirstViewController: UIViewController, UITableViewDataSource {
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 let vc = segue.destination as! VehicleViewController
-                vc.vehicle = data![indexPath.row]
+                if let vehicle = data![indexPath.row].vehicle {
+                    vc.vehicle = vehicle
+                }
             }
             
         }

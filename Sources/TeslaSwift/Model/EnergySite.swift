@@ -24,10 +24,15 @@ open class EnergySite: Codable {
     }
     open var assetSiteID: String?
     open var components: Components?
-    
+    open var goOffGridTestBannerEnabled: Bool?
+    open var stormModeEnabled: Bool?
+    open var powerwallOnboardingSettingsSet: String?
+    open var powerwallTeslaElectricInterestedIn: String?
+    open var vppTourEnabled: Bool?
+
     // Also available in EnergySiteStatus
     open var resourceType: String
-    open var siteName: String?
+    open var warpSiteNumber: String?
     open var gatewayID: String?
     open var energyLeft: Double?
     open var totalPackEnergy: Double?
@@ -41,7 +46,7 @@ open class EnergySite: Codable {
     enum CodingKeys: String, CodingKey {
         case energySiteID = "energy_site_id"
         case resourceType = "resource_type"
-        case siteName = "site_name"
+        case warpSiteNumber = "warp_site_number"
         case id
         case gatewayID = "gateway_id"
         case assetSiteID = "asset_site_id"
@@ -54,6 +59,11 @@ open class EnergySite: Codable {
         case syncGridAlertEnabled = "sync_grid_alert_enabled"
         case breakerAlertEnabled = "breaker_alert_enabled"
         case components
+        case goOffGridTestBannerEnabled = "go_off_grid_test_banner_enabled"
+        case stormModeEnabled = "storm_mode_enabled"
+        case powerwallOnboardingSettingsSet = "powerwall_onboarding_settings_set"
+        case powerwallTeslaElectricInterestedIn = "powerwall_tesla_electric_interested_in"
+        case vppTourEnabled = "vpp_tour_enabled"
     }
 
     // MARK: - Components
@@ -65,6 +75,7 @@ open class EnergySite: Codable {
         open var grid: Bool
         open var loadMeter: Bool
         open var marketType: String
+        open var wallConnectors: [WallConnectors]?
 
         enum CodingKeys: String, CodingKey {
             case battery
@@ -74,6 +85,22 @@ open class EnergySite: Codable {
             case grid
             case loadMeter = "load_meter"
             case marketType = "market_type"
+            case wallConnectors = "wall_connectors"
         }
     }
+}
+
+open class WallConnectors: Codable {
+    open var deviceId: String?
+    open var din: String?
+    open var partNumber: String?
+    open var isActive: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case deviceId = "device_id"
+        case din
+        case partNumber = "part_number"
+        case isActive = "is_active"
+    }
+
 }

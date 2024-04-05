@@ -53,7 +53,7 @@ class SecondViewController: UIViewController, UITableViewDataSource {
             cell.textLabel?.text = vehicle.displayName
             cell.detailTextLabel?.text = vehicle.vin
         } else if let energySite = product.energySite {
-            cell.textLabel?.text = energySite.siteName
+            cell.textLabel?.text = energySite.id
             cell.detailTextLabel?.text = energySite.resourceType
         } else {
             cell.textLabel?.text = "Unknown"
