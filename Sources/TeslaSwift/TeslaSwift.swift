@@ -721,7 +721,7 @@ extension TeslaSwift {
             } else if httpResponse.allHeaderFields["Www-Authenticate"] != nil, httpResponse.statusCode == 401 {
                 throw TeslaError.authenticationFailed
             } else if let mapped = try? teslaJSONDecoder.decode(ErrorMessage.self, from: data) {
-                if mapped.description == "invalid bearer token" {
+                if mapped.error == "invalid bearer token" {
                     token?.expiresIn = 0
                     throw TeslaError.tokenRevoked
                 } else {
