@@ -716,11 +716,17 @@ extension TeslaSwift {
             logDebug(debugString, debuggingEnabled: debugEnabled)
             if let wwwAuthenticate = httpResponse.allHeaderFields["Www-Authenticate"] as? String,
                wwwAuthenticate.contains("invalid_token") {
+                token?.expiresIn = 0
                 throw TeslaError.tokenRevoked
             } else if httpResponse.allHeaderFields["Www-Authenticate"] != nil, httpResponse.statusCode == 401 {
                 throw TeslaError.authenticationFailed
             } else if let mapped = try? teslaJSONDecoder.decode(ErrorMessage.self, from: data) {
-                throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: ["ErrorInfo": mapped]))
+                if mapped.description == "invalid bearer token" {
+                    token?.expiresIn = 0
+                    throw TeslaError.tokenRevoked
+                } else {
+                    throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: ["ErrorInfo": mapped]))
+                }
             } else {
                 throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: nil))
             }
