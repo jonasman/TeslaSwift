@@ -96,15 +96,6 @@ open class EnergySiteInfo: Codable {
         open var fromDayOfWeek: Int?
         open var fromHour: Int?
         open var fromMinute: Int?
-
-        enum CodingKeys: String, CodingKey {
-            case toDayOfWeek = "toDayOfWeek"
-            case toHour = "toHour"
-            case toMinute = "toMinute"
-            case fromDayOfWeek = "fromDayOfWeek"
-            case fromHour = "fromHour"
-            case fromMinute = "fromMinute"
-        }
     }
 
     // MARK: - SeasonPeriods
