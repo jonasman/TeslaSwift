@@ -145,7 +145,7 @@ open class EnergySiteInfo: Codable {
         }
     }
 
-    // MARK - EnergyChargeRates 
+    // MARK: - EnergyChargeRates 
     open class EnergyChargeRates: Codable {
         open var rates: [String: Double]
 
