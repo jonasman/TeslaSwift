@@ -23,8 +23,8 @@ open class EnergySiteInfo: Codable {
     open var offGridVehicleChargingReservePercent: Double?
     
     open var userSettings: UserSettings
-    open var touSettings: TOUSettings?
     open var components: Components
+    open var tariffContentV2: TariffV2?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -34,8 +34,8 @@ open class EnergySiteInfo: Codable {
         case installationDate = "installation_date"
         case userSettings = "user_settings"
         case components, version
+        case tariffContentV2 = "tariff_content_v2"
         case batteryCount = "battery_count"
-        case touSettings = "tou_settings"
         case nameplatePower = "nameplate_power"
         case nameplateEnergy = "nameplate_energy"
         case installationTimeZone = "installation_time_zone"
@@ -87,43 +87,105 @@ open class EnergySiteInfo: Codable {
             case wallConnectors = "wall_connectors"
         }
     }
+    
+    // MARK: - SeasonPeriod
+    open class SeasonPeriod: Codable {
+        open var toDayOfWeek: Int?
+        open var toHour: Int?
+        open var toMinute: Int?
+        open var fromDayOfWeek: Int?
+        open var fromHour: Int?
+        open var fromMinute: Int?
+    }
 
-    // MARK: - TouSettings
-    open class TOUSettings: Codable {
-        open var optimizationStrategy: String
-        open var schedule: [Schedule]
+    // MARK: - SeasonPeriods
+    open class TariffV2: Codable {
+        open var code: String
+        open var name: String
+        open var utility: String
+        open var energyCharges: [String: EnergyChargeRates]
+        open var seasons: [String: Season]
+        open var sellTariff: SellTariff
+        open var version: Int
 
         enum CodingKeys: String, CodingKey {
-            case optimizationStrategy = "optimization_strategy"
-            case schedule
+            case code
+            case name
+            case utility
+            case energyCharges = "energy_charges"
+            case seasons
+            case sellTariff = "sell_tariff"
+            case version
         }
     }
 
-    // MARK: - Schedule
-    open class Schedule: Codable {
-        open var target: String
-        open var weekDays: [Int]
-        open var startSeconds: Int
-        open var endSeconds: Int
+    // MARK: - SeasonPeriod
+    open class SeasonPeriods: Codable {
+        open var periods: [SeasonPeriod]
 
         enum CodingKeys: String, CodingKey {
-            case target
-            case weekDays = "week_days"
-            case startSeconds = "start_seconds"
-            case endSeconds = "end_seconds"
+            case periods
         }
     }
 
+    // MARK: - Season
+    open class Season: Codable {
+        open var fromDay: Int
+        open var toDay: Int
+        open var fromMonth: Int
+        open var toMonth: Int
+        open var touPeriods: [String: SeasonPeriods]
+
+        enum CodingKeys: String, CodingKey {
+            case fromDay = "fromDay"
+            case toDay = "toDay"
+            case fromMonth = "fromMonth"
+            case toMonth = "toMonth"
+            case touPeriods = "tou_periods"
+        }
+    }
+
+    // MARK: - EnergyChargeRates 
+    open class EnergyChargeRates: Codable {
+        open var rates: [String: Double]
+
+        enum CodingKeys: String, CodingKey {
+            case rates
+        }
+    }
+
+    // MARK: - SellTariff
+    open class SellTariff: Codable {
+        open var name: String
+        open var utility: String
+        open var energyCharges: [String: EnergyChargeRates]
+        open var seasons: [String: Season]
+
+        enum CodingKeys: String, CodingKey {
+            case name
+            case utility
+            case energyCharges = "energy_charges"
+            case seasons
+        }
+    }
     // MARK: - UserSettings
     open class UserSettings: Codable {
         open var stormModeEnabled: Bool?
         open var syncGridAlertEnabled: Bool
         open var breakerAlertEnabled: Bool
+        open var vppTourEnabled: Bool?
+        open var goOffGridTestBannerEnabled: Bool?
+        open var powerwallOnboardingSettingsSet: Bool?
+        open var powerwallTeslaElectricInterestedIn: Bool?
 
         enum CodingKeys: String, CodingKey {
             case stormModeEnabled = "storm_mode_enabled"
             case syncGridAlertEnabled = "sync_grid_alert_enabled"
             case breakerAlertEnabled = "breaker_alert_enabled"
+            case vppTourEnabled = "vpp_tour_enabled"
+            case goOffGridTestBannerEnabled = "go_off_grid_test_banner_enabled"
+            case powerwallOnboardingSettingsSet = "powerwall_onboarding_settings_set"
+            case powerwallTeslaElectricInterestedIn = "powerwall_tesla_electric_interested_in"
         }
     }
 }
