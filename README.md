@@ -275,6 +275,7 @@ http://ts.la/joao290
 * S3XY Key Fob (https://kenmaz.net/tesla-app/)
 * Meter (https://apps.apple.com/us/app/meter/id1603166204)
 * Chargey (https://get.chargey.app/)
+* Charge My Way (https://apple.co/42EtHM5)
 
 Missing your app? open a PR or issue
 

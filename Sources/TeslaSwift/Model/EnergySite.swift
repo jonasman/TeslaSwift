@@ -22,11 +22,12 @@ open class EnergySite: Codable {
     public var siteId: SiteId {
         SiteId(id: energySiteID)
     }
+    open var siteName: String?
     open var assetSiteID: String?
     open var components: Components?
     open var goOffGridTestBannerEnabled: Bool?
     open var stormModeEnabled: Bool?
-    open var powerwallOnboardingSettingsSet: String?
+    open var powerwallOnboardingSettingsSet: Bool?
     open var powerwallTeslaElectricInterestedIn: String?
     open var vppTourEnabled: Bool?
 
@@ -44,6 +45,7 @@ open class EnergySite: Codable {
     open var breakerAlertEnabled: Bool
 
     enum CodingKeys: String, CodingKey {
+        case siteName = "site_name"
         case energySiteID = "energy_site_id"
         case resourceType = "resource_type"
         case warpSiteNumber = "warp_site_number"
