@@ -94,12 +94,16 @@ open class WallConnectors: Codable {
     open var deviceId: String?
     open var din: String?
     open var partNumber: String?
+    open var partType: Int?
+    open var partName: String?
     open var isActive: Bool?
 
     enum CodingKeys: String, CodingKey {
         case deviceId = "device_id"
         case din
         case partNumber = "part_number"
+        case partType = "part_type"
+        case partName = "part_name"
         case isActive = "is_active"
     }
 

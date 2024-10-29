@@ -10,20 +10,21 @@ import Foundation
 
 // MARK: - EnergySiteLiveStatus
 open class EnergySiteLiveStatus: Codable {
-    open var solarPower: Double
-    open var energyLeft: Double
-    open var totalPackEnergy: Double
-    open var percentageCharged: Double
-    open var backupCapable: Bool
-    open var batteryPower: Double
-    open var loadPower: Double
-    open var gridStatus: String
-    open var gridServicesActive: Bool
-    open var gridPower: Double
-    open var gridServicesPower: Double
-    open var generatorPower: Double
-    open var islandStatus: String
-    open var stormModeActive: Bool
+    open var solarPower: Double?
+    open var energyLeft: Double?
+    open var totalPackEnergy: Double?
+    open var percentageCharged: Double?
+    open var backupCapable: Bool?
+    open var batteryPower: Double?
+    open var loadPower: Double?
+    open var gridStatus: String?
+    open var gridServicesActive: Bool?
+    open var gridPower: Double?
+    open var gridServicesPower: Double?
+    open var generatorPower: Double?
+    open var islandStatus: String?
+    open var stormModeActive: Bool?
+    open var wallConnectors: [WallConnector]
     open var timestamp: Date
 
     enum CodingKeys: String, CodingKey {
@@ -41,6 +42,19 @@ open class EnergySiteLiveStatus: Codable {
         case generatorPower = "generator_power"
         case islandStatus = "island_status"
         case stormModeActive = "storm_mode_active"
+        case wallConnectors = "wall_connectors"
         case timestamp
+    }
+
+    open class WallConnector: Codable {
+        open var din: String?
+        open var wallConnectorState: Int?
+        open var wallConnectorPower: Int?
+
+        enum CodingKeys: String, CodingKey {
+            case din
+            case wallConnectorState = "wall_connector_state"
+            case wallConnectorPower = "wall_connector_power"
+        }
     }
 }
