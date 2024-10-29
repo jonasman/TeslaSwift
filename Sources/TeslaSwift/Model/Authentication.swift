@@ -11,25 +11,34 @@ import CryptoKit
 
 private let oAuthCodeVerifier: String = "81527cff06843c8634fdc09e8ac0abefb46ac849f38fe1e431c2ef21067963841234334232123232323232"
 
-open class AuthToken: Codable {
+final public class AuthToken: Codable, Sendable {
+
+	let accessToken: String?
+	let tokenType: String?
+	let createdAt: Date?
+	var expiresIn: TimeInterval?
+	let refreshToken: String?
+    let idToken: String?
 	
-	open var accessToken: String?
-	open var tokenType: String?
-	open var createdAt: Date? = Date()
-	open var expiresIn: TimeInterval?
-	open var refreshToken: String?
-    open var idToken: String?
-	
-	open var isValid: Bool {
+	var isValid: Bool {
 		if let createdAt = createdAt, let expiresIn = expiresIn {
 			return -createdAt.timeIntervalSinceNow < expiresIn
 		} else {
 			return false
 		}
 	}
-	
+
+    func expire() {
+        expiresIn = 0
+    }
+
 	public init(accessToken: String) {
 		self.accessToken = accessToken
+        self.tokenType = nil
+        self.createdAt = Date()
+        self.expiresIn = nil
+        self.refreshToken = nil
+        self.idToken = nil
 	}
 
     public required init(from decoder: Decoder) throws {

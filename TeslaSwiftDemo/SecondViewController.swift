@@ -33,7 +33,7 @@ class SecondViewController: UIViewController, UITableViewDataSource {
         tableView.estimatedRowHeight = 50.0
     }
     
-    func getProducts() {
+    nonisolated func getProducts() {
         Task { @MainActor in
             self.data = try await api.getProducts()
             self.tableView.reloadData()

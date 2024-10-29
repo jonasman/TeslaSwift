@@ -8,13 +8,13 @@
 
 import Foundation
 
-open class VehicleExtended: Vehicle {
-	open var chargeState: ChargeState?
-	open var climateState: ClimateState?
-	open var driveState: DriveState?
-	open var guiSettings: GuiSettings?
-	open var vehicleConfig: VehicleConfig?
-	open var vehicleState: VehicleState?
+final public class VehicleExtended: Vehicle, @unchecked Sendable {
+	let chargeState: ChargeState?
+	let climateState: ClimateState?
+	let driveState: DriveState?
+	let guiSettings: GuiSettings?
+	let vehicleConfig: VehicleConfig?
+	let vehicleState: VehicleState?
 
 	private enum CodingKeys: String, CodingKey {
 		case userId			 = "user_id"
@@ -43,7 +43,7 @@ open class VehicleExtended: Vehicle {
         }
 	}
 	
-	override open func encode(to encoder: Encoder) throws {
+	override public func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		try container.encodeIfPresent(chargeState, forKey: .chargeState)
 		try container.encodeIfPresent(climateState, forKey: .climateState)

@@ -16,12 +16,12 @@ public protocol Charger {
     var location: NearbyChargingSites.ChargerLocation? { get }
 }
 
-open class NearbyChargingSites: Codable {
+final public class NearbyChargingSites: Codable, Sendable {
 
-    open var congestionSyncTimeUTCSecs: Int?
-    open var destinationChargers: [DestinationCharger]?
-    open var superchargers: [Supercharger]?
-    open var timestamp: Double?
+    public let congestionSyncTimeUTCSecs: Int?
+    public let destinationChargers: [DestinationCharger]?
+    public let superchargers: [Supercharger]?
+    public let timestamp: Double?
 
     enum CodingKeys: String, CodingKey {
         case congestionSyncTimeUTCSecs = "congestion_sync_time_utc_secs"
@@ -46,7 +46,7 @@ open class NearbyChargingSites: Codable {
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
     }
 
-    public struct DestinationCharger: Codable, Charger {
+    public struct DestinationCharger: Codable, Charger, Sendable {
         public var distance: Distance?
         public var location: ChargerLocation?
         public var name: String?
@@ -60,7 +60,7 @@ open class NearbyChargingSites: Codable {
         }
     }
 
-    public struct Supercharger: Codable, Charger {
+    public struct Supercharger: Codable, Charger, Sendable {
         public var availableStalls: Int?
         public var distance: Distance?
         public var location: ChargerLocation?
@@ -80,7 +80,7 @@ open class NearbyChargingSites: Codable {
         }
     }
 
-    public struct ChargerLocation: Codable {
+    public struct ChargerLocation: Codable, Sendable {
         public var latitude: CLLocationDegrees?
         public var longitude: CLLocationDegrees?
 

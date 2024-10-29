@@ -8,17 +8,17 @@
 
 import Foundation
 
-open class CommandResponse: Decodable {
-	
-	private struct Response: Decodable {
+final public class CommandResponse: Decodable, Sendable {
+
+    private struct Response: Decodable {
 		var result: Bool?
 		var reason: String?
 	}
-	private var response: Response
-	
-	open var result: Bool? { return response.result }
-	open var reason: String? { return response.reason }
-	
+	private let response: Response
+
+	public var result: Bool? { return response.result }
+    public var reason: String? { return response.reason }
+
 	init() {
 		response = Response()
 	}

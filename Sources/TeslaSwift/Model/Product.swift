@@ -8,11 +8,11 @@
 
 import Foundation
 
-open class Product: Codable {
-    open var vehicle: Vehicle?
-    open var energySite: EnergySite?
-    
-    open var isValidProduct: Bool { vehicle != nil || energySite != nil}
+final public class Product: Codable, Sendable {
+    public let vehicle: Vehicle?
+    public let energySite: EnergySite?
+
+    public var isValidProduct: Bool { vehicle != nil || energySite != nil}
     
     required public init(from decoder: Decoder) throws {
         let vehicleContainer = try decoder.container(keyedBy: Vehicle.CodingKeys.self)

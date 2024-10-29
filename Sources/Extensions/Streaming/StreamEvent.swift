@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import TeslaSwift
 
-public enum TeslaStreamingEvent: Equatable {
+public enum TeslaStreamingEvent: Equatable, Sendable {
     case open
     case event(StreamEvent)
     case error(Error)
@@ -27,26 +27,26 @@ public enum TeslaStreamingEvent: Equatable {
     }
 }
 
-open class StreamEvent: Codable {
-    open var timestamp: Double?
-    open var speed: CLLocationSpeed? // mph
-    open var speedUnit: Speed? {
+final public class StreamEvent: Codable, Sendable {
+    public let timestamp: Double?
+    public let speed: CLLocationSpeed? // mph
+    public var speedUnit: Speed? {
         guard let speed = speed else { return nil }
         return Speed(milesPerHour: speed)
     }
-    open var odometer: Distance? // miles
-    open var soc: Int?
-    open var elevation: Int? // feet
-    open var estLat: CLLocationDegrees?
-    open var estLng: CLLocationDegrees?
-    open var power: Int? // kW
-    open var shiftState: String?
-    open var range: Distance? // miles
-    open var estRange: Distance? // miles
-    open var estHeading: CLLocationDirection?
-    open var heading: CLLocationDirection?
+    public let odometer: Distance? // miles
+    public let soc: Int?
+    public let elevation: Int? // feet
+    public let estLat: CLLocationDegrees?
+    public let estLng: CLLocationDegrees?
+    public let power: Int? // kW
+    public let shiftState: String?
+    public let range: Distance? // miles
+    public let estRange: Distance? // miles
+    public let estHeading: CLLocationDirection?
+    public let heading: CLLocationDirection?
 	
-	open var position: CLLocation? {
+	public var position: CLLocation? {
 		if let latitude = estLat,
 			let longitude = estLng,
 			let heading = heading,
@@ -68,12 +68,16 @@ open class StreamEvent: Codable {
 		guard separatedValues.count > 11 else { return }
 		
 		if let timeValue = Double(separatedValues[0]) {
-			timestamp = timeValue
-		}
+            self.timestamp = timeValue
+        } else {
+            self.timestamp = nil
+        }
 		speed = CLLocationSpeed(separatedValues[1])
 		if let value = Double(separatedValues[2]) {
 			odometer = Distance(miles: value)
-		}
+        } else {
+            odometer = nil
+        }
 		soc = Int(separatedValues[3])
 		elevation = Int(separatedValues[4])
 		estHeading = CLLocationDirection(separatedValues[5])
@@ -83,14 +87,18 @@ open class StreamEvent: Codable {
 		shiftState = separatedValues[9]
 		if let value = Double(separatedValues[10]) {
 			range = Distance(miles: value)
-		}
+        } else {
+            range = nil
+        }
 		if let value = Double(separatedValues[11]) {
 			estRange = Distance(miles: value)
-		}
+        } else {
+            estRange = nil
+        }
 		heading = CLLocationDirection(separatedValues[12])
 	}
 	
-	open var originalValues: String {
+	public var originalValues: String {
 		var resultString = ""
 		if let timestamp = timestamp {
 			resultString.append("\(timestamp)")

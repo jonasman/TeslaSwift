@@ -46,7 +46,7 @@ enum Endpoint {
     case getBatteryPowerHistory(batteryID: BatteryId)
 }
 
-public enum AllStatesEndpoints: String {
+public enum AllStatesEndpoints: String, Sendable {
     case chargeState = "charge_state"
     case climateState = "climate_state"
     case closuresState = "closures_state"
@@ -57,8 +57,8 @@ public enum AllStatesEndpoints: String {
     case vehicleState = "vehicle_state"
     case vehicleDataCombo = "vehicle_data_combo"
 
-    public static var all: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .driveState, .guiSettings, .vehicleConfig, .vehicleState]
-    public static var allWithLocation: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .locationData, .guiSettings, .vehicleConfig, .vehicleState]
+    public static let all: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .driveState, .guiSettings, .vehicleConfig, .vehicleState]
+    public static let allWithLocation: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .locationData, .guiSettings, .vehicleConfig, .vehicleState]
 }
 
 extension Endpoint {

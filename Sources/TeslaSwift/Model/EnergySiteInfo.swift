@@ -9,23 +9,23 @@
 import Foundation
 
 // MARK: - EnergySiteInfo
-open class EnergySiteInfo: Codable {
-    open var id: String
-    open var siteName: String?
-    open var siteNumber: String?
-    open var backupReservePercent: Double?
-    open var defaultRealMode: String?
-    open var installationDate: Date
-    open var version: String?
-    open var batteryCount: Int?
-    open var nameplatePower: Double?
-    open var nameplateEnergy: Double?
-    open var installationTimeZone: String
-    open var offGridVehicleChargingReservePercent: Double?
+final public class EnergySiteInfo: Codable, Sendable {
+    public let id: String
+    public let siteName: String?
+    public let siteNumber: String?
+    public let backupReservePercent: Double?
+    public let defaultRealMode: String?
+    public let installationDate: Date
+    public let version: String?
+    public let batteryCount: Int?
+    public let nameplatePower: Double?
+    public let nameplateEnergy: Double?
+    public let installationTimeZone: String
+    public let offGridVehicleChargingReservePercent: Double?
     
-    open var userSettings: UserSettings
-    open var touSettings: TOUSettings?
-    open var components: Components
+    public let userSettings: UserSettings
+    public let touSettings: TOUSettings?
+    public let components: Components
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -46,30 +46,30 @@ open class EnergySiteInfo: Codable {
     }
     
     // MARK: - Components
-    open class Components: Codable {
-        open var solar: Bool
-        open var solarType: String?
-        open var battery: Bool
-        open var grid: Bool
-        open var backup: Bool
-        open var gateway: String
-        open var loadMeter: Bool
-        open var touCapable: Bool?
-        open var stormModeCapable: Bool?
-        open var flexEnergyRequestCapable: Bool
-        open var carChargingDataSupported: Bool
-        open var offGridVehicleChargingReserveSupported: Bool
-        open var vehicleChargingPerformanceViewEnabled: Bool
-        open var vehicleChargingSolarOffsetViewEnabled: Bool
-        open var batterySolarOffsetViewEnabled: Bool
-        open var setIslandingModeEnabled: Bool?
-        open var backupTimeRemainingEnabled: Bool?
-        open var batteryType: String?
-        open var configurable: Bool?
-        open var gridServicesEnabled: Bool?
-        open var energyServiceSelfSchedulingEnabled: Bool?
-        open var wallConnectors: [WallConnectors]?
-        open var nbtSupported: Bool?
+    final public class Components: Codable, Sendable {
+        public let solar: Bool
+        public let solarType: String?
+        public let battery: Bool
+        public let grid: Bool
+        public let backup: Bool
+        public let gateway: String
+        public let loadMeter: Bool
+        public let touCapable: Bool?
+        public let stormModeCapable: Bool?
+        public let flexEnergyRequestCapable: Bool
+        public let carChargingDataSupported: Bool
+        public let offGridVehicleChargingReserveSupported: Bool
+        public let vehicleChargingPerformanceViewEnabled: Bool
+        public let vehicleChargingSolarOffsetViewEnabled: Bool
+        public let batterySolarOffsetViewEnabled: Bool
+        public let setIslandingModeEnabled: Bool?
+        public let backupTimeRemainingEnabled: Bool?
+        public let batteryType: String?
+        public let configurable: Bool?
+        public let gridServicesEnabled: Bool?
+        public let energyServiceSelfSchedulingEnabled: Bool?
+        public let wallConnectors: [WallConnectors]?
+        public let nbtSupported: Bool?
 
         enum CodingKeys: String, CodingKey {
             case solar
@@ -96,9 +96,9 @@ open class EnergySiteInfo: Codable {
     }
 
     // MARK: - TouSettings
-    open class TOUSettings: Codable {
-        open var optimizationStrategy: String
-        open var schedule: [Schedule]
+    final public class TOUSettings: Codable, Sendable {
+        public let optimizationStrategy: String
+        public let schedule: [Schedule]
 
         enum CodingKeys: String, CodingKey {
             case optimizationStrategy = "optimization_strategy"
@@ -107,11 +107,11 @@ open class EnergySiteInfo: Codable {
     }
 
     // MARK: - Schedule
-    open class Schedule: Codable {
-        open var target: String
-        open var weekDays: [Int]
-        open var startSeconds: Int
-        open var endSeconds: Int
+    final public class Schedule: Codable, Sendable {
+        public let target: String
+        public let weekDays: [Int]
+        public let startSeconds: Int
+        public let endSeconds: Int
 
         enum CodingKeys: String, CodingKey {
             case target
@@ -122,15 +122,15 @@ open class EnergySiteInfo: Codable {
     }
 
     // MARK: - UserSettings
-    open class UserSettings: Codable {
-        open var stormModeEnabled: Bool?
-        open var syncGridAlertEnabled: Bool
-        open var breakerAlertEnabled: Bool
-        open var goOffGridTestBannerEnabled: Bool?
-        open var powerwallOnboardingSettingsSet: Bool?
-        open var powerwallTeslaElectricInterestedIn: Bool?
-        open var vppTourEnabled: Bool?
-        open var offGridVehicleChargingEnabled: Bool?
+    final public class UserSettings: Codable, Sendable {
+        public let stormModeEnabled: Bool?
+        public let syncGridAlertEnabled: Bool
+        public let breakerAlertEnabled: Bool
+        public let goOffGridTestBannerEnabled: Bool?
+        public let powerwallOnboardingSettingsSet: Bool?
+        public let powerwallTeslaElectricInterestedIn: Bool?
+        public let vppTourEnabled: Bool?
+        public let offGridVehicleChargingEnabled: Bool?
 
         enum CodingKeys: String, CodingKey {
             case stormModeEnabled = "storm_mode_enabled"

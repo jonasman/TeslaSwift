@@ -9,23 +9,23 @@
 import Foundation
 
 // MARK: - EnergySiteLiveStatus
-open class EnergySiteLiveStatus: Codable {
-    open var solarPower: Double?
-    open var energyLeft: Double?
-    open var totalPackEnergy: Double?
-    open var percentageCharged: Double?
-    open var backupCapable: Bool?
-    open var batteryPower: Double?
-    open var loadPower: Double?
-    open var gridStatus: String?
-    open var gridServicesActive: Bool?
-    open var gridPower: Double?
-    open var gridServicesPower: Double?
-    open var generatorPower: Double?
-    open var islandStatus: String?
-    open var stormModeActive: Bool?
-    open var wallConnectors: [WallConnector]
-    open var timestamp: Date
+final public class EnergySiteLiveStatus: Codable, Sendable {
+    public let solarPower: Double?
+    public let energyLeft: Double?
+    public let totalPackEnergy: Double?
+    public let percentageCharged: Double?
+    public let backupCapable: Bool?
+    public let batteryPower: Double?
+    public let loadPower: Double?
+    public let gridStatus: String?
+    public let gridServicesActive: Bool?
+    public let gridPower: Double?
+    public let gridServicesPower: Double?
+    public let generatorPower: Double?
+    public let islandStatus: String?
+    public let stormModeActive: Bool?
+    public let wallConnectors: [WallConnector]
+    public let timestamp: Date
 
     enum CodingKeys: String, CodingKey {
         case solarPower = "solar_power"
@@ -46,10 +46,10 @@ open class EnergySiteLiveStatus: Codable {
         case timestamp
     }
 
-    open class WallConnector: Codable {
-        open var din: String?
-        open var wallConnectorState: Int?
-        open var wallConnectorPower: Int?
+    final public class WallConnector: Codable, Sendable {
+        public let din: String?
+        public let wallConnectorState: Int?
+        public let wallConnectorPower: Int?
 
         enum CodingKeys: String, CodingKey {
             case din

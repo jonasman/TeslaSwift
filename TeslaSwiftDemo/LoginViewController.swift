@@ -40,10 +40,12 @@ class LoginViewController: UIViewController {
         if let url = api.authenticateWebNativeURL() {
             UIApplication.shared.open(url)
         }
-        NotificationCenter.default.addObserver(forName: Notification.Name.nativeLoginDone, object: nil, queue: nil) { [weak self] (notification: Notification) in
+        NotificationCenter.default.addObserver(forName: Notification.Name.nativeLoginDone, object: nil, queue: nil) { (notification: Notification) in
             NotificationCenter.default.post(name: Notification.Name.loginDone, object: nil)
 
-            self?.dismiss(animated: true, completion: nil)
+            Task {  @MainActor [weak self] in 
+                self?.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }

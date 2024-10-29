@@ -9,40 +9,40 @@
 import Foundation
 
 // MARK: - EnergySite
-open class EnergySite: Codable {
-    
+final public class EnergySite: Codable, Sendable {
+
     // Unique to EnergySite
-    open var id: String?
+    public let id: String?
     public var batteryId: BatteryId? {
         guard let id else { return nil }
-        
+
         return BatteryId(id: id)
     }
-    open var energySiteID: Decimal
+    public let energySiteID: Decimal
     public var siteId: SiteId {
         SiteId(id: energySiteID)
     }
-    open var siteName: String?
-    open var assetSiteID: String?
-    open var components: Components?
-    open var goOffGridTestBannerEnabled: Bool?
-    open var stormModeEnabled: Bool?
-    open var powerwallOnboardingSettingsSet: Bool?
-    open var powerwallTeslaElectricInterestedIn: String?
-    open var vppTourEnabled: Bool?
+    public let siteName: String?
+    public let assetSiteID: String?
+    public let components: Components?
+    public let goOffGridTestBannerEnabled: Bool?
+    public let stormModeEnabled: Bool?
+    public let powerwallOnboardingSettingsSet: Bool?
+    public let powerwallTeslaElectricInterestedIn: String?
+    public let vppTourEnabled: Bool?
 
     // Also available in EnergySiteStatus
-    open var resourceType: String
-    open var warpSiteNumber: String?
-    open var gatewayID: String?
-    open var energyLeft: Double?
-    open var totalPackEnergy: Double?
-    open var percentageCharged: Double?
-    open var batteryType: String?
-    open var backupCapable: Bool?
-    open var batteryPower: Double?
-    open var syncGridAlertEnabled: Bool
-    open var breakerAlertEnabled: Bool
+    public let resourceType: String
+    public let warpSiteNumber: String?
+    public let gatewayID: String?
+    public let energyLeft: Double?
+    public let totalPackEnergy: Double?
+    public let percentageCharged: Double?
+    public let batteryType: String?
+    public let backupCapable: Bool?
+    public let batteryPower: Double?
+    public let syncGridAlertEnabled: Bool
+    public let breakerAlertEnabled: Bool
 
     enum CodingKeys: String, CodingKey {
         case siteName = "site_name"
@@ -69,15 +69,15 @@ open class EnergySite: Codable {
     }
 
     // MARK: - Components
-    open class Components: Codable {
-        open var battery: Bool
-        open var batteryType: String?
-        open var solar: Bool
-        open var solarType: String?
-        open var grid: Bool
-        open var loadMeter: Bool
-        open var marketType: String
-        open var wallConnectors: [WallConnectors]?
+    final public class Components: Codable, Sendable {
+        public let battery: Bool
+        public let batteryType: String?
+        public let solar: Bool
+        public let solarType: String?
+        public let grid: Bool
+        public let loadMeter: Bool
+        public let marketType: String
+        public let wallConnectors: [WallConnectors]?
 
         enum CodingKeys: String, CodingKey {
             case battery
@@ -92,13 +92,13 @@ open class EnergySite: Codable {
     }
 }
 
-open class WallConnectors: Codable {
-    open var deviceId: String?
-    open var din: String?
-    open var partNumber: String?
-    open var partType: Int?
-    open var partName: String?
-    open var isActive: Bool?
+final public class WallConnectors: Codable, Sendable {
+    public let deviceId: String?
+    public let din: String?
+    public let partNumber: String?
+    public let partType: Int?
+    public let partName: String?
+    public let isActive: Bool?
 
     enum CodingKeys: String, CodingKey {
         case deviceId = "device_id"

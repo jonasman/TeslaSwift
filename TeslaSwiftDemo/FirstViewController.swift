@@ -36,7 +36,7 @@ class FirstViewController: UIViewController, UITableViewDataSource {
         
     }
     
-    func getVehicles() {
+    nonisolated func getVehicles() {
         Task { @MainActor in
             let products = try await api.getProducts()
             self.data = products

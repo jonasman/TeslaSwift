@@ -55,7 +55,7 @@ public enum TeslaAPI {
     }
 }
 
-open class TeslaSwift {
+public class TeslaSwift {
     open var debuggingEnabled = false
 
     open fileprivate(set) var token: AuthToken?
@@ -716,13 +716,13 @@ extension TeslaSwift {
             logDebug(debugString, debuggingEnabled: debugEnabled)
             if let wwwAuthenticate = httpResponse.allHeaderFields["Www-Authenticate"] as? String,
                wwwAuthenticate.contains("invalid_token") {
-                token?.expiresIn = 0
+                token?.expire()// .expiresIn = 0
                 throw TeslaError.tokenRevoked
             } else if httpResponse.allHeaderFields["Www-Authenticate"] != nil, httpResponse.statusCode == 401 {
                 throw TeslaError.authenticationFailed
             } else if let mapped = try? teslaJSONDecoder.decode(ErrorMessage.self, from: data) {
                 if mapped.error == "invalid bearer token" {
-                    token?.expiresIn = 0
+                    token?.expire() //.expiresIn = 0
                     throw TeslaError.tokenRevoked
                 } else {
                     throw TeslaError.networkError(error: NSError(domain: "TeslaError", code: httpResponse.statusCode, userInfo: ["ErrorInfo": mapped]))

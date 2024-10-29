@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Distance: Codable {
+public struct Distance: Codable, Sendable {
     public var value: Measurement<UnitLength>
     
     public init(miles: Double?) {

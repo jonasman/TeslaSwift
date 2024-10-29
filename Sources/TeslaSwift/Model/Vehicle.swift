@@ -8,40 +8,34 @@
 
 import Foundation
 
-open class Vehicle: Codable {
-	
-	open var backseatToken: String?
-	open var backseatTokenUpdatedAt: Date?
-	open var calendarEnabled: Bool?
-	open var color: String?
-	open var displayName: String?
-	open var id: VehicleId? {
-		get {
+public class Vehicle: Codable, @unchecked Sendable {
+
+	public let backseatToken: String?
+	public let backseatTokenUpdatedAt: Date?
+	public let calendarEnabled: Bool?
+	public let color: String?
+	public let displayName: String?
+	var id: VehicleId? {
 			guard let value = idInt else { return nil }
 			return VehicleId(id: value)
-		}
-		set {
-            guard let newValue = newValue?.id else { idInt = nil; return }
-            idInt = newValue
-		}
 	}
-	open var idInt: Int64?
-	open var idS: String?
-	open var inService: Bool?
-	open var optionCodes: String?
-	open var state: String?
-	open var tokens: [String]?
-	open var vehicleID: Int64?
-	open var vin: String?
+	public let idInt: Int64?
+	public let idS: String?
+	public let inService: Bool?
+	public let optionCodes: String?
+	public let state: String?
+	public let tokens: [String]?
+	public let vehicleID: Int64?
+	public let vin: String?
 
     // fields via /api/1/products
-    open var userId: Int64?
-    open var accessType: String?
-    open var cachedData: String?
-    open var apiVersion: Int?
-    open var bleAutopairEnrolled: Bool?
-    open var commandSigning: Bool?
-    open var releaseNotesSupported: Bool?
+    public let userId: Int64?
+    public let accessType: String?
+    public let cachedData: String?
+    public let apiVersion: Int?
+    public let bleAutopairEnrolled: Bool?
+    public let commandSigning: Bool?
+    public let releaseNotesSupported: Bool?
 
 	// MARK: Codable protocol
 	
@@ -72,7 +66,7 @@ open class Vehicle: Codable {
 	
 	required public init(from decoder: Decoder) throws {
 		
-		let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
 		backseatToken = try? container.decode(String.self, forKey: .backseatToken)
 		backseatTokenUpdatedAt = try? container.decode(Date.self, forKey: .backseatTokenUpdatedAt)
 		calendarEnabled = {

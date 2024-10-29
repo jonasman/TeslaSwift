@@ -9,25 +9,25 @@
 import Foundation
 
 // MARK: - EnergySiteStatus
-open class EnergySiteStatus: Codable {
-    open var resourceType: String
-    open var siteName: String
-    open var assetSiteId: String?
-    open var goOffGridTestBannerEnabled: Bool?
-    open var stormModeEnabled: Bool?
-    open var powerwallOnboardingSettingsSet: Bool?
-    open var powerwallTeslaElectricInterestedIn: Bool?
-    open var vppTourEnabled: Bool?
-    open var solarPower: Int?
-    open var gatewayID: String?
-    open var energyLeft: Double?
-    open var totalPackEnergy: Double?
-    open var percentageCharged: Double?
-    open var batteryType: String?
-    open var backupCapable: Bool?
-    open var batteryPower: Double?
-    open var syncGridAlertEnabled: Bool
-    open var breakerAlertEnabled: Bool
+final public class EnergySiteStatus: Codable, Sendable {
+    public let resourceType: String
+    public let siteName: String
+    public let assetSiteId: String?
+    public let goOffGridTestBannerEnabled: Bool?
+    public let stormModeEnabled: Bool?
+    public let powerwallOnboardingSettingsSet: Bool?
+    public let powerwallTeslaElectricInterestedIn: Bool?
+    public let vppTourEnabled: Bool?
+    public let solarPower: Int?
+    public let gatewayID: String?
+    public let energyLeft: Double?
+    public let totalPackEnergy: Double?
+    public let percentageCharged: Double?
+    public let batteryType: String?
+    public let backupCapable: Bool?
+    public let batteryPower: Double?
+    public let syncGridAlertEnabled: Bool
+    public let breakerAlertEnabled: Bool
 
     enum CodingKeys: String, CodingKey {
         case resourceType = "resource_type"
