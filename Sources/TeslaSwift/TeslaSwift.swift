@@ -8,6 +8,7 @@
 
 import Foundation
 import os
+import SafariServices
 
 public enum TeslaError: Error, Equatable {
     case networkError(error: NSError)
@@ -132,17 +133,21 @@ extension TeslaSwift {
         return token != nil && (token?.isValid ?? false)
     }
 
-    #if canImport(WebKit) && canImport(UIKit)
     /**
      Performs the authentication with the Tesla API for web logins
 
-     For MFA users, this is the only way to authenticate.
      If the token expires, a token refresh will be done
 
-     - returns: A ViewController that your app needs to present. This ViewController will ask the user for his/her Tesla credentials, MFA code if set and then dismiss on successful authentication.
-     An async function that returns when the token as been retrieved
+     Capture the token like this:
+     ```
+     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+         let token = try await api.authenticateWebNative(url: url)
+     }
+     ```
+     - parameter delegate: An optional `SFSafariViewControllerDelegate` to receive the cancel event.
+     - returns: A `SFSafariViewController` that your app needs to present. This ViewController will ask the user for his/her Tesla credentials, MFA code and then you will get a callback in your AppDelegate with the code to complete authentication.
      */
-    public func authenticateWeb() -> (TeslaWebLoginViewController?, () async throws -> AuthToken) {
+    public func authenticateWeb(delegate: SFSafariViewControllerDelegate? = nil) -> SFSafariViewController? {
 
         let codeRequest = AuthCodeRequest(teslaAPI: teslaAPI)
         let endpoint = Endpoint.oAuth2Authorization(auth: codeRequest)
@@ -151,34 +156,24 @@ extension TeslaSwift {
         urlComponents?.queryItems = endpoint.queryParameters
 
         guard let safeUrlComponents = urlComponents else {
-            func error() async throws -> AuthToken {
-                throw TeslaError.authenticationFailed
-            }
-            return (nil, error)
+            return nil
         }
 
-        let teslaWebLoginViewController = TeslaWebLoginViewController(url: safeUrlComponents.url!)
+        let safariViewController = SFSafariViewController(url: safeUrlComponents.url!)
+        safariViewController.dismissButtonStyle = .cancel
 
-        func result() async throws -> AuthToken {
-            let url = try await teslaWebLoginViewController.result()
-            let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
-            if let queryItems = urlComponents?.queryItems {
-                for queryItem in queryItems {
-                    if queryItem.name == "code", let code = queryItem.value {
-                        return try await self.getAuthenticationTokenForWeb(code: code)
-                    }
-                }
-            }
-            throw TeslaError.authenticationFailed
-        }
-        return (teslaWebLoginViewController, result)
+        return safariViewController
     }
-    #endif
 
     /**
-     Creates a URL for Native browser authentication
+     Creates a URL for Native browser authentication, open with  UIApplication.shared.open(url)
 
-     If the Auth is successful, the Tesla login will call your Redirect URI
+     If the Auth is successful, the Tesla login will call your Redirect URI. Get the callback url with this code in your AppDelegate:
+     ```
+     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let token = try await api.authenticateWebNative(url: url)
+     }
+     ```
 
      - returns: the URL to open
      */
