@@ -8,10 +8,12 @@
 
 import Foundation
 import os
-#if ios
+#if canImport(SafariServices)
 import SafariServices
 #endif
+#if canImport(WebKit)
 import WebKit
+#endif
 
 public enum TeslaError: Error, Equatable {
     case networkError(error: NSError)
@@ -309,11 +311,12 @@ extension TeslaSwift {
         email = nil
         password = nil
         cleanToken()
-        #if canImport(WebKit) && canImport(UIKit)
+        #if canImport(WebKit)
         Self.removeCookies()
         #endif
     }
 
+    #if canImport(WebKit)
     static func removeCookies() {
         WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
@@ -321,6 +324,7 @@ extension TeslaSwift {
             }
         }
     }
+    #endif
 
     /**
      Create a URL to send your public key to vehicle.
