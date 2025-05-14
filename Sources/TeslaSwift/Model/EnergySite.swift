@@ -41,8 +41,8 @@ open class EnergySite: Codable {
     open var batteryType: String?
     open var backupCapable: Bool?
     open var batteryPower: Double?
-    open var syncGridAlertEnabled: Bool
-    open var breakerAlertEnabled: Bool
+    open var syncGridAlertEnabled: Bool?
+    open var breakerAlertEnabled: Bool?
 
     enum CodingKeys: String, CodingKey {
         case siteName = "site_name"
