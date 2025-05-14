@@ -86,26 +86,32 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplication.Op
 }
 ```   
 
-Alternative method using a webview (this method does not have auto fill for email and MFA code)
+Alternative method using a SFSafariViewController
 Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support:
 
 ```swift
 let teslaAPI = ...
 let api = TeslaSwift(teslaAPI: teslaAPI)
-let (webloginViewController, result) = api.authenticateWeb()
-guard let webloginViewController else { return }
-present(webloginViewController, animated: true, completion: nil)
-Task { @MainActor in
+let safariViewController = api.authenticateWeb(delegate: self)
+guard let safariViewController else { return }
+present(safariViewController, animated: true, completion: nil)
+
+...
+
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    Task { @MainActor in
         do {
-             _ = try await result()
-             self.messageLabel.text = "Authentication success"
-        } catch let error {
-            // error
-       }
+            _ = try await api.authenticateWebNative(url: url)
+            // Notify your code the auth is done and dismiss the safariViewController
+        } catch {
+            print("Error")
+        }
+    }        
+    return true
 }
 ```
 
-To to perform an authentication in SwiftUI, create an UIViewControllerRepresentable to inject the UIViewController into a SwiftUI view:
+To to perform an authentication in SwiftUI, use the native Browser or create an UIViewControllerRepresentable to inject the UIViewController into a SwiftUI view:
 
 ```swift
 import TeslaSwift
@@ -116,26 +122,7 @@ struct TeslaWebLogin: UIViewControllerRepresentable {
     let api = TeslaSwift(teslaAPI: teslaAPI)    
     
     func makeUIViewController(context: Context) -> TeslaWebLoginViewController {
-        let (webloginViewController, result) = api.authenticateWeb()        
-        Task { @MainActor in
-                do {
-                     _ = try await result()
-                    print("Authentication success")                    
-                    guard api.isAuthenticated else { return }
-                    Task { @MainActor in
-                        do {
-                            let vehicles = try await api.getVehicles()
-
-                            // post process your vehicles here
-
-                        } catch {
-                            print("Error",error)
-                        }
-                    }                    
-                } catch let error {
-                    print("Error", error)
-               }
-        }        
+        let webloginViewController = api.authenticateWeb(delegate: self)
         return webloginViewController!
     }
     
