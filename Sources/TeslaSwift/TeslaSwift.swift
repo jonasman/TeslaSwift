@@ -8,7 +8,9 @@
 
 import Foundation
 import os
+#if ios
 import SafariServices
+#endif
 import WebKit
 
 public enum TeslaError: Error, Equatable {
