@@ -148,6 +148,7 @@ extension TeslaSwift {
      - parameter delegate: An optional `SFSafariViewControllerDelegate` to receive the cancel event.
      - returns: A `SFSafariViewController` that your app needs to present. This ViewController will ask the user for his/her Tesla credentials, MFA code and then you will get a callback in your AppDelegate with the code to complete authentication.
      */
+    #if ios
     public func authenticateWeb(delegate: SFSafariViewControllerDelegate? = nil) -> SFSafariViewController? {
 
         let codeRequest = AuthCodeRequest(teslaAPI: teslaAPI)
@@ -165,6 +166,7 @@ extension TeslaSwift {
 
         return safariViewController
     }
+    #endif
 
     /**
      Creates a URL for Native browser authentication, open with  UIApplication.shared.open(url)

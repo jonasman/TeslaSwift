@@ -69,7 +69,6 @@
 		CF5D13A71CB41BAE00744DCC /* WakeUp.json in Resources */ = {isa = PBXBuildFile; fileRef = CF5D13A61CB41BAE00744DCC /* WakeUp.json */; };
 		CF5FF50E21AADC3E007B6306 /* ShareToVehicleOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F055172173DB3D00BE3BE5 /* ShareToVehicleOptions.swift */; };
 		CF67D223272D49D100738CB3 /* ChargeAmpsCommandOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF67D221272D49D100738CB3 /* ChargeAmpsCommandOptions.swift */; };
-		CF713549256AA59D00988AFE /* TeslaWebLoginViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF713547256AA59D00988AFE /* TeslaWebLoginViewContoller.swift */; };
 		CF7FEFDC2B9CB92700743B49 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = CF7FEFDB2B9CB92700743B49 /* Starscream */; };
 		CFA984E61CBD6E0C00B23C7D /* SetValetMode.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA984E51CBD6E0C00B23C7D /* SetValetMode.json */; };
 		CFA984E81CBD730500B23C7D /* ResetValetPin.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA984E71CBD730500B23C7D /* ResetValetPin.json */; };
@@ -197,7 +196,6 @@
 		CF5FF51021AAED84007B6306 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		CF5FF51121AAED8A007B6306 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
 		CF67D221272D49D100738CB3 /* ChargeAmpsCommandOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeAmpsCommandOptions.swift; sourceTree = "<group>"; };
-		CF713547256AA59D00988AFE /* TeslaWebLoginViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaWebLoginViewContoller.swift; sourceTree = "<group>"; };
 		CF786B1E2A92268C00084FAF /* TeslaSwift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TeslaSwift; path = ..; sourceTree = "<group>"; };
 		CF7FEFD92B9CB91A00743B49 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CF8D0CFE1D971B320069FFFE /* Pods_TeslaSwift_TeslaSwiftTests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_TeslaSwift_TeslaSwiftTests.framework; path = "../../Library/Developer/Xcode/DerivedData/TeslaSwift-dvxfesbvbekzvlebgextwccbvtxb/Build/Products/Debug-iphonesimulator/Pods_TeslaSwift_TeslaSwiftTests.framework"; sourceTree = "<group>"; };
@@ -280,7 +278,6 @@
 				CFD2E7E71C8A13F20005E882 /* TeslaSwift.swift */,
 				CF4398BB27F7A726004895E1 /* VehicleCommands.swift */,
 				CFA984F81CC2545600B23C7D /* TeslaEndpoint.swift */,
-				CF713547256AA59D00988AFE /* TeslaWebLoginViewContoller.swift */,
 				1A9B1B1C22DA40AF0014CE17 /* Model */,
 			);
 			path = TeslaSwift;
@@ -694,7 +691,6 @@
 				CF215837258E36AB00110C52 /* TeslaSwift+StreamingCombine.swift in Sources */,
 				708FBA52274E9D040026CEEF /* EnergySiteHistory.swift in Sources */,
 				CF0D2F281D95A4A900E5A304 /* ChargeState.swift in Sources */,
-				CF713549256AA59D00988AFE /* TeslaWebLoginViewContoller.swift in Sources */,
 				CFF048031F72EE15006B52F7 /* Distance.swift in Sources */,
 				CFF5CFFF1EABD1AB00655B81 /* StreamEvent.swift in Sources */,
 				CF4398BD27F7A726004895E1 /* VehicleCommands.swift in Sources */,

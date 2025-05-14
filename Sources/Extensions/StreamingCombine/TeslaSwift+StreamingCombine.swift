@@ -6,7 +6,6 @@
 //  Copyright © 2020 Joao Nunes. All rights reserved.
 //
 
-#if swift(>=5.1)
 import Combine
 import TeslaSwift
 
@@ -56,5 +55,3 @@ extension TeslaStreaming  {
         }
     }
 }
-
-#endif
