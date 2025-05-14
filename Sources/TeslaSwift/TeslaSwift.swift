@@ -9,6 +9,7 @@
 import Foundation
 import os
 import SafariServices
+import WebKit
 
 public enum TeslaError: Error, Equatable {
     case networkError(error: NSError)
@@ -305,8 +306,16 @@ extension TeslaSwift {
         password = nil
         cleanToken()
         #if canImport(WebKit) && canImport(UIKit)
-        TeslaWebLoginViewController.removeCookies()
+        Self.removeCookies()
         #endif
+    }
+
+    static func removeCookies() {
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
     }
 
     /**
