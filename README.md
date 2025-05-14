@@ -1,7 +1,7 @@
 # TeslaSwift
 Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https://tesla-api.timdorr.com) and [Tesla Fleet API](https://developer.tesla.com/docs/fleet-api)
 
-[![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg?style=flat)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-5.10-orange.svg?style=flat)](https://swift.org)
 [![Build Status](https://travis-ci.org/jonasman/TeslaSwift.svg?branch=master)](https://travis-ci.org/jonasman/TeslaSwift)
 
 ## Installation
