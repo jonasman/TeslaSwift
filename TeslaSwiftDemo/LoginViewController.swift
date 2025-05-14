@@ -47,8 +47,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: SFSafariViewControllerDelegate {
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        self.dismiss(animated: false) {
-        }
+        self.dismiss(animated: false)
         print("cancelled")
     }
 }
