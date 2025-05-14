@@ -26,6 +26,7 @@ open class EnergySiteInfo: Codable {
     open var userSettings: UserSettings
     open var touSettings: TOUSettings?
     open var components: Components
+    // tariff_content_v2
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -56,8 +57,8 @@ open class EnergySiteInfo: Codable {
         open var loadMeter: Bool
         open var touCapable: Bool?
         open var stormModeCapable: Bool?
-        open var flexEnergyRequestCapable: Bool
-        open var carChargingDataSupported: Bool
+        open var flexEnergyRequestCapable: Bool?
+        open var carChargingDataSupported: Bool?
         open var offGridVehicleChargingReserveSupported: Bool
         open var vehicleChargingPerformanceViewEnabled: Bool
         open var vehicleChargingSolarOffsetViewEnabled: Bool
@@ -70,6 +71,7 @@ open class EnergySiteInfo: Codable {
         open var energyServiceSelfSchedulingEnabled: Bool?
         open var wallConnectors: [WallConnectors]?
         open var nbtSupported: Bool?
+        open var systemAlertsEnabled: Bool?
 
         enum CodingKeys: String, CodingKey {
             case solar
@@ -92,6 +94,7 @@ open class EnergySiteInfo: Codable {
             case energyServiceSelfSchedulingEnabled = "energy_service_self_scheduling_enabled"
             case wallConnectors = "wall_connectors"
             case nbtSupported = "nbt_supported"
+            case systemAlertsEnabled = "system_alerts_enabled"
         }
     }
 
@@ -124,8 +127,8 @@ open class EnergySiteInfo: Codable {
     // MARK: - UserSettings
     open class UserSettings: Codable {
         open var stormModeEnabled: Bool?
-        open var syncGridAlertEnabled: Bool
-        open var breakerAlertEnabled: Bool
+        open var syncGridAlertEnabled: Bool?
+        open var breakerAlertEnabled: Bool?
         open var goOffGridTestBannerEnabled: Bool?
         open var powerwallOnboardingSettingsSet: Bool?
         open var powerwallTeslaElectricInterestedIn: Bool?

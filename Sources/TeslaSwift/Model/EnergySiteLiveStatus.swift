@@ -48,13 +48,21 @@ open class EnergySiteLiveStatus: Codable {
 
     open class WallConnector: Codable {
         open var din: String?
+        open var vin: String?
         open var wallConnectorState: Int?
+        open var wallConnectorFaultState: Int?
         open var wallConnectorPower: Int?
+        open var ocppStatus: Int?
+        open var powershareSessionState: Int?
 
         enum CodingKeys: String, CodingKey {
             case din
+            case vin
             case wallConnectorState = "wall_connector_state"
+            case wallConnectorFaultState = "wall_connector_fault_state"
             case wallConnectorPower = "wall_connector_power"
+            case ocppStatus = "ocpp_status"
+            case powershareSessionState = "powershare_session_state"
         }
     }
 }

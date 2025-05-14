@@ -26,8 +26,8 @@ open class EnergySiteStatus: Codable {
     open var batteryType: String?
     open var backupCapable: Bool?
     open var batteryPower: Double?
-    open var syncGridAlertEnabled: Bool
-    open var breakerAlertEnabled: Bool
+    open var syncGridAlertEnabled: Bool?
+    open var breakerAlertEnabled: Bool?
 
     enum CodingKeys: String, CodingKey {
         case resourceType = "resource_type"

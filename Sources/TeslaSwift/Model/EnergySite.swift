@@ -95,6 +95,7 @@ open class EnergySite: Codable {
 open class WallConnectors: Codable {
     open var deviceId: String?
     open var din: String?
+    open var serialNumber: String?
     open var partNumber: String?
     open var partType: Int?
     open var partName: String?
@@ -103,6 +104,7 @@ open class WallConnectors: Codable {
     enum CodingKeys: String, CodingKey {
         case deviceId = "device_id"
         case din
+        case serialNumber = "serial_number"
         case partNumber = "part_number"
         case partType = "part_type"
         case partName = "part_name"
