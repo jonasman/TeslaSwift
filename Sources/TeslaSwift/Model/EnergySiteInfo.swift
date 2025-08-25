@@ -11,29 +11,33 @@ import Foundation
 // MARK: - EnergySiteInfo
 open class EnergySiteInfo: Codable {
     open var id: String
-    open var siteName: String
-    open var backupReservePercent: Double
-    open var defaultRealMode: String
+    open var siteName: String?
+    open var siteNumber: String?
+    open var backupReservePercent: Double?
+    open var defaultRealMode: String?
     open var installationDate: Date
-    open var version: String
-    open var batteryCount: Int
-    open var nameplatePower: Double
-    open var nameplateEnergy: Double
+    open var version: String?
+    open var batteryCount: Int?
+    open var nameplatePower: Double?
+    open var nameplateEnergy: Double?
     open var installationTimeZone: String
-    open var offGridVehicleChargingReservePercent: Double
+    open var offGridVehicleChargingReservePercent: Double?
     
     open var userSettings: UserSettings
-    open var touSettings: TOUSettings
+    open var touSettings: TOUSettings?
     open var components: Components
+    // tariff_content_v2
 
     enum CodingKeys: String, CodingKey {
         case id
         case siteName = "site_name"
+        case siteNumber = "site_number"
         case backupReservePercent = "backup_reserve_percent"
         case defaultRealMode = "default_real_mode"
         case installationDate = "installation_date"
         case userSettings = "user_settings"
-        case components, version
+        case components
+        case version
         case batteryCount = "battery_count"
         case touSettings = "tou_settings"
         case nameplatePower = "nameplate_power"
@@ -45,25 +49,29 @@ open class EnergySiteInfo: Codable {
     // MARK: - Components
     open class Components: Codable {
         open var solar: Bool
-        open var solarType: String
+        open var solarType: String?
         open var battery: Bool
         open var grid: Bool
         open var backup: Bool
         open var gateway: String
         open var loadMeter: Bool
-        open var touCapable: Bool
-        open var stormModeCapable: Bool
-        open var flexEnergyRequestCapable: Bool
-        open var carChargingDataSupported: Bool
+        open var touCapable: Bool?
+        open var stormModeCapable: Bool?
+        open var flexEnergyRequestCapable: Bool?
+        open var carChargingDataSupported: Bool?
         open var offGridVehicleChargingReserveSupported: Bool
         open var vehicleChargingPerformanceViewEnabled: Bool
         open var vehicleChargingSolarOffsetViewEnabled: Bool
         open var batterySolarOffsetViewEnabled: Bool
-        open var setIslandingModeEnabled: Bool
-        open var backupTimeRemainingEnabled: Bool
-        open var batteryType: String
-        open var configurable: Bool
-        open var gridServicesEnabled: Bool
+        open var setIslandingModeEnabled: Bool?
+        open var backupTimeRemainingEnabled: Bool?
+        open var batteryType: String?
+        open var configurable: Bool?
+        open var gridServicesEnabled: Bool?
+        open var energyServiceSelfSchedulingEnabled: Bool?
+        open var wallConnectors: [WallConnectors]?
+        open var nbtSupported: Bool?
+        open var systemAlertsEnabled: Bool?
 
         enum CodingKeys: String, CodingKey {
             case solar
@@ -83,6 +91,10 @@ open class EnergySiteInfo: Codable {
             case batteryType = "battery_type"
             case configurable
             case gridServicesEnabled = "grid_services_enabled"
+            case energyServiceSelfSchedulingEnabled = "energy_service_self_scheduling_enabled"
+            case wallConnectors = "wall_connectors"
+            case nbtSupported = "nbt_supported"
+            case systemAlertsEnabled = "system_alerts_enabled"
         }
     }
 
@@ -114,14 +126,24 @@ open class EnergySiteInfo: Codable {
 
     // MARK: - UserSettings
     open class UserSettings: Codable {
-        open var stormModeEnabled: Bool
-        open var syncGridAlertEnabled: Bool
-        open var breakerAlertEnabled: Bool
+        open var stormModeEnabled: Bool?
+        open var syncGridAlertEnabled: Bool?
+        open var breakerAlertEnabled: Bool?
+        open var goOffGridTestBannerEnabled: Bool?
+        open var powerwallOnboardingSettingsSet: Bool?
+        open var powerwallTeslaElectricInterestedIn: Bool?
+        open var vppTourEnabled: Bool?
+        open var offGridVehicleChargingEnabled: Bool?
 
         enum CodingKeys: String, CodingKey {
             case stormModeEnabled = "storm_mode_enabled"
             case syncGridAlertEnabled = "sync_grid_alert_enabled"
             case breakerAlertEnabled = "breaker_alert_enabled"
+            case goOffGridTestBannerEnabled = "go_off_grid_test_banner_enabled"
+            case powerwallOnboardingSettingsSet = "powerwall_onboarding_settings_set"
+            case powerwallTeslaElectricInterestedIn = "powerwall_tesla_electric_interested_in"
+            case vppTourEnabled = "vpp_tour_enabled"
+            case offGridVehicleChargingEnabled =  "off_grid_vehicle_charging_enabled"
         }
     }
 }

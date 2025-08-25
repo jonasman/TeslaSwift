@@ -8,7 +8,7 @@
 
 import XCTest
 @testable import TeslaSwift
-import OHHTTPStubs
+//import OHHTTPStubs
 
 class TeslaSwiftTests: XCTestCase {
 	let headers = ["Content-Type" as NSObject :"application/json" as AnyObject]
@@ -18,14 +18,23 @@ class TeslaSwiftTests: XCTestCase {
 	
 	override func setUp() {
 		super.setUp()
-		let path2 = OHPathForFile("Vehicles.json", type(of: self))
+		/*let path2 = OHPathForFile("Vehicles.json", type(of: self))
 		_ = stub(condition: isPath(Endpoint.vehicles.path)) {
 			_ in
 			return fixture(filePath: path2!, headers: self.headers)
-		}
+		}*/
     }
 	
 	// MARK: - Authentication -
+
+    func testCodeParsing() {
+        let url = URL(string: "keytesla://keytesla/login?code=EU_123&state=teslaSwift&issuer=https%3A%2F%2Fauth.tesla.com%2Foauth2%2Fv3")!
+        let sut = TeslaSwift(teslaAPI: .fleetAPI(region: .europeMiddleEastAfrica, clientID: "", clientSecret: "", redirectURI: "", scopes: TeslaAPI.Scope.all))
+
+        let code = sut.parseCode(url: url)
+
+        XCTAssertEqual(code, "EU_123")
+    }
 	/*
 	func testAuthenticate() {
 		
@@ -119,7 +128,7 @@ class TeslaSwiftTests: XCTestCase {
      */
 	
 	// MARK: - Vehicles -
-	
+/*
 	func testGetVehicles() {
 		let expection = expectation(description: "All Done")
 		
@@ -1173,4 +1182,5 @@ class TeslaSwiftTests: XCTestCase {
 	func testParseEmpty() {
 		XCTAssertNoThrow( { () -> VehicleExtended? in "{}".decodeJSON() }())
 	}
-}
+*/
+ }

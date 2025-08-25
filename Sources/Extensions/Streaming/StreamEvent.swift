@@ -8,10 +8,7 @@
 
 import Foundation
 import CoreLocation
-#if COCOAPODS
-#else // SPM
 import TeslaSwift
-#endif
 
 public enum TeslaStreamingEvent: Equatable {
     case open

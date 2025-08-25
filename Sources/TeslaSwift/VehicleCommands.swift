@@ -26,6 +26,7 @@ public enum VehicleCommand {
     case honkHorn
     case unlockDoors
     case lockDoors
+    case remoteBoombox
     case setTemperature(driverTemperature: Double, passengerTemperature: Double)
     case setMaxDefrost(on: Bool)
     case startAutoConditioning
@@ -87,6 +88,8 @@ public enum VehicleCommand {
                 return "command/door_unlock"
             case .lockDoors:
                 return "command/door_lock"
+            case .remoteBoombox:
+                return "command/remote_boombox"
             case .setTemperature:
                 return "command/set_temps"
             case .setMaxDefrost:

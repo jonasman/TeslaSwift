@@ -16,27 +16,49 @@ enum Endpoint {
     case oAuth2TokenCN
     case oAuth2revoke(token: String)
     case oAuth2revokeCN(token: String)
+
+    case me
+    case region
+
+    case partnerAccounts
 	case vehicles
-    case vehicleSummary(vehicleID: String)
-	case mobileAccess(vehicleID: String)
-	case allStates(vehicleID: String)
-	case chargeState(vehicleID: String)
-	case climateState(vehicleID: String)
-	case driveState(vehicleID: String)
-    case nearbyChargingSites(vehicleID: String)
-	case guiSettings(vehicleID: String)
-	case vehicleState(vehicleID: String)
-	case vehicleConfig(vehicleID: String)
-	case wakeUp(vehicleID: String)
-	case command(vehicleID: String, command: VehicleCommand)
+    case vehicleSummary(vehicleID: VehicleId)
+	case mobileAccess(vehicleID: VehicleId)
+    case allStates(vehicleID: VehicleId, endpoints: [AllStatesEndpoints])
+	case chargeState(vehicleID: VehicleId)
+	case climateState(vehicleID: VehicleId)
+	case driveState(vehicleID: VehicleId)
+    case nearbyChargingSites(vehicleID: VehicleId)
+	case guiSettings(vehicleID: VehicleId)
+	case vehicleState(vehicleID: VehicleId)
+	case vehicleConfig(vehicleID: VehicleId)
+	case wakeUp(vehicleID: VehicleId)
+	case command(vehicleID: VehicleId, command: VehicleCommand)
+    case signedCommand(vehicleID: VehicleId)
     case products
-    case getEnergySiteStatus(siteID: String)
-    case getEnergySiteLiveStatus(siteID: String)
-    case getEnergySiteInfo(siteID: String)
-    case getEnergySiteHistory(siteID: String, period: EnergySiteHistory.Period)
-    case getBatteryStatus(batteryID: String)
-    case getBatteryData(batteryID: String)
-    case getBatteryPowerHistory(batteryID: String)
+    case chargeHistory(vehicleID: VehicleId)
+    case getEnergySiteStatus(siteID: SiteId)
+    case getEnergySiteLiveStatus(siteID: SiteId)
+    case getEnergySiteInfo(siteID: SiteId)
+    case getEnergySiteHistory(siteID: SiteId, period: EnergySiteHistory.Period)
+    case getBatteryStatus(batteryID: BatteryId)
+    case getBatteryData(batteryID: BatteryId)
+    case getBatteryPowerHistory(batteryID: BatteryId)
+}
+
+public enum AllStatesEndpoints: String {
+    case chargeState = "charge_state"
+    case climateState = "climate_state"
+    case closuresState = "closures_state"
+    case driveState = "drive_state"
+    case guiSettings = "gui_settings"
+    case locationData = "location_data" // Same as driveState but with location
+    case vehicleConfig = "vehicle_config"
+    case vehicleState = "vehicle_state"
+    case vehicleDataCombo = "vehicle_data_combo"
+
+    public static var all: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .driveState, .guiSettings, .vehicleConfig, .vehicleState]
+    public static var allWithLocation: [AllStatesEndpoints] = [.chargeState, .climateState, .closuresState, .locationData, .guiSettings, .vehicleConfig, .vehicleState]
 }
 
 extension Endpoint {
@@ -52,59 +74,70 @@ extension Endpoint {
                 return "/oauth2/v3/token"
             case .oAuth2revoke, .oAuth2revokeCN:
                 return "/oauth2/v3/revoke"
+            case .partnerAccounts:
+                return "/api/1/partner_accounts"
+
+            case .me:
+                return "/api/1/users/me"
+            case .region:
+                return "/api/1/users/region"
             // Vehicle Data and Commands
             case .vehicles:
                 return "/api/1/vehicles"
             case .vehicleSummary(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)"
+                return "/api/1/vehicles/\(vehicleID.id)"
             case .mobileAccess(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/mobile_enabled"
-            case .allStates(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/vehicle_data"
+                return "/api/1/vehicles/\(vehicleID.id)/mobile_enabled"
+            case .allStates(let vehicleID, _):
+                return "/api/1/vehicles/\(vehicleID.id)/vehicle_data"
             case .chargeState(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/data_request/charge_state"
+                return "/api/1/vehicles/\(vehicleID.id)/data_request/charge_state"
             case .climateState(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/data_request/climate_state"
+                return "/api/1/vehicles/\(vehicleID.id)/data_request/climate_state"
             case .driveState(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/data_request/drive_state"
+                return "/api/1/vehicles/\(vehicleID.id)/data_request/drive_state"
             case .guiSettings(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/data_request/gui_settings"
+                return "/api/1/vehicles/\(vehicleID.id)/data_request/gui_settings"
             case .nearbyChargingSites(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/nearby_charging_sites"
+                return "/api/1/vehicles/\(vehicleID.id)/nearby_charging_sites"
             case .vehicleState(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/data_request/vehicle_state"
+                return "/api/1/vehicles/\(vehicleID.id)/data_request/vehicle_state"
             case .vehicleConfig(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/data_request/vehicle_config"
+                return "/api/1/vehicles/\(vehicleID.id)/data_request/vehicle_config"
             case .wakeUp(let vehicleID):
-                return "/api/1/vehicles/\(vehicleID)/wake_up"
+                return "/api/1/vehicles/\(vehicleID.id)/wake_up"
             case let .command(vehicleID, command):
-                return "/api/1/vehicles/\(vehicleID)/\(command.path())"
+                return "/api/1/vehicles/\(vehicleID.id)/\(command.path())"
+            case let .signedCommand(vehicleID):
+                return "/api/1/vehicles/\(vehicleID.id)/signed_command"
             case .products:
                 return "/api/1/products"
-            
+            case let .chargeHistory(vehicleID):
+                return "/api/1/vehicles/\(vehicleID.id)/charge_history"
+
             // Energy Data
             case .getEnergySiteStatus(let siteID):
-                return "/api/1/energy_sites/\(siteID)/site_status"
+                return "/api/1/energy_sites/\(siteID.id)/site_status"
             case .getEnergySiteLiveStatus(let siteID):
-                return "/api/1/energy_sites/\(siteID)/live_status"
+                return "/api/1/energy_sites/\(siteID.id)/live_status"
             case .getEnergySiteInfo(let siteID):
-                return "/api/1/energy_sites/\(siteID)/site_info"
+                return "/api/1/energy_sites/\(siteID.id)/site_info"
             case .getEnergySiteHistory(let siteID, _):
-                return "/api/1/energy_sites/\(siteID)/history"
+                return "/api/1/energy_sites/\(siteID.id)/history"
             case .getBatteryStatus(let batteryID):
-                return "/api/1/powerwalls/\(batteryID)/status"
+                return "/api/1/powerwalls/\(batteryID.id)/status"
             case .getBatteryData(let batteryID):
-                return "/api/1/powerwalls/\(batteryID)/"
+                return "/api/1/powerwalls/\(batteryID.id)/"
             case .getBatteryPowerHistory(let batteryID):
-                return "/api/1/powerwalls/\(batteryID)/powerhistory"
+                return "/api/1/powerwalls/\(batteryID.id)/powerhistory"
         }
 	}
 	
 	var method: String {
 		switch self {
-            case .revoke, .oAuth2Token, .oAuth2TokenCN, .wakeUp, .command:
+            case .revoke, .oAuth2Token, .oAuth2TokenCN, .wakeUp, .partnerAccounts, .chargeHistory, .command, .signedCommand:
                 return "POST"
-        case .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
+            case .me, .region, .vehicles, .vehicleSummary, .mobileAccess, .allStates, .chargeState, .climateState, .driveState, .guiSettings, .vehicleState, .vehicleConfig, .nearbyChargingSites, .oAuth2Authorization, .oAuth2revoke, .oAuth2AuthorizationCN, .oAuth2revokeCN, .products, .getEnergySiteStatus, .getEnergySiteLiveStatus, .getEnergySiteInfo, .getEnergySiteHistory, .getBatteryStatus, .getBatteryData, .getBatteryPowerHistory:
                 return "GET"
 		}
 	}
@@ -117,19 +150,21 @@ extension Endpoint {
                 return [URLQueryItem(name: "token", value: token)]
             case let .getEnergySiteHistory(_, period):
                 return [URLQueryItem(name: "period", value: period.rawValue), URLQueryItem(name: "kind", value: "energy")]
+            case let .allStates(_, endpoints):
+                return [URLQueryItem(name: "endpoints", value: endpoints.map({ $0.rawValue }).joined(separator: ";"))]
             default:
                 return []
         }
     }
 
-    func baseURL() -> String {
+    func baseURL(teslaAPI: TeslaAPI) -> String {
         switch self {
             case .oAuth2Authorization, .oAuth2Token, .oAuth2revoke:
-                return "https://auth.tesla.com"
+                return "https://fleet-auth.prd.vn.cloud.tesla.com"
             case .oAuth2AuthorizationCN, .oAuth2TokenCN, .oAuth2revokeCN:
-                return "https://auth.tesla.cn"
+                return "https://fleet-auth.prd.vn.cloud.tesla.com"
             default:
-                return "https://owner-api.teslamotors.com"
+                return teslaAPI.url
         }
     }
 }

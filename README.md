@@ -1,64 +1,44 @@
 # TeslaSwift
-Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https://tesla-api.timdorr.com)
+Swift library to access Tesla API based on [Tesla JSON API (Unofficial)](https://tesla-api.timdorr.com) and [Tesla Fleet API](https://developer.tesla.com/docs/fleet-api)
 
-[![Swift](https://img.shields.io/badge/Swift-5.5-orange.svg?style=flat)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-5.10-orange.svg?style=flat)](https://swift.org)
 [![Build Status](https://travis-ci.org/jonasman/TeslaSwift.svg?branch=master)](https://travis-ci.org/jonasman/TeslaSwift)
-[![TeslaSwift](https://img.shields.io/cocoapods/v/TeslaSwift.svg)](https://github.com/jonasman/TeslaSwift)
 
 ## Installation
-
-### Manual
-
-Copy `Sources` folder into your project
-
-### CocoaPods
-
-If you don't need any extensions, use this line
-
-```ruby
-pod 'TeslaSwift', '~> 8'
-```
-If you need PromiseKit extensions, use this line 
-
-```ruby
-pod 'TeslaSwift/PromiseKit', '~> 8'
-```
-If you need Combine extensions, use this line
-
-```ruby
-pod 'TeslaSwift/Combine', '~> 8'
-```
-If you need Rx extensions, use this line
-
-```ruby
-pod 'TeslaSwift/Rx', '~> 8'
-```
-
-#### Streaming extension
-
-```ruby
-pod 'TeslaSwift/Streaming', '~> 8'
-```
-If you need Combine extensions for Streaming, use this line
-```ruby
-pod 'TeslaSwift/StreamingCombine', '~> 8'
-```
-If you need Rx extensions for Streaming, use this line
-
-```ruby
-pod 'TeslaSwift/StreamingRx', '~> 8'
-```
 
 ### Swift Package Manager
 
 You can use [Swift Package Manager](https://swift.org/package-manager/) and specify a dependency in `Package.swift` by adding this or adding the dependency to Xcode:
 
 ```swift
-.Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 8)
+.Package(url: "https://github.com/jonasman/TeslaSwift.git", majorVersion: 10)
 ```
 
-There are also extensions for Combine `TeslaSwiftCombine`, PromiseKit `TeslaSwiftPMK` and Rx `TeslaSwiftRx`
-The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamingCombine` and Rx `TeslaSwiftStreamingRx` 
+There are also extensions for Combine `TeslaSwiftCombine`
+
+The Streaming extensions are: `TeslaSwiftStreaming`, Combine `TeslaSwiftStreamingCombine` 
+
+## Tesla API
+There are 2 Tesla APIs available:
+1. The old owner API
+2. The new Fleet API
+
+You can choose any of them. If you want to use FleetAPI, initialize the library with a `region`, `clientId`, `clientSecret` and `redirectURI`
+
+## App registration for the Fleet API
+To use the new Fleet API, you will need to register your app.
+
+Follow the steps on the [official documentation](https://developer.tesla.com/docs/fleet-api#setup):
+1. Create a private/public key and upload the public key to a website
+2. Make a new app at [Tesla Developer](https://developer.tesla.com/dashboard)
+3. Get a partner token (using this Library)
+4. Register your app (using this Library)
+
+This library helps you get a partner token and register your app with 2 APIs:
+```swift
+getPartnerToken()
+registerApp(domain: String)
+```
 
 ## Usage
 
@@ -81,31 +61,97 @@ import TeslaSwift
 Add the extension modules if needed (with the previous line)
 
 ```swift
-import TeslaSwiftPMK
-```
-```swift
 import TeslaSwiftCombine
 ```
-```swift
-import TeslaSwiftRx
-```
 
-Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support: 
+Perform an authentication with your MyTesla credentials using the browser:
 
+If you use deeplinks, add your callback URI scheme as a URL Scheme to your app under info -> URL Types
 ```swift
-let api = TeslaSwift()
-let (webloginViewController, result) = await api.authenticate()
-guard let safeWebLoginViewController = authViewControler else { return }
-present(safeWebLoginViewController, animated: true, completion: nil)
-Task { @MainActor in
+ if let url = api.authenticateWebNativeURL() {
+    UIApplication.shared.open(url)
+}
+...
+
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    Task { @MainActor in
         do {
-             _ = try await result()
-             self.messageLabel.text = "Authentication success"
-        } catch let error {
-            // error
-       }
+            _ = try await api.authenticateWebNative(url: url)
+            // Notify your code the auth is done
+        } catch {
+            print("Error")
+        }
+    }        
+    return true
+}
+```   
+
+Alternative method using a SFSafariViewController
+Perform an authentication with your MyTesla credentials using the web oAuth2 flow with MFA support:
+
+```swift
+let teslaAPI = ...
+let api = TeslaSwift(teslaAPI: teslaAPI)
+let safariViewController = api.authenticateWeb(delegate: self)
+guard let safariViewController else { return }
+present(safariViewController, animated: true, completion: nil)
+
+...
+
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    Task { @MainActor in
+        do {
+            _ = try await api.authenticateWebNative(url: url)
+            // Notify your code the auth is done and dismiss the safariViewController
+        } catch {
+            print("Error")
+        }
+    }        
+    return true
 }
 ```
+
+To to perform an authentication in SwiftUI, use the native Browser or create an UIViewControllerRepresentable to inject the UIViewController into a SwiftUI view:
+
+```swift
+import TeslaSwift
+import SwiftUI
+
+struct TeslaWebLogin: UIViewControllerRepresentable {
+    let teslaAPI = ...
+    let api = TeslaSwift(teslaAPI: teslaAPI)    
+    
+    func makeUIViewController(context: Context) -> TeslaWebLoginViewController {
+        let webloginViewController = api.authenticateWeb(delegate: self)
+        return webloginViewController!
+    }
+    
+    func updateUIViewController(_ uiViewController: TeslaWebLoginViewController, context: Context) {
+    }
+    
+}
+```
+
+```swift
+import SwiftUI
+struct TeslaLogin: View {
+    var body: some View {
+        VStack {
+            TeslaWebLogin()
+        }
+    }
+}
+```
+## Public Key upload to vehicle
+After authenticatiom, some vehicles might need to receive your public key.
+
+```swift
+if let url = api.urlToSendPublicKeyToVehicle(domain: yourDomain) {
+    UIApplication.shared.open(url)
+}
+```
+
+This will open the Tesla app and send the public key to the selected vehicle in the app.
 
 
 ## Token reuse
@@ -113,13 +159,14 @@ After authentication, store the AuthToken in a safe place.
 The next time the app starts-up you can reuse the token:
 
 ```swift
-let api = TeslaSwift()
+let teslaAPI = ...
+let api = TeslaSwift(teslaAPI: teslaAPI)
 api.reuse(token: previousToken)
 
 ```
 
 ## Vehicle data
-Example on how to get a list of vehicles with promiseKit
+Example on how to get a list of vehicles
 
 ```swift
 
@@ -146,9 +193,6 @@ Import the extension modules if needed (with the previous line)
 
 ```swift
 import TeslaSwiftStreamingCombine
-```
-```swift
-import TeslaSwiftStreamingRx
 ```
 ```swift
 class CarsViewController: ViewController {
@@ -191,6 +235,7 @@ public let teslaJSONDecoder: JSONDecoder
 ## Options
 
 You can enable debugging by setting: `api.debuggingEnabled = true`
+Debug logs use Unified Logging and can be found by filtering for `subsystem: Tesla Swift`
 
 ## Other Features
 
@@ -215,6 +260,9 @@ http://ts.la/joao290
 * Pilot Log for Tesla (https://itunes.apple.com/us/app/pilot-log-for-Tesla/id1564398488?mt=8)
 * EV Companion (https://itunes.apple.com/us/app/ev-companion/id1574209459?mt=8)
 * S3XY Key Fob (https://kenmaz.net/tesla-app/)
+* Meter (https://apps.apple.com/us/app/meter/id1603166204)
+* Chargey (https://get.chargey.app/)
+* Charge My Way (https://apple.co/42EtHM5)
 
 Missing your app? open a PR or issue
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TeslaSwift
 
 extension UIViewController {
 	public var api: TeslaSwift {

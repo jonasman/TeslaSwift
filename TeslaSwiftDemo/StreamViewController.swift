@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TeslaSwift
+import TeslaSwiftStreaming
 
 class StreamViewController: UIViewController {
 	@IBOutlet weak var textView: UITextView!

@@ -10,7 +10,6 @@ import Foundation
 
 // MARK: - Welcome
 open class BatteryData: Codable {
-    open var siteName: String
     open var energyLeft: Double
     open var totalPackEnergy: Double
     open var gridStatus: String
@@ -24,7 +23,6 @@ open class BatteryData: Codable {
     open var powerReading: [PowerReading]
 
     enum CodingKeys: String, CodingKey {
-        case siteName = "site_name"
         case energyLeft = "energy_left"
         case totalPackEnergy = "total_pack_energy"
         case gridStatus = "grid_status"

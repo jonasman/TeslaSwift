@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--Login-->
         <scene sceneID="RLU-GX-AlX">
             <objects>
-                <viewController title="Login" modalPresentationStyle="fullScreen" id="gEs-3m-96K" customClass="LoginViewController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" modalPresentationStyle="fullScreen" id="gEs-3m-96K" customClass="LoginViewController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Wq-ak-cpO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,13 +36,22 @@
                                     <action selector="webLoginAction:" destination="gEs-3m-96K" eventType="touchUpInside" id="HG8-Jf-YZB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEc-1W-XvM">
+                                <rect key="frame" x="146.5" y="130" width="82" height="30"/>
+                                <state key="normal" title="NativeLogin"/>
+                                <connections>
+                                    <action selector="nativeLoginAction:" destination="gEs-3m-96K" eventType="touchUpInside" id="4zU-Vt-zlC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o0e-Sq-to2"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="JzU-9s-Xww" secondAttribute="trailing" id="3BJ-aV-l9D"/>
+                            <constraint firstItem="KEc-1W-XvM" firstAttribute="top" secondItem="jLG-8m-UEH" secondAttribute="bottom" constant="16" id="749-rj-yQ1"/>
                             <constraint firstItem="BW1-mo-rTp" firstAttribute="top" secondItem="7Wq-ak-cpO" secondAttribute="topMargin" id="MKZ-KR-L3H"/>
                             <constraint firstItem="BW1-mo-rTp" firstAttribute="leading" secondItem="7Wq-ak-cpO" secondAttribute="leadingMargin" constant="-20" id="PJd-tN-v0V"/>
+                            <constraint firstItem="KEc-1W-XvM" firstAttribute="centerX" secondItem="7Wq-ak-cpO" secondAttribute="centerX" id="Qhx-bf-FLh"/>
                             <constraint firstItem="JzU-9s-Xww" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Wq-ak-cpO" secondAttribute="leadingMargin" id="h1N-EP-lW7"/>
                             <constraint firstItem="jLG-8m-UEH" firstAttribute="centerX" secondItem="7Wq-ak-cpO" secondAttribute="centerX" id="iSC-l1-Egg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BW1-mo-rTp" secondAttribute="trailing" constant="-20" id="lyZ-rz-eTx"/>
@@ -62,17 +71,17 @@
         <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="FirstViewController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="FirstViewController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oft-Jp-GaC">
-                                <rect key="frame" x="16" y="44" width="343" height="574"/>
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="Bbt-TU-HOi" detailTextLabel="ulw-nk-We8" style="IBUITableViewCellStyleValue1" id="KGv-NT-M2M">
-                                        <rect key="frame" x="0.0" y="44.5" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGv-NT-M2M" id="N9i-Hr-k3f">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -126,189 +135,140 @@
         <!--Vehicle View Controller-->
         <scene sceneID="zHh-tM-ID5">
             <objects>
-                <viewController id="hQa-7w-LXN" customClass="VehicleViewController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hQa-7w-LXN" customClass="VehicleViewController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zs8-Um-QL5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dL3-Y4-FTE">
-                                <rect key="frame" x="16" y="204" width="343" height="394"/>
+                                <rect key="frame" x="16" y="224" width="343" height="374"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iA-0c-01W">
-                                <rect key="frame" x="16" y="106" width="71.5" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iA-0c-01W">
+                                <rect key="frame" x="20" y="102" width="71" height="30"/>
                                 <state key="normal" title="Command"/>
                                 <connections>
                                     <action selector="command:" destination="hQa-7w-LXN" eventType="touchUpInside" id="ot1-Sv-VtE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2I-wH-VVW">
-                                <rect key="frame" x="16" y="44" width="119" height="30"/>
-                                <state key="normal" title="Get Charge State"/>
-                                <connections>
-                                    <action selector="getChargeState:" destination="hQa-7w-LXN" eventType="touchUpInside" id="0S2-Xz-nck"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDa-tz-cjg">
-                                <rect key="frame" x="151.5" y="44" width="72" height="30"/>
-                                <state key="normal" title="Get temps"/>
-                                <connections>
-                                    <action selector="getTemps:" destination="hQa-7w-LXN" eventType="touchUpInside" id="IRa-o0-Lij"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xP4-ae-x7r">
-                                <rect key="frame" x="256" y="44" width="103" height="30"/>
-                                <state key="normal" title="Get drive State"/>
-                                <connections>
-                                    <action selector="getDriveState:" destination="hQa-7w-LXN" eventType="touchUpInside" id="gc3-Eu-hBM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8v-jY-iJa">
-                                <rect key="frame" x="16" y="81" width="115" height="30"/>
-                                <state key="normal" title="Get GUI Settings"/>
-                                <connections>
-                                    <action selector="getGUISettings:" destination="hQa-7w-LXN" eventType="touchUpInside" id="Jty-TR-a0B"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7a-lS-cgG">
-                                <rect key="frame" x="143" y="81" width="115" height="30"/>
-                                <state key="normal" title="Get vehicle state"/>
-                                <connections>
-                                    <action selector="getVehicleState:" destination="hQa-7w-LXN" eventType="touchUpInside" id="l7O-Ay-bFQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiR-K7-WLA">
-                                <rect key="frame" x="296" y="81" width="72" height="30"/>
-                                <state key="normal" title="Get config"/>
-                                <connections>
-                                    <action selector="getConfig:" destination="hQa-7w-LXN" eventType="touchUpInside" id="WOY-dB-XV8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLA-89-uZU">
-                                <rect key="frame" x="112.5" y="106" width="49" height="30"/>
-                                <state key="normal" title="Stream"/>
-                                <connections>
-                                    <segue destination="Tzz-ec-DsJ" kind="show" identifier="toStream" id="orP-Rk-jxS"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugC-lm-CpD">
-                                <rect key="frame" x="215" y="106" width="62" height="30"/>
+                                <rect key="frame" x="111" y="64" width="62" height="30"/>
                                 <state key="normal" title="Wake Up"/>
                                 <connections>
                                     <action selector="wakeup:" destination="hQa-7w-LXN" eventType="touchUpInside" id="zDL-BF-JfF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeE-wh-PNs">
-                                <rect key="frame" x="290" y="106" width="78" height="30"/>
+                                <rect key="frame" x="103" y="102" width="78" height="30"/>
                                 <state key="normal" title="SpeedLimit"/>
                                 <connections>
                                     <action selector="speedLimit:" destination="hQa-7w-LXN" eventType="touchUpInside" id="yMW-Mt-XyZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-h9-uZn">
-                                <rect key="frame" x="16" y="143" width="79" height="30"/>
+                                <rect key="frame" x="15" y="64" width="79" height="30"/>
                                 <state key="normal" title="Get Vehicle"/>
                                 <connections>
                                     <action selector="getVehicle:" destination="hQa-7w-LXN" eventType="touchUpInside" id="Szm-Zd-vYh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUy-VO-gOX">
-                                <rect key="frame" x="111" y="144" width="178" height="30"/>
+                                <rect key="frame" x="16" y="140" width="178" height="30"/>
                                 <state key="normal" title="Get Nearby charging sites"/>
                                 <connections>
                                     <action selector="getNearbyChargingSites:" destination="hQa-7w-LXN" eventType="touchUpInside" id="RQC-vC-4gK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmL-KV-smN">
-                                <rect key="frame" x="310" y="144" width="53" height="30"/>
-                                <state key="normal" title="Refresh"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqb-8q-DiQ">
+                                <rect key="frame" x="194" y="178" width="171" height="34.5"/>
+                                <state key="normal" title="send Key to vehicle"/>
+                                <buttonConfiguration key="configuration" style="plain" title="send Key to vehicle"/>
                                 <connections>
-                                    <action selector="refreshToken:" destination="hQa-7w-LXN" eventType="touchUpInside" id="7Kt-IL-gYc"/>
+                                    <action selector="sendKeyToVehicle:" destination="hQa-7w-LXN" eventType="touchUpInside" id="hQk-I0-iSS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TU-qj-zp8">
-                                <rect key="frame" x="308" y="165" width="50" height="30"/>
+                                <rect key="frame" x="78" y="178" width="50" height="30"/>
                                 <state key="normal" title="Revoke"/>
                                 <connections>
                                     <action selector="revokeToken:" destination="hQa-7w-LXN" eventType="touchUpInside" id="Syq-Wy-eWh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8si-jS-X0j">
-                                <rect key="frame" x="251" y="165" width="48" height="30"/>
+                                <rect key="frame" x="20" y="178" width="48" height="30"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="logout:" destination="hQa-7w-LXN" eventType="touchUpInside" id="vcY-Zf-xNP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7f-gf-SKe">
-                                <rect key="frame" x="17" y="174" width="77" height="30"/>
+                                <rect key="frame" x="204" y="102" width="77" height="30"/>
                                 <state key="normal" title="Amps to 16"/>
                                 <connections>
                                     <action selector="ampsTo16:" destination="hQa-7w-LXN" eventType="touchUpInside" id="mh4-Fz-TvV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySF-V2-hJS">
-                                <rect key="frame" x="172.5" y="166" width="30" height="30"/>
+                                <rect key="frame" x="189" y="64" width="30" height="30"/>
                                 <state key="normal" title="all"/>
                                 <connections>
                                     <action selector="gettAll:" destination="hQa-7w-LXN" eventType="touchUpInside" id="VUo-KP-vxg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLA-89-uZU">
+                                <rect key="frame" x="249" y="64" width="49" height="30"/>
+                                <state key="normal" title="Stream"/>
+                                <connections>
+                                    <segue destination="Tzz-ec-DsJ" kind="show" identifier="toStream" id="orP-Rk-jxS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmL-KV-smN">
+                                <rect key="frame" x="131" y="178" width="53" height="30"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshToken:" destination="hQa-7w-LXN" eventType="touchUpInside" id="7Kt-IL-gYc"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xr7-QY-Fkr"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="g7a-lS-cgG" firstAttribute="baseline" secondItem="v8v-jY-iJa" secondAttribute="baseline" id="0r9-Cp-cZK"/>
-                            <constraint firstItem="g7a-lS-cgG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v8v-jY-iJa" secondAttribute="trailing" constant="8" symbolic="YES" id="14n-DG-arx"/>
-                            <constraint firstItem="RmL-KV-smN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8si-jS-X0j" secondAttribute="trailing" constant="8" symbolic="YES" id="4u8-16-0NX"/>
-                            <constraint firstItem="qDa-tz-cjg" firstAttribute="trailing" secondItem="1iA-0c-01W" secondAttribute="trailing" constant="136" id="53z-5N-2eV"/>
+                            <constraint firstItem="Nqb-8q-DiQ" firstAttribute="top" secondItem="RmL-KV-smN" secondAttribute="top" id="1nR-so-XiB"/>
+                            <constraint firstItem="yUy-VO-gOX" firstAttribute="leading" secondItem="dL3-Y4-FTE" secondAttribute="leading" id="1z9-39-F7g"/>
+                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" secondItem="RLA-89-uZU" secondAttribute="trailing" constant="77" id="2Az-Gr-tat"/>
+                            <constraint firstItem="Nqb-8q-DiQ" firstAttribute="leading" secondItem="RmL-KV-smN" secondAttribute="trailing" constant="10" id="2Qf-By-G76"/>
+                            <constraint firstItem="ZeE-wh-PNs" firstAttribute="leading" secondItem="1iA-0c-01W" secondAttribute="trailing" constant="12" id="2vL-Vp-5oR"/>
                             <constraint firstItem="dL3-Y4-FTE" firstAttribute="trailing" secondItem="zs8-Um-QL5" secondAttribute="trailingMargin" id="580-EF-m7n"/>
-                            <constraint firstItem="0TU-qj-zp8" firstAttribute="top" secondItem="RmL-KV-smN" secondAttribute="bottom" constant="-9" id="5Vo-j9-DC0"/>
-                            <constraint firstItem="8si-jS-X0j" firstAttribute="top" secondItem="yUy-VO-gOX" secondAttribute="bottom" constant="-9" id="6wA-UW-eLJ"/>
+                            <constraint firstItem="VFT-h9-uZn" firstAttribute="leading" secondItem="Xr7-QY-Fkr" secondAttribute="leading" constant="15" id="5nT-VW-SBy"/>
                             <constraint firstItem="dL3-Y4-FTE" firstAttribute="leading" secondItem="zs8-Um-QL5" secondAttribute="leadingMargin" id="6yK-w5-77i"/>
+                            <constraint firstItem="1iA-0c-01W" firstAttribute="leading" secondItem="8si-jS-X0j" secondAttribute="leading" id="76C-tF-GpC"/>
+                            <constraint firstItem="VFT-h9-uZn" firstAttribute="baseline" secondItem="ugC-lm-CpD" secondAttribute="baseline" id="7eF-yd-eOY"/>
                             <constraint firstItem="Xr7-QY-Fkr" firstAttribute="bottom" secondItem="dL3-Y4-FTE" secondAttribute="bottom" constant="20" id="87g-in-Fax"/>
-                            <constraint firstItem="g7a-lS-cgG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="V2I-wH-VVW" secondAttribute="trailing" constant="8" symbolic="YES" id="Csl-37-NKC"/>
-                            <constraint firstItem="8si-jS-X0j" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="z7f-gf-SKe" secondAttribute="trailing" constant="8" symbolic="YES" id="ETQ-gC-1Oq"/>
-                            <constraint firstItem="VFT-h9-uZn" firstAttribute="leading" secondItem="Xr7-QY-Fkr" secondAttribute="leading" constant="16" id="Foa-wU-Qu3"/>
-                            <constraint firstItem="ugC-lm-CpD" firstAttribute="bottom" secondItem="RLA-89-uZU" secondAttribute="bottom" id="GjJ-te-7to"/>
+                            <constraint firstItem="z7f-gf-SKe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZeE-wh-PNs" secondAttribute="trailing" id="DMn-7x-Meg"/>
+                            <constraint firstItem="ySF-V2-hJS" firstAttribute="leading" secondItem="ugC-lm-CpD" secondAttribute="trailing" constant="16" id="EDT-nG-zoZ"/>
+                            <constraint firstItem="8si-jS-X0j" firstAttribute="top" secondItem="yUy-VO-gOX" secondAttribute="bottom" constant="8" id="Fha-ep-b27"/>
+                            <constraint firstItem="1iA-0c-01W" firstAttribute="baseline" secondItem="ZeE-wh-PNs" secondAttribute="baseline" id="GfL-RQ-Y53"/>
+                            <constraint firstItem="Nqb-8q-DiQ" firstAttribute="trailing" secondItem="Xr7-QY-Fkr" secondAttribute="trailing" constant="-10" id="IJo-BY-T0W"/>
+                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" secondItem="z7f-gf-SKe" secondAttribute="trailing" constant="94" id="ITZ-H5-qqW"/>
                             <constraint firstItem="dL3-Y4-FTE" firstAttribute="top" secondItem="Xr7-QY-Fkr" secondAttribute="top" constant="160" id="Ifi-ov-SfX"/>
-                            <constraint firstItem="ugC-lm-CpD" firstAttribute="leading" secondItem="RLA-89-uZU" secondAttribute="trailing" constant="53.5" id="JJ2-l6-kNg"/>
-                            <constraint firstItem="VFT-h9-uZn" firstAttribute="top" secondItem="1iA-0c-01W" secondAttribute="bottom" constant="7" id="Jpf-2w-9JS"/>
-                            <constraint firstItem="ZeE-wh-PNs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ugC-lm-CpD" secondAttribute="trailing" symbolic="YES" id="Kwq-qr-Dmc"/>
-                            <constraint firstItem="8si-jS-X0j" firstAttribute="leading" secondItem="VFT-h9-uZn" secondAttribute="trailing" constant="156" id="PDT-cq-Ls1"/>
-                            <constraint firstItem="ZeE-wh-PNs" firstAttribute="leading" secondItem="g7a-lS-cgG" secondAttribute="trailing" constant="32" id="Q9a-Ae-RzV"/>
-                            <constraint firstItem="RmL-KV-smN" firstAttribute="top" secondItem="ZeE-wh-PNs" secondAttribute="bottom" constant="8" id="QY9-JF-OUt"/>
-                            <constraint firstItem="0TU-qj-zp8" firstAttribute="leading" secondItem="yUy-VO-gOX" secondAttribute="trailing" constant="19" id="Tz7-sb-8TV"/>
-                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" secondItem="RmL-KV-smN" secondAttribute="trailing" constant="12" id="V0n-Tv-QrC"/>
-                            <constraint firstItem="0TU-qj-zp8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8si-jS-X0j" secondAttribute="trailing" constant="8" symbolic="YES" id="WTi-6m-2xl"/>
-                            <constraint firstItem="xP4-ae-x7r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qDa-tz-cjg" secondAttribute="trailing" constant="8" symbolic="YES" id="Yle-6q-RSn"/>
-                            <constraint firstItem="V2I-wH-VVW" firstAttribute="leading" secondItem="dL3-Y4-FTE" secondAttribute="leading" id="YoO-4n-cSJ"/>
-                            <constraint firstItem="qDa-tz-cjg" firstAttribute="centerX" secondItem="dL3-Y4-FTE" secondAttribute="centerX" id="Zkk-J1-41o"/>
-                            <constraint firstItem="RLA-89-uZU" firstAttribute="top" secondItem="V2I-wH-VVW" secondAttribute="bottom" constant="32" id="Zx1-iu-YAb"/>
-                            <constraint firstItem="NiR-K7-WLA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ugC-lm-CpD" secondAttribute="trailing" constant="8" symbolic="YES" id="cQT-tS-7Bk"/>
-                            <constraint firstItem="V2I-wH-VVW" firstAttribute="top" secondItem="Xr7-QY-Fkr" secondAttribute="top" symbolic="YES" id="dCk-o2-SJo"/>
-                            <constraint firstItem="ZeE-wh-PNs" firstAttribute="bottom" secondItem="ugC-lm-CpD" secondAttribute="bottom" id="eN9-LA-BOX"/>
-                            <constraint firstItem="xP4-ae-x7r" firstAttribute="baseline" secondItem="qDa-tz-cjg" secondAttribute="baseline" id="ebx-82-gQY"/>
-                            <constraint firstItem="yUy-VO-gOX" firstAttribute="top" secondItem="RLA-89-uZU" secondAttribute="bottom" constant="8" id="gIi-ld-YRd"/>
-                            <constraint firstItem="ySF-V2-hJS" firstAttribute="top" secondItem="g7a-lS-cgG" secondAttribute="bottom" constant="55" id="hRn-qO-ASj"/>
-                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" secondItem="NiR-K7-WLA" secondAttribute="trailing" constant="7" id="iwp-tw-vU8"/>
-                            <constraint firstItem="RmL-KV-smN" firstAttribute="bottom" secondItem="yUy-VO-gOX" secondAttribute="bottom" id="jfY-Ew-ssP"/>
-                            <constraint firstItem="NiR-K7-WLA" firstAttribute="baseline" secondItem="g7a-lS-cgG" secondAttribute="baseline" id="kby-Z6-9gV"/>
-                            <constraint firstItem="v8v-jY-iJa" firstAttribute="leading" secondItem="V2I-wH-VVW" secondAttribute="leading" id="kcW-Yd-VGP"/>
-                            <constraint firstItem="ySF-V2-hJS" firstAttribute="centerX" secondItem="zs8-Um-QL5" secondAttribute="centerX" id="otG-ub-KjU"/>
-                            <constraint firstItem="v8v-jY-iJa" firstAttribute="top" secondItem="Xr7-QY-Fkr" secondAttribute="top" constant="37" id="pww-bt-4nh"/>
-                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" secondItem="ZeE-wh-PNs" secondAttribute="trailing" constant="7" id="sV5-vo-1I9"/>
-                            <constraint firstItem="qDa-tz-cjg" firstAttribute="baseline" secondItem="V2I-wH-VVW" secondAttribute="baseline" id="toM-KE-baz"/>
-                            <constraint firstItem="xP4-ae-x7r" firstAttribute="trailing" secondItem="dL3-Y4-FTE" secondAttribute="trailing" id="u7E-K6-cVx"/>
-                            <constraint firstItem="z7f-gf-SKe" firstAttribute="leading" secondItem="Xr7-QY-Fkr" secondAttribute="leading" constant="17" id="uZw-bm-0UC"/>
-                            <constraint firstItem="yUy-VO-gOX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VFT-h9-uZn" secondAttribute="trailing" symbolic="YES" id="uxG-li-1JI"/>
-                            <constraint firstItem="1iA-0c-01W" firstAttribute="leading" secondItem="Xr7-QY-Fkr" secondAttribute="leading" constant="16" id="vFA-SY-OzU"/>
-                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" secondItem="0TU-qj-zp8" secondAttribute="trailing" constant="17" id="w3z-0J-Mqe"/>
-                            <constraint firstItem="RLA-89-uZU" firstAttribute="leading" secondItem="1iA-0c-01W" secondAttribute="trailing" constant="25" id="xgg-rv-Kjc"/>
-                            <constraint firstItem="z7f-gf-SKe" firstAttribute="top" secondItem="VFT-h9-uZn" secondAttribute="bottom" constant="1" id="yFC-tD-Hdh"/>
-                            <constraint firstItem="1iA-0c-01W" firstAttribute="top" secondItem="V2I-wH-VVW" secondAttribute="bottom" constant="32" id="yja-yV-dgv"/>
+                            <constraint firstItem="yUy-VO-gOX" firstAttribute="top" secondItem="1iA-0c-01W" secondAttribute="bottom" constant="8" id="Ls5-xR-eQP"/>
+                            <constraint firstItem="z7f-gf-SKe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RmL-KV-smN" secondAttribute="leading" id="RZc-3Y-NJU"/>
+                            <constraint firstItem="ugC-lm-CpD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VFT-h9-uZn" secondAttribute="trailing" constant="8" symbolic="YES" id="T4p-Gp-4F5"/>
+                            <constraint firstItem="ZeE-wh-PNs" firstAttribute="baseline" secondItem="z7f-gf-SKe" secondAttribute="baseline" id="U7H-zO-Ftm"/>
+                            <constraint firstItem="RLA-89-uZU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ySF-V2-hJS" secondAttribute="trailing" constant="8" symbolic="YES" id="UvP-41-Z3y"/>
+                            <constraint firstItem="1iA-0c-01W" firstAttribute="leading" secondItem="Xr7-QY-Fkr" secondAttribute="leading" constant="20" id="Uxy-Ge-gnU"/>
+                            <constraint firstItem="RLA-89-uZU" firstAttribute="baseline" secondItem="ySF-V2-hJS" secondAttribute="baseline" id="bBL-3y-kOe"/>
+                            <constraint firstItem="ugC-lm-CpD" firstAttribute="baseline" secondItem="ySF-V2-hJS" secondAttribute="baseline" id="bSI-RK-e0I"/>
+                            <constraint firstItem="0TU-qj-zp8" firstAttribute="leading" secondItem="8si-jS-X0j" secondAttribute="trailing" constant="10" id="dL5-ZM-cVX"/>
+                            <constraint firstItem="8si-jS-X0j" firstAttribute="baseline" secondItem="0TU-qj-zp8" secondAttribute="baseline" id="iG7-Bf-4m1"/>
+                            <constraint firstItem="1iA-0c-01W" firstAttribute="top" secondItem="VFT-h9-uZn" secondAttribute="bottom" constant="8" id="jIH-IF-EbP"/>
+                            <constraint firstItem="Xr7-QY-Fkr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yUy-VO-gOX" secondAttribute="trailing" symbolic="YES" id="o7N-oO-PQX"/>
+                            <constraint firstItem="ZeE-wh-PNs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0TU-qj-zp8" secondAttribute="trailing" id="puS-BF-hhh"/>
+                            <constraint firstItem="0TU-qj-zp8" firstAttribute="baseline" secondItem="RmL-KV-smN" secondAttribute="baseline" id="px0-cD-LQX"/>
+                            <constraint firstItem="ugC-lm-CpD" firstAttribute="centerX" secondItem="ZeE-wh-PNs" secondAttribute="centerX" id="vWj-K8-P9r"/>
+                            <constraint firstItem="VFT-h9-uZn" firstAttribute="top" secondItem="Xr7-QY-Fkr" secondAttribute="top" id="yxt-gK-4SN"/>
                         </constraints>
                     </view>
                     <connections>
@@ -322,27 +282,27 @@
         <!--Stream View Controller-->
         <scene sceneID="ghy-PD-2uV">
             <objects>
-                <viewController id="Tzz-ec-DsJ" customClass="StreamViewController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Tzz-ec-DsJ" customClass="StreamViewController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kse-2m-Aff">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mk9-9O-c5U">
-                                <rect key="frame" x="6" y="84" width="34" height="30"/>
+                                <rect key="frame" x="6" y="104" width="34" height="30"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
                                     <action selector="stream:" destination="Tzz-ec-DsJ" eventType="touchUpInside" id="FC6-3d-xHI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUQ-Fk-f1m">
-                                <rect key="frame" x="61" y="84" width="32" height="30"/>
+                                <rect key="frame" x="61" y="104" width="32" height="30"/>
                                 <state key="normal" title="Stop"/>
                                 <connections>
                                     <action selector="stopStream:" destination="Tzz-ec-DsJ" eventType="touchUpInside" id="ehN-zl-rJ6"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qbG-r5-Xtw">
-                                <rect key="frame" x="5" y="119" width="365" height="494"/>
+                                <rect key="frame" x="5" y="139" width="365" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -372,7 +332,7 @@
         <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -383,7 +343,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="product-cell" textLabel="69t-9c-gga" detailTextLabel="x9J-au-INv" style="IBUITableViewCellStyleValue1" id="Yyh-Ow-eeV">
-                                        <rect key="frame" x="0.0" y="44.5" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yyh-Ow-eeV" id="pNw-fx-9ZQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -431,31 +391,31 @@
         <!--Product View Controller-->
         <scene sceneID="7EH-v3-QoE">
             <objects>
-                <viewController id="KZF-oY-DPf" customClass="ProductViewController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KZF-oY-DPf" customClass="ProductViewController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rvH-WK-clJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="poC-sF-vfc">
-                                <rect key="frame" x="10" y="44" width="355" height="103"/>
+                                <rect key="frame" x="10" y="64" width="355" height="111.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="qOS-Jo-f2s">
-                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="103"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="111.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy Site" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0G-m3-HCM">
-                                                <rect key="frame" x="0.0" y="0.0" width="177.5" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="177.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvJ-wp-DRj">
-                                                <rect key="frame" x="0.0" y="22" width="177.5" height="81"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="177.5" height="91"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="H2o-oI-Usg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="89" height="81"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="89" height="91"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HI0-ab-UAH">
-                                                                <rect key="frame" x="0.0" y="0.0" width="65.5" height="31"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HI0-ab-UAH">
+                                                                <rect key="frame" x="0.0" y="0.0" width="73" height="34.5"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Status">
                                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -464,8 +424,8 @@
                                                                     <action selector="getEnergySiteStatus:" destination="KZF-oY-DPf" eventType="touchUpInside" id="3q6-kg-pdg"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1B-OQ-qne">
-                                                                <rect key="frame" x="0.0" y="31" width="65.5" height="50"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1B-OQ-qne">
+                                                                <rect key="frame" x="0.0" y="34.5" width="73" height="56.5"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Live Status">
                                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -477,10 +437,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="C5L-BA-4o3">
-                                                        <rect key="frame" x="89" y="0.0" width="88.5" height="81"/>
+                                                        <rect key="frame" x="89" y="0.0" width="88.5" height="91"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAb-Ji-5c1">
-                                                                <rect key="frame" x="0.0" y="0.0" width="48.5" height="31"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="53" height="34.5"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Info">
                                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -490,7 +450,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUe-aE-kx1">
-                                                                <rect key="frame" x="0.0" y="31" width="70.5" height="50"/>
+                                                                <rect key="frame" x="0.0" y="34.5" width="78.5" height="56.5"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="History">
                                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -506,22 +466,22 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="M39-nQ-wYJ">
-                                        <rect key="frame" x="177.5" y="0.0" width="177.5" height="103"/>
+                                        <rect key="frame" x="177.5" y="0.0" width="177.5" height="111.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nS2-0o-a3A">
-                                                <rect key="frame" x="0.0" y="0.0" width="47" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="55.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLV-ic-Y6S">
-                                                <rect key="frame" x="0.0" y="22" width="141" height="81"/>
+                                                <rect key="frame" x="0.0" y="25.5" width="157" height="86"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="zgF-VI-j4G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="70.5" height="81"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="78.5" height="86"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xy1-9f-3dQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="65.5" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="73" height="51.5"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Status">
                                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -531,7 +491,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKp-qN-wwk">
-                                                                <rect key="frame" x="0.0" y="50" width="54.5" height="31"/>
+                                                                <rect key="frame" x="0.0" y="51.5" width="60" height="34.5"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Data">
                                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -543,10 +503,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="7QQ-be-XDI">
-                                                        <rect key="frame" x="70.5" y="0.0" width="70.5" height="81"/>
+                                                        <rect key="frame" x="78.5" y="0.0" width="78.5" height="86"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTx-NK-cGE">
-                                                                <rect key="frame" x="0.0" y="0.0" width="70.5" height="81"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="86"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain">
                                                                     <string key="title">Power
@@ -569,14 +529,14 @@ History</string>
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Select an action to get started" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hf1-5C-SiX">
-                                <rect key="frame" x="10" y="187.5" width="355" height="420.5"/>
+                                <rect key="frame" x="10" y="216" width="355" height="392"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Response" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyn-UI-iNK">
-                                <rect key="frame" x="10" y="157" width="355" height="20.5"/>
+                                <rect key="frame" x="10" y="185.5" width="355" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -609,7 +569,7 @@ History</string>
         <!--Tab Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" customClass="TabController" customModule="TeslaSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="TabController" customModule="TeslaSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -633,7 +593,7 @@ History</string>
                     <tabBarItem key="tabBarItem" title="Vehicles" image="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0F0-t0-hZd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -645,14 +605,14 @@ History</string>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--Second-->
+        <!--Energy sites-->
         <scene sceneID="oK7-fF-8Ad">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="udJ-mL-ZXk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Energy sites" image="second" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZXc-pc-Lch">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

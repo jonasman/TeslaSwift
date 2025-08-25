@@ -138,11 +138,18 @@ open class VehicleState: Codable {
 	open var sunRoofState: String?
 	
 	open var timeStamp: Double?
+    
+    open var tpms_pressure_fl: Double?
+    open var tpms_pressure_fr: Double?
+    open var tpms_pressure_rl: Double?
+    open var tpms_pressure_rr: Double?
 	
 	open var valetMode: Bool?
 	open var valetPinNeeded: Bool?
 	
 	open var vehicleName: String?
+
+    //TOOD: webcam_available: Bool
 	
 	// MARK: Codable protocol
 	
@@ -199,6 +206,12 @@ open class VehicleState: Codable {
 		case sunRoofState			 = "sun_roof_state"
 		
 		case timeStamp				= "timestamp"
+        
+        case tpms_pressure_fl = "tpms_pressure_fl"
+        case tpms_pressure_fr = "tpms_pressure_fr"
+        case tpms_pressure_rl = "tpms_pressure_rl"
+        case tpms_pressure_rr = "tpms_pressure_rr"
+        
 		
 		case valetMode				 = "valet_mode"
 		case valetPinNeeded			 = "valet_pin_needed"
@@ -261,6 +274,11 @@ open class VehicleState: Codable {
 		sunRoofState = try? container.decode(String.self, forKey: .sunRoofState)
 		
 		timeStamp = try? container.decode(Double.self, forKey: .timeStamp)
+        
+        tpms_pressure_fl = try? container.decode(Double.self, forKey: .tpms_pressure_fl)
+        tpms_pressure_fr = try? container.decode(Double.self, forKey: .tpms_pressure_fr)
+        tpms_pressure_rl = try? container.decode(Double.self, forKey: .tpms_pressure_rl)
+        tpms_pressure_rr = try? container.decode(Double.self, forKey: .tpms_pressure_rr)
 		
 		valetMode = try? container.decode(Bool.self, forKey: .valetMode)
 		valetPinNeeded = try? container.decode(Bool.self, forKey: .valetPinNeeded)
@@ -269,7 +287,6 @@ open class VehicleState: Codable {
 	}
 	
 	public func encode(to encoder: Encoder) throws {
-		
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		
 		try container.encodeIfPresent(apiVersion, forKey: .apiVersion)
@@ -306,10 +323,12 @@ open class VehicleState: Codable {
 		try container.encodeIfPresent(sunRoofPercentageOpen, forKey: .sunRoofPercentageOpen)
 		try container.encodeIfPresent(sunRoofState, forKey: .sunRoofState)
 		try container.encodeIfPresent(timeStamp, forKey: .timeStamp)
+        try container.encodeIfPresent(tpms_pressure_fl, forKey: .tpms_pressure_fl)
+        try container.encodeIfPresent(tpms_pressure_fr, forKey: .tpms_pressure_fr)
+        try container.encodeIfPresent(tpms_pressure_rl, forKey: .tpms_pressure_rl)
+        try container.encodeIfPresent(tpms_pressure_rr, forKey: .tpms_pressure_rr)
 		try container.encodeIfPresent(valetMode, forKey: .valetMode)
 		try container.encodeIfPresent(valetPinNeeded, forKey: .valetPinNeeded)
-		
 		try container.encodeIfPresent(vehicleName, forKey: .vehicleName)
-		
 	}
 }

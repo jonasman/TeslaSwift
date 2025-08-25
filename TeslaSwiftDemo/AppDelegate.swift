@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import TeslaSwift
 
+// Change this!
+let clientID = "ABC"
+let clientSecret = "DEF"
+let redirectURI = "teslaswift://teslaswift"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var api = TeslaSwift()
+    var api: TeslaSwift!
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 
+        let teslaAPI = TeslaAPI.fleetAPI(region: .europeMiddleEastAfrica, clientID: clientID, clientSecret: clientSecret, redirectURI: redirectURI)
+        api = TeslaSwift(teslaAPI: teslaAPI)
 		api.debuggingEnabled = true
 		
 		if let jsonString = UserDefaults.standard.object(forKey: "tesla.token") as? String,
@@ -28,6 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		return true
 	}
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print(url)
+        Task { @MainActor in
+            do {
+                _ = try await api.authenticateWebNative(url: url)
+                NotificationCenter.default.post(name: Notification.Name.nativeLoginDone, object: nil)
+            } catch {
+                print("Error")
+            }
+        }
+
+        return true
+    }
 
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -54,7 +75,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
-
-
 }
-

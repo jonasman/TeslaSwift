@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import TeslaSwift
 
 class VehicleViewController: UIViewController {
 	@IBOutlet weak var textView: UITextView!
@@ -18,84 +19,23 @@ class VehicleViewController: UIViewController {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
             let vehicle2 = try await api.getVehicle(vehicle)
-            self.textView.text = "Inside temp: \(vehicle2.jsonString!)"
+            self.textView.text = "Vehicle: \(vehicle2.jsonString!)"
         }
     }
-    
-    @IBAction func getTemps(_ sender: Any) {
-        guard let vehicle = vehicle else { return }
-        Task { @MainActor in
-            let climateState = try await api.getVehicleClimateState(vehicle)
-            self.textView.text = "Inside temp: \(String(describing: climateState.insideTemperature?.celsius))\n" +
-            climateState.jsonString!
-        }
-	}
-
-	@IBAction func getChargeState(_ sender: AnyObject) {
-        guard let vehicle = vehicle else { return }
-        Task { @MainActor in
-            let chargeState = try await api.getVehicleChargeState(vehicle)
-            self.textView.text = "Battery: \(chargeState.batteryLevel!) % (\(chargeState.idealBatteryRange!.kms) km)\n" +
-            "charge rate: \(chargeState.chargeRate!.kilometersPerHour) km/h\n" +
-            "energy added: \(chargeState.chargeEnergyAdded!) kWh\n" +
-            "distance added (ideal): \(chargeState.chargeDistanceAddedIdeal!.kms) km\n" +
-            "power: \(chargeState.chargerPower ?? 0) kW\n" +
-            "\(chargeState.chargerVoltage ?? 0)V \(chargeState.chargerActualCurrent ?? 0)A\n" +
-            "charger max current: \(String(describing: chargeState.chargerPilotCurrent))\n\(chargeState.jsonString!)"
-
-        }
-	}
-
-	@IBAction func getVehicleState(_ sender: Any) {
-        guard let vehicle = vehicle else { return }
-        Task { @MainActor in
-            let vehicleState = try await api.getVehicleState(vehicle)
-            self.textView.text = "FW: \(String(describing: vehicleState.firmwareVersion))\n" +
-            vehicleState.jsonString!
-        }
-	}
-
-	@IBAction func getDriveState(_ sender: Any) {
-        guard let vehicle = vehicle else { return }
-        Task { @MainActor in
-            let driveState = try await api.getVehicleDriveState(vehicle)
-            self.textView.text = "Location: \(String(describing: driveState.position))\n" +
-            driveState.jsonString!
-        }
-	}
-
-	@IBAction func getGUISettings(_ sender: Any) {
-        guard let vehicle = vehicle else { return }
-        Task { @MainActor in
-            let guiSettings = try await api.getVehicleGuiSettings(vehicle)
-            self.textView.text = "Charge rate units: \(String(describing: guiSettings.chargeRateUnits))\n" +
-            guiSettings.jsonString!
-        }
-	}
 	
 	@IBAction func gettAll(_ sender: Any) {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
-            let extendedVehicle = try await api.getAllData(vehicle)
+            let extendedVehicle = try await api.getAllData(vehicle, endpoints: AllStatesEndpoints.allWithLocation)
             self.textView.text = "All data:\n" +
             extendedVehicle.jsonString!
-        }
-	}
-	
-	
-	@IBAction func getConfig(_ sender: Any) {
-        guard let vehicle = vehicle else { return }
-        Task { @MainActor in
-            let config = try await api.getVehicleConfig(vehicle)
-            self.textView.text = "All data:\n" +
-            config.jsonString!
         }
 	}
 	
 	@IBAction func command(_ sender: AnyObject) {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
-            let response = try await api.sendCommandToVehicle(vehicle, command: .setMaxDefrost(on: false))
+            let response = try await api.sendCommandToVehicle(vehicle, command: VehicleCommand.setMaxDefrost(on: false))
             self.textView.text = (response.result! ? "true" : "false")
             if let reason = response.reason {
                 self.textView.text.append(reason)
@@ -115,7 +55,7 @@ class VehicleViewController: UIViewController {
 	@IBAction func speedLimit(_ sender: Any) {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
-            let response = try await api.sendCommandToVehicle(vehicle, command: .speedLimitClearPin(pin: "1234"))
+            let response = try await api.sendCommandToVehicle(vehicle, command: VehicleCommand.speedLimitClearPin(pin: "1234"))
             self.textView.text = (response.result! ? "true" : "false")
             if let reason = response.reason {
                 self.textView.text.append(reason)
@@ -135,7 +75,7 @@ class VehicleViewController: UIViewController {
     @IBAction func refreshToken(_ sender: Any) {
         Task { @MainActor in
             do {
-                let token = try await api.refreshWebToken()
+                let token = try await api.refreshToken()
                 self.textView.text = "New access Token:\n \(token)"
             } catch {
                 self.textView.text = "Refresh Token:\n CATCH"
@@ -146,7 +86,7 @@ class VehicleViewController: UIViewController {
     @IBAction func ampsTo16(_ sender: Any) {
         guard let vehicle = vehicle else { return }
         Task { @MainActor in
-            let response = try await api.sendCommandToVehicle(vehicle, command: .setCharging(amps: 16))
+            let response = try await api.sendCommandToVehicle(vehicle, command: VehicleCommand.setCharging(amps: 16))
             self.textView.text = (response.result! ? "true" : "false")
             if let reason = response.reason {
                 self.textView.text.append(reason)
@@ -157,7 +97,7 @@ class VehicleViewController: UIViewController {
     @IBAction func revokeToken(_ sender: Any) {
         Task { @MainActor in
             do {
-                let status = try await api.revokeWeb()
+                let status = try await api.revokeToken()
                 self.textView.text = "Revoked: \(status)"
             } catch {
                 self.textView.text = "Revoke Token:\n CATCH"
@@ -168,7 +108,14 @@ class VehicleViewController: UIViewController {
     @IBAction func logout(_ sender: Any) {
         api.logout()
     }
-    
+    @IBAction func sendKeyToVehicle(_ sender: Any) {
+        let yourDomain = "orange-dune-0e6c58803.5.azurestaticapps.net"
+        if let url = api.urlToSendPublicKeyToVehicle(domain: yourDomain) {
+            UIApplication.shared.open(url)
+        }
+    }
+
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		super.prepare(for: segue, sender: sender)
 		if segue.identifier == "toStream" {
