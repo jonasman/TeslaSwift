@@ -69,6 +69,7 @@ open class TeslaSwift {
 
     open fileprivate(set) var token: AuthToken?
     open fileprivate(set) var partnerToken: AuthToken?
+    private var refreshTask: Task<AuthToken, Error>?
 
     open fileprivate(set) var email: String?
     fileprivate var password: String?
@@ -84,6 +85,17 @@ open class TeslaSwift {
     private func updateToken(_ token: AuthToken?) {
         self.token = token
         onTokenUpdate?(token)
+    }
+
+    private func clearTokenIfUnchanged(refreshToken: String?) {
+        guard let refreshToken else {
+            updateToken(nil)
+            return
+        }
+
+        if token?.refreshToken == refreshToken {
+            updateToken(nil)
+        }
     }
 }
 
@@ -254,29 +266,44 @@ extension TeslaSwift {
      - returns: The AuthToken.
      */
     public func refreshToken() async throws -> AuthToken {
+        if let refreshTask {
+            return try await refreshTask.value
+        }
+
         guard let token = self.token else { throw TeslaError.noTokenToRefresh }
         let body = AuthTokenRequestWeb(teslaAPI: teslaAPI, grantType: .refreshToken, refreshToken: token.refreshToken)
 
-        do {
-            let authToken: AuthToken = try await request(.oAuth2Token, body: body)
-            updateToken(authToken)
-            return authToken
-        } catch let error {
-            if case let TeslaError.networkError(error: internalError) = error {
-                if internalError.code == 302 || internalError.code == 403 {
-                    //Handle redirection for tesla.cn
-                    let authToken: AuthToken = try await request(.oAuth2TokenCN, body: body)
-                    updateToken(authToken)
-                    return authToken
-                } else if internalError.code == 401 {
-                    throw TeslaError.tokenRefreshFailed
+        let refreshTask = Task<AuthToken, Error> {
+            do {
+                let authToken: AuthToken = try await request(.oAuth2Token, body: body)
+                updateToken(authToken)
+                return authToken
+            } catch let error {
+                if case let TeslaError.networkError(error: internalError) = error {
+                    if internalError.code == 302 || internalError.code == 403 {
+                        //Handle redirection for tesla.cn
+                        let authToken: AuthToken = try await request(.oAuth2TokenCN, body: body)
+                        updateToken(authToken)
+                        return authToken
+                    } else if internalError.code == 401 {
+                        clearTokenIfUnchanged(refreshToken: token.refreshToken)
+                        throw TeslaError.tokenRefreshFailed
+                    } else {
+                        throw error
+                    }
+                } else if case TeslaError.refreshTokenRevoked = error {
+                    clearTokenIfUnchanged(refreshToken: token.refreshToken)
+                    throw error
                 } else {
                     throw error
                 }
-            } else {
-                throw error
             }
         }
+
+        self.refreshTask = refreshTask
+        defer { self.refreshTask = nil }
+
+        return try await refreshTask.value
     }
 
     /**
@@ -742,7 +769,6 @@ extension TeslaSwift {
                 throw TeslaError.authenticationFailed
             } else if let mapped = try? teslaJSONDecoder.decode(ErrorMessage.self, from: data) {
                 if mapped.error == "login_required" {
-                    updateToken(nil)
                     throw TeslaError.refreshTokenRevoked
                 } else if mapped.error == "invalid bearer token" {
                     token?.expiresIn = 0
