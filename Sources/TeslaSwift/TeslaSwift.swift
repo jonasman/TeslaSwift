@@ -43,6 +43,7 @@ public enum TeslaAPI {
         case offlineAccess = "offline_access"
         case userData = "user_data"
         case vehicleDeviceData = "vehicle_device_data"
+        case vehicleLocation = "vehicle_location"
         case vehicleCmds = "vehicle_cmds"
         case vehicleChargingCmds = "vehicle_charging_cmds"
         case energyDeviceData = "energy_device_data"
