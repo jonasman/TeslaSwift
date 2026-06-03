@@ -8,6 +8,7 @@
 
 import Foundation
 
+public typealias TeslaSwiftVehicle = Vehicle
 open class Vehicle: Codable {
 	
 	open var backseatToken: String?
